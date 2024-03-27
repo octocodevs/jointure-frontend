@@ -7,7 +7,7 @@ export default function LargeInput() {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '50ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
       }}
       noValidate
       autoComplete="off"

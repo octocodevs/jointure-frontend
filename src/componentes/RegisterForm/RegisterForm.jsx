@@ -1,39 +1,49 @@
 import LargeInput from "@/componentes/Mui/inputs/LargeInput";
 import SmallInput from "../Mui/inputs/SmallInput";
 import CheckboxLabels from "../Mui/inputs/Checkbox";
-import LargeButton from "../Mui/Buttons/LargeButton";
+import LargeButton from '../Mui/Buttons/LargeButton';
+import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import BoxBasic from "../Mui/shapes/LockerShape";
 
-export default function RegisterForm (){
-    return (
-      <>
-        <div className="flex justify-center items-center flex-col">
 
-            <h3>Registro</h3>
-        <form>
-            <div className="flex flex-row">
-                <SmallInput />
-                <SmallInput />
-            </div>
-            <div>
-                <LargeInput />
-                <LargeInput />
-            </div>
-            <div className="flex flex-row">
-                <SmallInput />
-                <SmallInput />
-            </div>
-            <div className="ml-2">
-                <CheckboxLabels />
-            </div>
 
-                <LargeButton />
-
-            <div className="flex justify-center items-center">
-                <p>¿Ya tienes una cuenta?<span>Inicia sesión aquí</span></p>
-            </div>
-        </form>
-        </div>
-          
-      </>
-    )
-  }
+export default function RegisterForm() {
+  return (
+    <Box
+      className="flex justify-center items-center flex-col mt-4"
+    >
+      <BoxBasic />
+      <Typography className="font-montserrat font-bold" variant="h5">Registro</Typography>
+      <FormControl>
+        <Box className="flex flex-row mt-2 justify justify-between gap-5"> 
+          <SmallInput />
+          <SmallInput />
+        </Box>
+        <Box className="mt-2"> 
+          <LargeInput />
+          <LargeInput />
+        </Box>
+        <Box className="flex flex-row mt-2 gap-5"> 
+          <SmallInput />
+          <SmallInput />
+        </Box>
+        <Box className="flex flex-row mt-2 gap-5"> 
+          <SmallInput />
+          <SmallInput />
+        </Box>
+        <Box className="mt-2"> {/* Contenedor del checkbox */}
+          <LargeInput />          
+          <CheckboxLabels />
+        </Box>
+        <Box className="mt-2"> {/* Contenedor del botón */}
+         <LargeButton />
+        </Box>
+      </FormControl>
+      <Box className="mt-2"> {/* Contenedor del texto de inicio de sesión */}
+        <Typography className="mt-2 font-montserrat" variant="body1">¿Ya tienes una cuenta? <span className="text-[#46A9B6] font-montserrat">Inicia sesión aquí</span> </Typography>
+      </Box>
+    </Box>
+  );
+}

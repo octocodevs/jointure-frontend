@@ -6,7 +6,7 @@ export default function SmallInput() {
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '24ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
       }}
       noValidate
       autoComplete="off"

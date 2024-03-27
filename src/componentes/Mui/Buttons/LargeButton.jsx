@@ -1,21 +1,10 @@
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import React from 'react'
 
-export default function LargeButton() {
+const LargeButton = () => {
   return (
-    <Stack spacing={2} direction="row">
-      <Button 
-        variant="contained"
-        sx={{
-          width: '200px', 
-          bgcolor: 'blue', 
-          '&:hover': {
-            bgcolor: 'darkblue', 
-          }
-        }}
-      >
-        Contained
-      </Button>
-    </Stack>
-  );
+    <button className='bg-[#46A9B6] w-full py-4 text-white text-center font-montserrat'>Enviar</button>
+  )
 }
+
+export default LargeButton
+
