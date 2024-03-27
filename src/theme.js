@@ -17,7 +17,6 @@ const theme = createTheme({
         contrastText: '#000',
       },
   typography: {
-    // Define typography options
   },
   // Other theme options like spacing, breakpoints, etc.
 });
