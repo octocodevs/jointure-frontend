@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import BoxBasic from "../mui/shapes/LockerShape";
 import BasicSelect from "../mui/inputs/BasicSelect";
-import { Container } from "@mui/material";
+
 
 
 export default function RegisterForm() {
@@ -23,6 +23,8 @@ export default function RegisterForm() {
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [formError, setFormError] = useState(false);
   const [country, setCountry] = useState('');
+  const [positionValue,setPositionValue] = useState('');
+  const [companyValue,setCompanyValue]= useState('');
 
   const handleNameChange = (event) => {
     setNameValue(event.target.value);
@@ -66,19 +68,27 @@ export default function RegisterForm() {
     }
   }, [passwordError, confirmPasswordError]);
 
+  const handlePositionChange = (event) => {
+    setPositionValue(event.target.value);
+  };
+
+  const handleCompanyChange = (event) => {
+    setCompanyValue(event.target.value);
+  }
+
   //
 
 
 
   return (
-    <Container
+    <Box
       className="flex justify-center items-center flex-col mt-4 w-1/2 "
     >
       <BoxBasic />
-      <Typography className="font-montserrat font-bold mt-4" variant="h5">Registro</Typography>
+      <Typography className="font-bold font- montserrat mt-4" variant="h5">Registro</Typography>
       <FormControl>
 
-        <Box className="flex flex-row mt-2 justify justify-between gap-5">
+        <Box className="flex flex-row mt-2 justify justify-between gap-5 px-1">
           <SmallInput
             id="name"
             label="Nombre"
@@ -97,7 +107,7 @@ export default function RegisterForm() {
           />
         </Box>
 
-        <Box className="mt-2">
+        <Box className="mt-2 px-1">
           <LargeInput 
               id="email"
               label="Email"
@@ -126,13 +136,21 @@ export default function RegisterForm() {
           />
         </Box>
 
-        <Box className="flex flex-row mt-2 gap-5">
-          <SmallInput />
-          <SmallInput />
+        <Box className="flex flex-row mt-2 gap-5 px-1">
+          <SmallInput
+            id="position"
+            label="cargo"
+            variant="outlined"
+            value={positionValue}
+            onChange={handlePositionChange}
+            type="text"
+          />
+          <SmallInput     
+          />
         </Box>
 
-        <Box className="flex flex-row mt-2 gap-5">
-          <SmallInput />
+        <Box className="flex flex-row mt-2 px-1 gap-2">
+
           <BasicSelect
             id="country"
             label="País"
@@ -148,17 +166,27 @@ export default function RegisterForm() {
               '& .MuiSelect-root': { backgroundColor: 'lightblue' },
             }}
           />
+          <SmallInput
+            id="company"
+            label="Nombre de la empresa"
+            variant="outlined"
+            value={companyValue}
+            onChange={handleCompanyChange}
+            type="text"       
+          />
         </Box>
 
-        <Box className="mt-2">
+        <Box className="mt-2 px-1">
           <LargeInput 
           
           />
           <CheckboxLabels />
         </Box>
 
-        <Box className="mt-2">
-          <LargeButton />
+        <Box className="mt-2 ml-3">
+          <LargeButton
+
+          />
         </Box>
 
       </FormControl>
@@ -173,6 +201,6 @@ export default function RegisterForm() {
           </span>
         </Typography>
       </Box>
-    </Container>
+    </Box>
   );
 }
