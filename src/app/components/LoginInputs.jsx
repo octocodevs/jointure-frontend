@@ -1,20 +1,27 @@
-"use client"
-import React, { useState } from 'react';
-import { TextField, Checkbox, FormControlLabel, Box, Container, Button } from '@mui/material';
-import Link from 'next/link';
+"use client";
+import React, { useState } from "react";
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  Box,
+  Container, Typography} 
+from "@mui/material";
+import Link from "next/link";
+import LoginButton from "./Buttons/LoginButton";
 
 const LoginInputs = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     agree: false,
   });
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: name === 'agree' ? checked : value,
+      [name]: name === "agree" ? checked : value,
     }));
   };
 
@@ -29,7 +36,7 @@ const LoginInputs = () => {
           fullWidth
           margin="normal"
           label="E-mail"
-          name="username"
+          name="user"
           value={formData.username}
           onChange={handleChange}
         />
@@ -55,11 +62,23 @@ const LoginInputs = () => {
           className="text-gray-700 mt-4"
         />
       </Box>
-      <Box mt={2}>
-        <Link href="admin/register" passHref>
-          <Button component="a" variant="text" color="primary">¿No estás registrado? Regístrate aquí</Button>
+
+      <Box >
+        <Link href="admin/marketplace" passHref>
+          <LoginButton />
         </Link>
-        </Box>
+      </Box>
+
+      
+<Box mt={2}>
+  <Typography variant="body2" color="textSecondary">
+    ¿No estás registrado?{' '}
+    <Link href="/admin/register" color="primary">
+      Regístrate aquí
+    </Link>
+  </Typography>
+</Box>
+
     </Container>
   );
 };

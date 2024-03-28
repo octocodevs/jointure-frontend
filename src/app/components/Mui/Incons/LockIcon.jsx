@@ -13,7 +13,8 @@ const LockIcon = ({ color = '#ffffff' }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: '-55rem'
+        marginTop: '2rem',
+        marginBottom: '1rem'
       }}
     >
       <LockOutlinedIcon sx={{ fontSize: 25, color }} />

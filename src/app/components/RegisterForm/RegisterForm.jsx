@@ -1,14 +1,14 @@
 'use client'
 import { useState,useEffect } from "react";
-import LargeInput from "@/componentes/Mui/inputs/LargeInput";
-import SmallInput from "../Mui/inputs/SmallInput";
-import CheckboxLabels from "../Mui/inputs/Checkbox";
-import LargeButton from '../Mui/Buttons/LargeButton';
+import LargeInput from "@/app/components/mui/inputs/LargeInput";
+import SmallInput from "../mui/inputs/SmallInput";
+import CheckboxLabels from "../mui/inputs/Checkbox";
+import LargeButton from '../Buttons/LargeButton';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import BoxBasic from "../Mui/shapes/LockerShape";
-import BasicSelect from "../Mui/inputs/BasicSelect";
+import BoxBasic from "../mui/shapes/LockerShape";
+import BasicSelect from "../mui/inputs/BasicSelect";
 import { Container } from "@mui/material";
 
 
