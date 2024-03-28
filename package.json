@@ -21,6 +21,8 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
+    "@iconify/tailwind": "^0.1.4",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "autoprefixer": "^10.0.1",
