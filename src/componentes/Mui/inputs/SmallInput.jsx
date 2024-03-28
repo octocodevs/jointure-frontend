@@ -1,7 +1,11 @@
+'use client'
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-export default function SmallInput() {
+
+export default function SmallInput(props) {
+  const { id, label, variant, value, onChange,type } = props;
   return (
     <Box
       component="form"
@@ -11,20 +15,14 @@ export default function SmallInput() {
       noValidate
       autoComplete="off"
     >
-      <div>
       <TextField 
-      id="outlined-basic" 
-      label="Nombre" 
-      variant="outlined" 
-      type="text"
-      value=""
-      onChange=""
-      required
-      placeholder="Escribe tu nombre ..."
-      pattern="[A-Za-z ]+"
+      id={id}
+      label={label}
+      variant={variant}
+      value={value}
+      onChange={onChange}
+      type={type}
       />
-      </div>
-
     </Box>
   );
 }
