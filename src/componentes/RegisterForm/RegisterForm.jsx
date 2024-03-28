@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import BoxBasic from "../Mui/shapes/LockerShape";
 import BasicSelect from "../Mui/inputs/BasicSelect";
+import { Container } from "@mui/material";
 
 
 export default function RegisterForm() {
@@ -70,10 +71,10 @@ export default function RegisterForm() {
 
 
   return (
-    <Box
+    <Container
       className="flex justify-center items-center flex-col mt-4 w-1/2 "
     >
-      <BoxBasic className="w-full" />
+      <BoxBasic />
       <Typography className="font-montserrat font-bold mt-4" variant="h5">Registro</Typography>
       <FormControl>
 
@@ -172,6 +173,6 @@ export default function RegisterForm() {
           </span>
         </Typography>
       </Box>
-    </Box>
+    </Container>
   );
 }

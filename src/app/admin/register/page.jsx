@@ -12,8 +12,8 @@ export default function RegisterPage() {
             alt="Picture of the author"
             layout="responsive"
             objectFit="contain"
-            width="500"
-            height="1000"
+            width={500}
+            height={1000}
           />
         </figure>
       </section>
