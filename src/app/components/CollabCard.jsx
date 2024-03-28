@@ -38,15 +38,15 @@ export default function CollabCard() {
         className="flex flex-row gap-2 items-start pl-4 pb-4"
       >
         <Chip
-          label="Co-branding"
-          size="small"
-          className="bg-blue hover:bg-blue-dark"
-        />
-        <Chip
-          label="Chip Outlined"
+          label="Alimentación"
           size="small"
           variant="outlined"
           className="bg-green hover:bg-green-dark"
+        />
+        <Chip
+          label="Co-branding"
+          size="small"
+          className="bg-blue hover:bg-blue-dark"
         />
       </Box>
       <Typography variant="h6" className="text-bold pl-4">Colaboración</Typography>
