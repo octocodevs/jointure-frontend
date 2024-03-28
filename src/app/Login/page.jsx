@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginInputs from '@/componentes/LoginInputs';
-import LoginButton from '@/componentes/mui/Buttons/LoginButton';
+import LoginInputs from '@/app/components/LoginInputs';
+import LoginButton from '@/app/components/Buttons/LoginButton';
 
 const Login = () => {
   return (

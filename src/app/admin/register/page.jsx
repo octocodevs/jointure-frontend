@@ -1,4 +1,4 @@
-import RegisterForm from "@/componentes/RegisterForm/RegisterForm";
+import RegisterForm from "@/app/components/RegisterForm/RegisterForm";
 import Image from "next/image";
 
 export default function RegisterPage() {
