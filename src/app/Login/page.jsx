@@ -1,18 +1,24 @@
+import Link from 'next/link';
 import React from 'react';
 import LoginInputs from '@/app/components/LoginInputs';
-import LoginButton from '@/app/components/Buttons/LoginButton';
-import { Box, Container, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import LoginCard from '@/app/components/LoginCard'; 
+import LockIcon from '../components/Mui/Incons/LockIcon';
+
 const Login = () => {
   return (
-    <>
-      <Container className="flex items-start justify-start">
-        <Box className="w-1/2"> 
-        <Typography variant="h4" className="font-bold text-center mb-20">Iniciar sesión</Typography>
-          <LoginInputs />
-          <LoginButton />
+    <Box className="flex items-start justify-start">
+      <Box className="w-1/2 mt-24"> 
+      <Box display="flex" alignItems="center" justifyContent="center">
+          <LockIcon />
         </Box>
-      </Container>
-    </>
+        <Box className="text-3xl font-bold text-center mb-12 ml-10rem">Iniciar sesión</Box>
+        <LoginInputs />
+      </Box>
+      <Box className="w-1/2">
+        <LoginCard />
+      </Box>
+    </Box>
   );
 };
 
