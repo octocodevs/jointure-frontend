@@ -13,15 +13,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
-      <html lang="es">
-        <main className={montserrat.className}>
-          <ThemeProvider theme={theme}>
-              <CssBaseline />
-              {children}
-          </ThemeProvider>
-        </main>
-      </html>
-    </>
+    <html lang="es">
+      <body className={montserrat.className}>{children}</body>
+    </html>
   );
 }

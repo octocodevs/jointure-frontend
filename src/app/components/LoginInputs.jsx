@@ -1,36 +1,44 @@
-"use client"
-import 'tailwindcss/tailwind.css';
-import React, { useState } from 'react';
-import { TextField, Checkbox,FormControlLabel, Box} from '@mui/material';
-
-
+"use client";
+import React, { useState } from "react";
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  Box,
+  Container, Typography} 
+from "@mui/material";
+import Link from "next/link";
+import LoginButton from "./Buttons/LoginButton";
 
 const LoginInputs = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     agree: false,
   });
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: name === 'agree' ? checked : value,
+      [name]: name === "agree" ? checked : value,
     }));
   };
 
   return (
-    <form className="max-w-md mx-auto mt-8 px-4">
-      <div className="flex flex-col items-center">
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          marginTop: 8,
+        }}
+      >
         <TextField
           fullWidth
           margin="normal"
-          label="Nombre de usuario"
+          label="E-mail"
           name="username"
           value={formData.username}
           onChange={handleChange}
-          style={{ width: 600, height: 56 }}
         />
         <TextField
           fullWidth
@@ -40,10 +48,7 @@ const LoginInputs = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          style={{ width: 600, height: 56 }}
         />
-      </div>
-      <Box display="flex" justifyContent="center">
         <FormControlLabel
           control={
             <Checkbox
@@ -54,10 +59,27 @@ const LoginInputs = () => {
             />
           }
           label="Acepto las condiciones y la privacidad"
-          className="text-gray-700"
+          className="text-gray-700 mt-4"
         />
       </Box>
-    </form>
+
+      <Box >
+        <Link href="admin/marketplace">
+          <LoginButton />
+        </Link>
+      </Box>
+
+      
+<Box mt={2}>
+  <Typography variant="body2" color="textSecondary">
+    ¿No estás registrado?{' '}
+    <Link href="/admin/register" color="primary">
+      Regístrate aquí
+    </Link>
+  </Typography>
+</Box>
+
+    </Container>
   );
 };
 

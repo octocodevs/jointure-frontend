@@ -1,10 +1,9 @@
-import React from 'react'
+const { Button } = require("@mui/material")
 
-const LargeButton = () => {
-  return (
-    <button className='bg-[#46A9B6] text-2xl font-montserrat w-full py-4 text-white text-center'>Enviar</button>
-  )
-}
+const LargeButton = ({ onClick }) => {
+    return (
+      <Button onClick={onClick} variant="contained" className="bg-[#46A9B6] w-full hover:bg-[#337C86]">Enviar</Button>
+    )
+  }
 
-export default LargeButton
-
+  export default LargeButton

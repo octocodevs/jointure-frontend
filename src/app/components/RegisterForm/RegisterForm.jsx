@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import BoxBasic from "../mui/shapes/LockerShape";
 import BasicSelect from "../mui/inputs/BasicSelect";
+import LockIcon from "../mui/Incons/LockIcon";
+import Link from "next/link";
 
 
 
@@ -25,17 +27,21 @@ export default function RegisterForm() {
   const [country, setCountry] = useState('');
   const [positionValue,setPositionValue] = useState('');
   const [companyValue,setCompanyValue]= useState('');
+  const [profileValue,setProfileValue]= useState('');
 
   const handleNameChange = (event) => {
     setNameValue(event.target.value);
+    console.log("Name:", event.target.value);
   };
 
   const handleLastNameChange = (event) => {
     setLastNameValue(event.target.value);
+    console.log("Last Name:", event.target.value);
   };
 
   const handleEmailChange = (event) => {
     setEmailValue(event.target.value);
+    console.log("Email:", event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -74,21 +80,25 @@ export default function RegisterForm() {
 
   const handleCompanyChange = (event) => {
     setCompanyValue(event.target.value);
-  }
+  };
 
-  //
-
+  const handleClick = () => {
+    console.log("botón clickado");
+  };
 
 
   return (
     <Box
       className="flex justify-center items-center flex-col mt-4 w-1/2 "
     >
-      <BoxBasic />
-      <Typography className="font-bold font- montserrat mt-4" variant="h5">Registro</Typography>
+         <Box display="flex" alignItems="center" justifyContent="center">
+          <LockIcon />
+        </Box>
+      {/* <BoxBasic className="p-32" /> */}
+      <h1 className="font-bold mt-4 text-4xl" variant="h5">Registro</h1>
       <FormControl>
 
-        <Box className="flex flex-row mt-2 justify justify-between gap-5 px-1">
+        <Box className="flex flex-row mt-2 justify-between px-1">
           <SmallInput
             id="name"
             label="Nombre"
@@ -136,7 +146,7 @@ export default function RegisterForm() {
           />
         </Box>
 
-        <Box className="flex flex-row mt-2 gap-5 px-1">
+        <Box className="flex flex-row justify-between gap-6  ml-1">
           <SmallInput
             id="position"
             label="cargo"
@@ -144,12 +154,26 @@ export default function RegisterForm() {
             value={positionValue}
             onChange={handlePositionChange}
             type="text"
+            className= "mr-2"
           />
-          <SmallInput     
+          <BasicSelect
+            id="company-profile"
+            label="Perfil de empresa"
+            value={profileValue}
+            onChange={setProfileValue}
+            options={[
+              { value: 10, label: 'Empresa' },
+              { value: 20, label: 'Agencia' },
+              { value: 30, label: 'Freelance' },
+            ]}
+            sx={{
+              '& .MuiInputLabel-root': { color: 'red' },
+              '& .MuiSelect-root': { backgroundColor: 'lightblue' },
+            }}
           />
         </Box>
 
-        <Box className="flex flex-row mt-2 px-1 gap-2">
+        <Box className="flex flex-row mt-2 ml-3 gap-2 justify-between">
 
           <BasicSelect
             id="country"
@@ -177,15 +201,14 @@ export default function RegisterForm() {
         </Box>
 
         <Box className="mt-2 px-1">
-          <LargeInput 
-          
-          />
+          {/* <LargeInput           
+          /> */}
           <CheckboxLabels />
         </Box>
 
         <Box className="mt-2 ml-3">
           <LargeButton
-
+            onClick={handleClick}
           />
         </Box>
 
@@ -196,9 +219,12 @@ export default function RegisterForm() {
           className="mt-2 font-montserrat"
           variant="body1">
           ¿Ya tienes una cuenta?
+          <Link href="/admin/login">
           <span className="text-[#46A9B6] font-montserrat">
             Inicia sesión aquí
           </span>
+          </Link>
+          
         </Typography>
       </Box>
     </Box>
