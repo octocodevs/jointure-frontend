@@ -85,7 +85,7 @@ export default function RegisterForm() {
       className="flex justify-center items-center flex-col mt-4 w-1/2 "
     >
       <BoxBasic />
-      <Typography className="font-bold font- montserrat mt-4" variant="h5">Registro</Typography>
+      <Typography className="font-bold mt-4" variant="h5">Registro</Typography>
       <FormControl>
 
         <Box className="flex flex-row mt-2 justify justify-between gap-5 px-1">

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import LoginInputs from '@/app/components/LoginInputs';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import LoginCard from '@/app/components/LoginCard'; 
-import LockIcon from '../components/Mui/Incons/LockIcon';
+import LockIcon from '../components/mui/Icons/LockIcon';
 
 const Login = () => {
   return (
@@ -12,7 +12,7 @@ const Login = () => {
       <Box display="flex" alignItems="center" justifyContent="center">
           <LockIcon />
         </Box>
-        <Box className="text-3xl font-bold text-center mb-12 ml-10rem">Iniciar sesión</Box>
+        <Typography variant = "h5" className="font-bold text-center mb-12 ml-10rem">Iniciar sesión</Typography>
         <LoginInputs />
       </Box>
       <Box className="w-1/2">

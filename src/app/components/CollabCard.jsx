@@ -19,7 +19,7 @@ export default function CollabCard() {
           src={"/images/croissants.jpg"}
           width={360}
           height={400}
-          objectFit="contain" // or objectFit="cover"
+          objectFit="cover"
         />
       </CardMedia>
       <CardHeader 

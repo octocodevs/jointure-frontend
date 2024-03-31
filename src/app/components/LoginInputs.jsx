@@ -73,7 +73,10 @@ const LoginInputs = () => {
 <Box mt={2}>
   <Typography variant="body2" color="textSecondary">
     ¿No estás registrado?{' '}
-    <Link href="/admin/register" color="primary">
+    <Link href="/admin/register" 
+      color="primary" 
+      className="font-bold underline" 
+      style={{ fontFamily: 'inherit' }} >
       Regístrate aquí
     </Link>
   </Typography>
