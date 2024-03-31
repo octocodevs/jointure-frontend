@@ -1,10 +1,7 @@
-import { Montserrat } from "next/font/google";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import theme from "../theme";
+import ThemeRegistry from "./utils/ThemeRegistry";
 import "../app/globals.css";
+import theme from "./utils/theme";
 
-const montserrat = Montserrat({weight: ['100', '300', '400', '700', '900'] , subsets: ["latin"] });
 
 export const metadata = {
   title: "Jointure",
@@ -15,12 +12,11 @@ export default function RootLayout({ children }) {
   return (
     <>
       <html lang="es">
-        <main className={montserrat.className}>
-          <ThemeProvider theme={theme}>
-              <CssBaseline />
+        <body>
+          <ThemeRegistry theme={theme}>
               {children}
-          </ThemeProvider>
-        </main>
+          </ThemeRegistry>
+        </body>
       </html>
     </>
   );
