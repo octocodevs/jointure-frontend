@@ -1,7 +1,7 @@
+import '../../tailwind.config';
+import "./globals.css";
 import ThemeRegistry from "./utils/ThemeRegistry";
-import "../app/globals.css";
 import theme from "./utils/theme";
-
 
 export const metadata = {
   title: "Jointure",

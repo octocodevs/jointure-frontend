@@ -1,18 +1,12 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
-    // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,jsx,ts,tsx,md,mdx}", 
   ],
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['__Montserrat_b1da2a']
-        },
+        montserrat: ['Montserrat', 'sans-serif'], // Change '__Montserrat_b1da2a' to 'Montserrat' or the correct font name
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
