@@ -18,11 +18,11 @@ import { LogoutRounded, PeopleRounded, HomeRounded, NoteAddRounded, DashboardRou
 const drawerWidth = 300;
 
 const menuItems = [
-  { text: 'Inicio', icon: <HomeRounded />, link: '/' },
-  { text: 'Mi perfil', icon: <PeopleRounded />, link: '/' },
-  { text: 'Bandeja de entrada', icon: <DashboardRounded />, link: '/' },
-  { text: 'Crear propuesta', icon: <NoteAddRounded />, link: '/' },
-  { text: 'Desconectarse', icon: <LogoutRounded />, link: '/perfil' },
+  { text: 'Inicio', icon: <HomeRounded />, href: '/marketplace' },
+  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/login' },
+  { text: 'Bandeja de entrada', icon: <DashboardRounded />, href: '/admin/register' },
+  { text: 'Crear propuesta', icon: <NoteAddRounded />, href: '/' },
+  { text: 'Desconectarse', icon: <LogoutRounded />, href: '/' },
 ];
 
 export default function ResponsiveDrawer(props) {
@@ -49,7 +49,12 @@ export default function ResponsiveDrawer(props) {
       <Toolbar />
       <List>
         {menuItems.map((item, index) => (
-          <ListItem key={index} disablePadding>
+          <ListItem
+            key={index}
+            disablePadding
+            component="a"
+            href={item.href}
+          >
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
