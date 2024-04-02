@@ -1,5 +1,8 @@
+
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import ThemeRegistry from "./utils/ThemeRegistry";
+import theme from "./utils/theme";
 
 const montserrat = Montserrat({weight: ['100', '300', '400', '700', '900'] , subsets: ["latin"] });
 
@@ -10,10 +13,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
-      <body className={montserrat.className}>
-        {children}
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body className={montserrat.className}>
+          <ThemeRegistry theme={theme}>
+              {children}
+          </ThemeRegistry>
+        </body>
+      </html>
+    </>
   );
 }

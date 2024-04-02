@@ -8,7 +8,7 @@ export default function RegisterPage() {
         <RegisterForm className="w-1/2 mx-auto" />
         <figure className="hidden sm:block md:w-1/2">
           <Image
-            src="/img/neon-pretzel-light.jpg"
+            src="/assets/img/neon-pretzel-light.jpg"
             alt="Picture of the author"
             layout="responsive"
             objectFit="contain"
