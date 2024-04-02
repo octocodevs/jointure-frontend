@@ -1,7 +1,7 @@
-import '../../tailwind.config';
+import { Montserrat } from "next/font/google";
 import "./globals.css";
-import ThemeRegistry from "./utils/ThemeRegistry";
-import theme from "./utils/theme";
+
+const montserrat = Montserrat({weight: ['100', '300', '400', '700', '900'] , subsets: ["latin"] });
 
 export const metadata = {
   title: "Jointure",
@@ -10,14 +10,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <>
-      <html lang="en">
-        <body>
-          <ThemeRegistry theme={theme}>
-              {children}
-          </ThemeRegistry>
-        </body>
-      </html>
-    </>
+    <html lang="es">
+      <body className={montserrat.className}>
+        {children}
+      </body>
+    </html>
   );
 }

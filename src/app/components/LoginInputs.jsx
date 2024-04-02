@@ -64,7 +64,7 @@ const LoginInputs = () => {
       </Box>
 
       <Box >
-        <Link href="admin/marketplace" passHref>
+        <Link href="admin/marketplace">
           <LoginButton />
         </Link>
       </Box>

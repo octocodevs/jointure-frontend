@@ -14,7 +14,6 @@ export default function LargeInput(props) {
       noValidate
       autoComplete="off"
     >
-      <div>
         <TextField
           id={id}
           label={label}
@@ -22,8 +21,8 @@ export default function LargeInput(props) {
           value={value}
           onChange={onChange}
           type={type}
+          size="small"
         />
-      </div>
     </Box>
   );
 }
