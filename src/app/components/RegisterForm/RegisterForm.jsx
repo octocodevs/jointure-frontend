@@ -23,7 +23,6 @@ export default function RegisterForm() {
   const router = useRouter()
 
   const [nameValue, setNameValue] = useState('');
-  // const [lastNameValue, setLastNameValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
