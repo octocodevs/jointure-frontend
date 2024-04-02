@@ -5,7 +5,7 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
-  Container, Typography} 
+  Container, Typography}
 from "@mui/material";
 import Link from "next/link";
 import LoginButton from "./Buttons/LoginButton";
@@ -36,7 +36,7 @@ const LoginInputs = () => {
           fullWidth
           margin="normal"
           label="E-mail"
-          name="user"
+          name="username"
           value={formData.username}
           onChange={handleChange}
         />
