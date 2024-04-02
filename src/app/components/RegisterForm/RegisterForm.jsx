@@ -189,7 +189,7 @@ export default function RegisterForm() {
           />
         </Box>
 
-        <Box className="flex flex-row justify-between gap-6  ml-1">
+        <Box className="flex flex-row md:flex-row justify-between gap-6  ml-1">
           <Box width="50%">
             <SmallInput
               id="position"
