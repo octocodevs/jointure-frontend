@@ -1,12 +1,13 @@
 import RegisterForm from "@/app/components/RegisterForm/RegisterForm";
+import { Box } from "@mui/material";
 import Image from "next/image";
 
 export default function RegisterPage() {
   return (
     <>
-      <section className="flex justify-center items-center h-screen w-full">
+      <Box className="flex justify-center items-center h-screen w-full">
         <RegisterForm className="w-1/2 mx-auto" />
-        <figure className="hidden sm:block md:w-1/2">
+        <Box className="hidden sm:block md:w-1/2">
           <Image
             src="/assets/img/neon-pretzel-light.jpg"
             alt="Picture of the author"
@@ -15,8 +16,8 @@ export default function RegisterPage() {
             width={500}
             height={1000}
           />
-        </figure>
-      </section>
+        </Box>
+      </Box>
     </>
   );
 }

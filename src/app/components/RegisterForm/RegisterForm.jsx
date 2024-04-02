@@ -8,14 +8,10 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import BasicSelect from "../mui/inputs/BasicSelect";
-import LockIcon from "../mui/Icons/LockIcon";
+//import LockIcon from "../mui/Incons/LockIcon";
 import Link from "next/link";
 import axios from "axios";
-import { registerNewUser } from "../../../../services/axios";
-// import LockIcon from "../mui/Incons/LockIcon";
-// import Link from "next/link";
-// import axios from "axios";
-// import { registerNewUser, getprofiles } from "../../../../services/axios";
+import { registerNewUser, getprofiles } from "../../../../services/axios";
 import { useRouter } from "next/navigation";
 
 
@@ -116,13 +112,14 @@ export default function RegisterForm() {
     // console.log('profies', profies);
 
     axios.get('/sanctum/csrf-cookie').then(response => {
+
       registerNewUser(userData).then((res) =>{
         
         router.push("/");
         router.refresh()
       })
       .catch ((error) =>{
-        console.error('Login failed:', error);
+        console.error('Register failed:', error);
         
       })
     })
@@ -153,7 +150,7 @@ export default function RegisterForm() {
       className="flex justify-center items-center flex-col mt-4 w-1/2 "
     >
       <Box display="flex" alignItems="center" justifyContent="center">
-        <LockIcon />
+        {/* <LockIcon /> */}
       </Box>
       {/* <BoxBasic className="p-32" /> */}
       <h1 className="font-bold mt-4 text-4xl" variant="h5">Registro</h1>
@@ -295,7 +292,6 @@ export default function RegisterForm() {
           <CheckboxLabels />
         </Box>
 
-        
         <Box className="mt-2 ml-3 ">
           <LargeButton
             onClick={handleButtonClick}
@@ -309,12 +305,6 @@ export default function RegisterForm() {
           className="mt-2 font-montserrat"
           variant="body1">
           ¿Ya tienes una cuenta?
-          <Link href="/admin/login">
-            <span className="text-[#46A9B6] font-montserrat">
-              Inicia sesión aquí
-            </span>
-          </Link>
-
           <Link href="/admin/login">
             <span className="text-[#46A9B6] font-montserrat">
               Inicia sesión aquí

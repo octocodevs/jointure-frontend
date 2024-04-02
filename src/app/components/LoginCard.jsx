@@ -11,6 +11,7 @@ const LoginCard = () => {
         height: '727px', 
         width: '600px',
         marginLeft: '21.9%',
+        
       }}
     />
   );
