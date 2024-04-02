@@ -1,9 +1,11 @@
-import Image from "next/image";
-
+import { Container, Typography } from '@mui/material'
+import ResponsiveDrawer from './components/Navigation/ResponsiveDrawer.jsx';
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="font-montserrat font-bold">Hola-Probando fuente</h1>
-    </main>
+    <ResponsiveDrawer>
+      <Container className="flex min-h-screen flex-col items-center justify-between p-24">
+        <Typography variant="h1" className="text-red-600">Jointure</Typography>
+      </Container>
+    </ResponsiveDrawer>
   );
 }

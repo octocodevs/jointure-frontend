@@ -1,14 +1,24 @@
-import RegisterForm from "@/componentes/RegisterForm/RegisterForm"
+import RegisterForm from "@/app/components/RegisterForm/RegisterForm";
+import Image from "next/image";
 
-export default function RegisterPage (){
+export default function RegisterPage() {
   return (
     <>
-      <div>
-        <RegisterForm />
-      </div>
-        
+      <section className="flex justify-center items-center h-screen w-full">
+        <RegisterForm className="w-1/2 mx-auto" />
+        <figure className="hidden sm:block md:w-1/2">
+          <Image
+            src="/assets/img/neon-pretzel-light.jpg"
+            alt="Picture of the author"
+            layout="responsive"
+            objectFit="contain"
+            width={500}
+            height={1000}
+          />
+        </figure>
+      </section>
     </>
-  )
+  );
 }
 
 
