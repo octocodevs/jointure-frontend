@@ -18,10 +18,13 @@ export const getCollaborations = async (page) => {
 
 export const registerNewUser = async (userData) => {
     try {
+        
         const response = await axios.post(`api/register`, userData);
+        
         return response.data;
     } catch (error) {
-        throw error.response.data;
+        console.log(error);
+        throw error.response;
     }
 };
 
@@ -96,3 +99,15 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
       throw error;
     }
   };
+
+
+  
+
+  export const getprofiles = async () => {
+    try {
+        const response = await axios.get(`api/profile`)
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};

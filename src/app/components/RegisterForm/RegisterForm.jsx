@@ -11,11 +11,16 @@ import BasicSelect from "../mui/inputs/BasicSelect";
 import LockIcon from "../mui/Icons/LockIcon";
 import Link from "next/link";
 import axios from "axios";
-import { registerNewUser } from "../../../../services/axios";
+import { registerNewUser, getprofiles } from "../../../../services/axios";
+import { useRouter } from "next/navigation";
+import { Container } from "@mui/material"
+
+
 
 
 export default function RegisterForm() {
-  // useState inputs
+ 
+  const router = useRouter()
 
   const [nameValue, setNameValue] = useState('');
   // const [lastNameValue, setLastNameValue] = useState('');
@@ -88,28 +93,47 @@ export default function RegisterForm() {
   //   console.log("botón clickado");
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
+   
 
     const userData = {
-      name: nameValue,
       email: emailValue,
+      name: nameValue,
       password: passwordValue,
-      confirmPassword: confirmPasswordValue,
+      password_confirmation: confirmPasswordValue,
       position: positionValue,
-      company: companyValue,
-      profile: profileValue,
+      business_name: companyValue,
+      profile_type: profileValue,
       country: country,
-      subscriptionType: subscriptionType,
+      subscription_type: subscriptionType,
     };
 
-    try {
-      const response = await registerNewUser(userData);
-      console.log('Registro exitoso:', response);
+    // const profies =  await getprofiles()
+    console.log('data', userData);
+    // console.log('profies', profies);
 
-    } catch (error) {
-      console.error('Error al registrar:', error);
+    axios.get('/sanctum/csrf-cookie').then(response => {
+      registerNewUser(userData).then((res) =>{
+        
+        router.push("/");
+        router.refresh()
+      })
+      .catch ((error) =>{
+        console.error('Login failed:', error);
+        
+      })
+    })
+    // try {
+    //   console.log('Registro:', response);
 
-    }
+    //   const response = await registerNewUser(userData);
+
+    //   console.log('Registro exitoso:', response);
+    //   // Aquí podrías redirigir al usuario a otra página o realizar otras acciones
+    // } catch (error) {
+    //   console.error('Error al registrar:', error);
+    //   // Aquí podrías manejar el error y mostrar un mensaje al usuario
+    // }
   };
 
   const handleButtonClick = (e) => {
@@ -122,36 +146,14 @@ export default function RegisterForm() {
   };
 
   return (
-    <Box
-      className="flex justify-center items-center flex-col mt-4 w-1/2 "
-    >
+    <Container>
       <Box display="flex" alignItems="center" justifyContent="center">
         <LockIcon />
       </Box>
-      {/* <BoxBasic className="p-32" /> */}
       <h1 className="font-bold mt-4 text-4xl" variant="h5">Registro</h1>
       <FormControl onSubmit={handleSubmit} >
 
-        <Box className="flex flex-row mt-2 justify-between px-1">
-          {/* <LargeInput
-            id="name"
-            label="Nombre"
-            variant="outlined"
-            value={nameValue}
-            onChange={handleNameChange}
-            type="text"
-          /> */}
-          {/* <SmallInput
-            id="lastname"
-            label="Apellido"
-            variant="outlined"
-            value={lastNameValue}
-            onChange={handleLastNameChange}
-            type="text"
-          />*/}
-        </Box>
-
-        <Box className="mt-2 px-1">
+        <Box className="mt-2">
           <LargeInput
             id="name"
             label="Nombre"
@@ -188,9 +190,9 @@ export default function RegisterForm() {
           />
         </Box>
 
-        <Box className="flex flex-row md:flex-row justify-between gap-6  ml-1">
-          <Box width="50%">
-            <SmallInput
+        <Box className="flex flex-col justify-between gap-6  ml-1">
+          <Box width="100%">
+            <LargeInput
               id="position"
               label="cargo"
               variant="outlined"
@@ -200,16 +202,16 @@ export default function RegisterForm() {
               className="mr-3"
             />
           </Box>
-          <Box width="50% mr-3">
+          <Box width="100%">
             <BasicSelect
               id="profile_type"
               label="Perfil de empresa"
               value={profileValue}
               onChange={setProfileValue}
               options={[
-                { value: 10, label: 'Empresa' },
-                { value: 20, label: 'Agencia' },
-                { value: 30, label: 'Freelance' },
+                { value: 'empresa', label: 'Empresa' },
+                { value: 'agencia', label: 'Agencia' },
+                { value: 'freelance', label: 'Freelance' },
               ]}
               sx={{
                 '& .MuiInputLabel-root': { color: 'red' },
@@ -219,17 +221,17 @@ export default function RegisterForm() {
           </Box>
         </Box>
 
-        <Box className="flex flex-row mt-2 ml-3 gap-2 justify-between">
-          <Box width="48%">
+        <Box className="flex flex-col mt-2 ml-3 gap-2 justify-between">
+          <Box width="100%">
             <BasicSelect
               id="country"
               label="País"
               value={country}
               onChange={setCountry}
               options={[
-                { value: 10, label: 'España' },
-                { value: 20, label: 'Francia' },
-                { value: 30, label: 'Italia' },
+                { value: 'España', label: 'España' },
+                { value: 'Francia', label: 'Francia' },
+                { value: 'Italia', label: 'Italia' },
               ]}
               sx={{
                 '& .MuiInputLabel-root': { color: 'red' },
@@ -237,8 +239,8 @@ export default function RegisterForm() {
               }}
             />
           </Box>
-          <Box width="50%">
-            <SmallInput
+          <Box>
+            <LargeInput
               id="business_name"
               label="Nombre de la empresa"
               variant="outlined"
@@ -249,16 +251,16 @@ export default function RegisterForm() {
           </Box>
         </Box>
 
-        <Box className="mt-2 pl-3 w-full">
+        <Box className="mt-2 ">
           <BasicSelect
             id="subscription_type"
             label="Tipo de suscripción"
             value={subscriptionType}
             onChange={setSubscriptionType}
             options={[
-              { value: 10, label: 'basic' },
-              { value: 20, label: 'standard' },
-              { value: 30, label: 'premium' },
+              { value: 'basic', label: 'basic' },
+              { value: 'professional', label: 'professional' },
+              { value: 'business', label: 'business' },
             ]}
             sx={{
               '& .MuiInputLabel-root': { color: 'red' },
@@ -268,7 +270,7 @@ export default function RegisterForm() {
           <CheckboxLabels />
         </Box>
 
-        <Box className="mt-2 ml-3 ">
+        <Box className="mt-2">
           <LargeButton
             onClick={handleButtonClick}
           />
@@ -289,6 +291,6 @@ export default function RegisterForm() {
 
         </Typography>
       </Box>
-    </Box>
+    </Container>
   );
 }

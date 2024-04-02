@@ -22,6 +22,7 @@ export default function LargeInput(props) {
           value={value}
           onChange={onChange}
           type={type}
+          fullWidth
         />
       </div>
     </Box>
