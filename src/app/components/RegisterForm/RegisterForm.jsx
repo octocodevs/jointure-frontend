@@ -150,7 +150,7 @@ export default function RegisterForm() {
         <LockIcon />
       </Box>
       <h1 className="font-bold mt-4 text-4xl" variant="h5">Registro</h1>
-      <FormControl onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit} >
 
         <Box className="mt-2">
           <LargeInput
@@ -275,7 +275,7 @@ export default function RegisterForm() {
           />
         </Box>
 
-      </FormControl>
+      </form>
 
       <Box className="mt-2">
         <Typography

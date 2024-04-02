@@ -61,7 +61,7 @@ const theme = createTheme({
 			  fontSize: '1.25rem',
 			},
 			'@media (min-width: 768px)': {
-			  fontSize: '1.5rem',
+			  fontSize: '1rem',
 			},
 		  },
 		  caption: {
@@ -72,13 +72,13 @@ const theme = createTheme({
 			},
 		  },
 		  button: {
-			fontSize: '1rem',
+			fontSize: '0.90rem',
 			fontWeight: 600,
 			'@media (min-width: 640px)': { 
 			  fontSize: '1.25rem',
 			},
 			'@media (min-width: 768px)': {
-			  fontSize: '1.5rem',
+			  fontSize: '1rem',
 			},
 		  },
 	},

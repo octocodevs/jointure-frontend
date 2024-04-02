@@ -1,7 +1,7 @@
 "use client"
 
 import TextField from '@mui/material/TextField';
-import { Container, Typography, Button, Box, Select, InputLabel } from '@mui/material';
+import { Container, Typography, Button, Box, Select, InputLabel, FormControl } from '@mui/material';
 import { React, useState, useEffect } from 'react';
 import { CheckBox, KeyboardArrowRight } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
@@ -11,8 +11,11 @@ import { registerNewUser} from "../../../../services/axios"
 import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
 
+
+
 export default function Form() {
 
+    
     const router = useRouter()
 
     const [nameValue, setNameValue] = useState('');
@@ -118,7 +121,7 @@ export default function Form() {
     };
 
     return (
-        <Container className='p-10'>
+        <Container className='h-screen py-20 max-h-[60vh]' overflow="auto">
             <Typography variant="h2" align="center">Registro</Typography>
             <form
                 noValidate
@@ -137,6 +140,7 @@ export default function Form() {
                     required
                     onChange={handleNameChange}
                     value={nameValue}
+                    
                 />
                 <TextField
                     sx={{
@@ -150,6 +154,7 @@ export default function Form() {
                     required
                     value={emailValue}
                     onChange={handleEmailChange}
+                    
                 />
 
                 <TextField
@@ -158,12 +163,14 @@ export default function Form() {
                     }}
                     id="password"
                     label="Contraseña"
+                    type="password"
                     variant="outlined"
                     color="primary"
                     fullWidth
                     required
                     value={passwordValue}
                     onChange={handlePasswordChange}
+                    
 
                 />
                 <TextField
@@ -181,6 +188,7 @@ export default function Form() {
                     onChange={handleConfirmPasswordChange}
                     error={Boolean(confirmPasswordError)}
                     helperText={confirmPasswordError}
+                    
                 />
                 <TextField
                     sx={{
@@ -195,8 +203,9 @@ export default function Form() {
                     color="primary"
                     value={positionValue}
                     onChange={handlePositionChange}
+                    
                 />
-                <Box>
+
                     <BasicSelect
                         id="profile_type"
                         label="Perfil de empresa"
@@ -211,6 +220,7 @@ export default function Form() {
                             '& .MuiInputLabel-root': { color: 'red' },
                             '& .MuiSelect-root': { backgroundColor: 'lightblue' },
                         }}
+                        
                     />
                     <BasicSelect
                         id="country"
@@ -227,6 +237,7 @@ export default function Form() {
                             '& .MuiSelect-root': { backgroundColor: 'lightblue' },
                         }}
                     />
+
                     <TextField
                         sx={{
                             margin: '1rem',
@@ -258,11 +269,11 @@ export default function Form() {
                     />
 
                     <CheckboxLabels />
-                </Box>
+                
 
                 <Box>
                     <Button
-                        onClick={() => console.log('submit info')}
+                        onClick={handleButtonClick}
                         type="submit"
                         color="primary"
                         variant="contained"
