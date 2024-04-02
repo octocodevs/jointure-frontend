@@ -11,12 +11,15 @@ import BasicSelect from "../mui/inputs/BasicSelect";
 import LockIcon from "../mui/Incons/LockIcon";
 import Link from "next/link";
 import axios from "axios";
-import { registerNewUser } from "../../../../services/axios";
+import { registerNewUser, getprofiles } from "../../../../services/axios";
+import { useRouter } from "next/navigation";
+
 
 
 
 export default function RegisterForm() {
-  // useState inputs
+ 
+  const router = useRouter()
 
   const [nameValue, setNameValue] = useState('');
   // const [lastNameValue, setLastNameValue] = useState('');
@@ -89,28 +92,47 @@ export default function RegisterForm() {
   //   console.log("botón clickado");
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
+   
 
     const userData = {
-      name: nameValue,
       email: emailValue,
+      name: nameValue,
       password: passwordValue,
-      confirmPassword: confirmPasswordValue,
+      password_confirmation: confirmPasswordValue,
       position: positionValue,
-      company: companyValue,
-      profile: profileValue,
+      business_name: companyValue,
+      profile_type: profileValue,
       country: country,
-      subscriptionType: subscriptionType,
+      subscription_type: subscriptionType,
     };
 
-    try {
-      const response = await registerNewUser(userData);
-      console.log('Registro exitoso:', response);
-      // Aquí podrías redirigir al usuario a otra página o realizar otras acciones
-    } catch (error) {
-      console.error('Error al registrar:', error);
-      // Aquí podrías manejar el error y mostrar un mensaje al usuario
-    }
+    // const profies =  await getprofiles()
+    console.log('data', userData);
+    // console.log('profies', profies);
+
+    axios.get('/sanctum/csrf-cookie').then(response => {
+      registerNewUser(userData).then((res) =>{
+        
+        router.push("/");
+        router.refresh()
+      })
+      .catch ((error) =>{
+        console.error('Login failed:', error);
+        
+      })
+    })
+    // try {
+    //   console.log('Registro:', response);
+
+    //   const response = await registerNewUser(userData);
+
+    //   console.log('Registro exitoso:', response);
+    //   // Aquí podrías redirigir al usuario a otra página o realizar otras acciones
+    // } catch (error) {
+    //   console.error('Error al registrar:', error);
+    //   // Aquí podrías manejar el error y mostrar un mensaje al usuario
+    // }
   };
 
   const handleButtonClick = (e) => {
@@ -208,9 +230,9 @@ export default function RegisterForm() {
               value={profileValue}
               onChange={setProfileValue}
               options={[
-                { value: 10, label: 'Empresa' },
-                { value: 20, label: 'Agencia' },
-                { value: 30, label: 'Freelance' },
+                { value: 'empresa', label: 'Empresa' },
+                { value: 'agencia', label: 'Agencia' },
+                { value: 'freelance', label: 'Freelance' },
               ]}
               sx={{
                 '& .MuiInputLabel-root': { color: 'red' },
@@ -228,9 +250,9 @@ export default function RegisterForm() {
               value={country}
               onChange={setCountry}
               options={[
-                { value: 10, label: 'España' },
-                { value: 20, label: 'Francia' },
-                { value: 30, label: 'Italia' },
+                { value: 'España', label: 'España' },
+                { value: 'Francia', label: 'Francia' },
+                { value: 'Italia', label: 'Italia' },
               ]}
               sx={{
                 '& .MuiInputLabel-root': { color: 'red' },
@@ -257,9 +279,9 @@ export default function RegisterForm() {
             value={subscriptionType}
             onChange={setSubscriptionType}
             options={[
-              { value: 10, label: 'basic' },
-              { value: 20, label: 'standard' },
-              { value: 30, label: 'premium' },
+              { value: 'basic', label: 'basic' },
+              { value: 'professional', label: 'professional' },
+              { value: 'business', label: 'business' },
             ]}
             sx={{
               '& .MuiInputLabel-root': { color: 'red' },
