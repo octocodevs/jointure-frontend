@@ -5,18 +5,27 @@ import {
   Card,
   CardHeader,
   CardMedia,
-  Chip,
   Box,
   Button,
   Typography,
   CardContent,
 } from "@mui/material";
+import CustomChip from "../Buttons/CustomChip";
 
 
-export default function CollabCard({ card }) {
+export default function ProposalCard({ card }) {
   if (!card){
     return null
   }
+
+  const lineClamp = {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'pre-wrap',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical'
+  };
 
   return (
     <div>
@@ -39,46 +48,37 @@ export default function CollabCard({ card }) {
               />
           }
           title={card.title}
+          titleTypographyProps={{ 
+            sx: {...lineClamp, 
+                  fontWeight: 600}
+              }}
         />
         <Box
           alignItems="left"
-          className="flex flex-row gap-2 items-start pl-4 pb-2"
+          className="flex flex-wrap gap-2 items-start pl-4 py-2"
         >
-          <Chip
-            sx={{
-              backgroundColor: '#2EE09F'
-            }}          
-            label="Alimentación"
-            size="small"
-            variant="outlined"
-            
-          />
-          <Chip
-            sx={{
-              backgroundColor: '#06ABDC'
-            }} 
-            label={card.collab_type}
-            size="small"
-          />
+          <CustomChip backgroundColor="#2EE09F" label="Alimentación" />
+          <CustomChip backgroundColor="#06ABDC" label={card.collab_type} />
         </Box>
-        <CardContent>
+        <CardContent className="h-30">
           <Typography
             variant="h5" 
-            className="pl-1"
+            className="pl-1 line-clamp-1"
             sx={{
               fontSize: '16px',
               fontWeight: 700
             }}
+            gutterBottom
             >
               {card.title}
            </Typography>
-          <Typography variant="body2" className="px-1">
+          <Typography variant="body2" className="px-1 line-clamp-3">
             {card.description}
           </Typography>
         </CardContent>
         <Box
           sx={{
-            paddingBottom: 1,
+            paddingBottom: 2,
             paddingLeft: 1
           }}>
           <Button
