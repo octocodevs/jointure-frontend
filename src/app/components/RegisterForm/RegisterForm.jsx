@@ -11,6 +11,7 @@ import { registerNewUser} from "../../../../services/axios"
 import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
 import LockIcon from '../mui/Icons/LockIcon';
+import { Alert } from '@mui/material';
 
 
 
@@ -31,6 +32,7 @@ export default function Form() {
     const [companyValue, setCompanyValue] = useState('');
     const [profileValue, setProfileValue] = useState('');
     const [subscriptionType, setSubscriptionType] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -101,7 +103,7 @@ export default function Form() {
 
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
-
+                setShowAlert(true);
                 router.push("/");
                 router.refresh()
             })
@@ -123,6 +125,11 @@ export default function Form() {
 
     return (
         <Container className='h-screen pt-4 max-h-[60vh]' overflow="auto">
+            {showAlert && (
+        <Alert severity='warning' onClose={() => setShowAlert(false)}>
+          Registro exitoso.
+        </Alert>
+            )}
             <Box display="flex" alignItems="center" justifyContent="center">
             <LockIcon />
             </Box>
