@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 
 axios.defaults.baseURL = urlAPI;
 
-export const getCollaborations = async () => {
+/* export const getCollaborations = async () => {
     try {
         const response = await axios.get(`api/collaboration-proposals`)
         console.log('entra', response.data.data)
@@ -15,7 +15,7 @@ export const getCollaborations = async () => {
     } catch (error) {
         throw error.response.data;
     }
-};
+}; */
 
 export const registerNewUser = async (userData) => {
     try {

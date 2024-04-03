@@ -14,6 +14,11 @@ import {
 
 
 export default function CollabCard({ card }) {
+  console.log('cards', card)
+  if (!card){
+    return null
+  }
+
   return (
     <div>
       <Card elevation={2} className="max-w-xs h-auto">
@@ -34,8 +39,8 @@ export default function CollabCard({ card }) {
                   className="mr-2 "
               />
           }
-/*           title={card.title}
- */        />
+          title={card.title}
+        />
         <Box
           alignItems="left"
           className="flex flex-row gap-2 items-start pl-4 pb-2"
@@ -53,8 +58,8 @@ export default function CollabCard({ card }) {
             sx={{
               backgroundColor: '#06ABDC'
             }} 
-/*             label={card.collab_type}
- */            size="small"
+            label={card.collab_type}
+            size="small"
           />
         </Box>
         <CardContent>
@@ -66,11 +71,11 @@ export default function CollabCard({ card }) {
               fontWeight: 700
             }}
             >
-{/*               {card.title}
- */}            </Typography>
+              {card.title}
+           </Typography>
           <Typography variant="body2" className="px-1">
-{/*             {card.description}
- */}          </Typography>
+            {card.description}
+          </Typography>
         </CardContent>
         <Box
           sx={{
