@@ -11,7 +11,6 @@ import {
   FormHelperText,
 } from "@mui/material";
 import Link from "next/link";
-import LoginButton from "./Buttons/LoginButton";
 import LargeButton from "./Buttons/LargeButton";
 import axios from "axios";
 import { loginUser } from "../../../services/axios";
@@ -42,7 +41,6 @@ const LoginInputs = () => {
     e.preventDefault();
     const { email, password, agree } = formData;
 
-    // Reinicia los mensajes de error
     setErrorMessages({});
 
     if (!email) {
@@ -66,7 +64,6 @@ const LoginInputs = () => {
       }));
     }
 
-    // Si hay errores, no procede con el envío del formulario
     if (Object.keys(errorMessages).length > 0) {
       return;
     }
@@ -79,7 +76,11 @@ const LoginInputs = () => {
         })
         .catch((error) => {
           console.log(error.response);
-          if (error.response && error.response.data && error.response.data.errors) {
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
             setErrorMessages(error.response.data.errors);
           } else {
             setErrorMessages({ general: "Email o contraseña incorrecto" });
@@ -117,21 +118,33 @@ const LoginInputs = () => {
             error={!!errorMessages.password}
             helperText={errorMessages.password}
           />
-          <FormControl error={!!errorMessages.agree}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  name="agree"
-                  checked={formData.agree}
-                  onChange={handleChange}
-                />
-              }
-              label="Acepto las condiciones y la privacidad"
-              className="text-gray-700 mt-4"
-            />
-            {errorMessages.agree && <FormHelperText>{errorMessages.agree}</FormHelperText>}
-          </FormControl>
+          <Box>
+            <FormControl
+              error={!!errorMessages.agree}
+              sx={{ display: "flex", alignItems: "" }}
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    name="agree"
+                    checked={formData.agree}
+                    onChange={handleChange}
+                  />
+                }
+                label="Acepto las condiciones y la privacidad"
+                variant="body2"
+                sx={{
+                  marginTop: 2,
+                  marginLeft: 0.5,
+                  marginBottom: 2,
+                }}
+              />
+              {errorMessages.agree && (
+                <FormHelperText>{errorMessages.agree}</FormHelperText>
+              )}
+            </FormControl>
+          </Box>
         </Box>
 
         <Box>
@@ -141,11 +154,11 @@ const LoginInputs = () => {
 
       <Box mt={2}>
         {errorMessages.general && (
-          <Typography variant="body2" color="error">
+          <Typography variant="body1" color="error">
             {errorMessages.general}
           </Typography>
         )}
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body1" color="textSecondary">
           ¿No estás registrado?{" "}
           <Link
             href="/admin/register"

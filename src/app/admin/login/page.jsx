@@ -17,7 +17,7 @@ const Login = () => {
         </Box>
         <LoginInputs />
       </Box>
-      <Box className="hidden sm:block md:w-1/2">
+      <Box>
         <LoginCard />
       </Box>
     </Box>

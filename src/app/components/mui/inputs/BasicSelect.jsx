@@ -12,7 +12,8 @@ export default function BasicSelect(props) {
   };
 
   return (
-      <FormControl sx={{my:1, minWidth:210, width: '100%'}} size='small'>
+    <Box sx={{ m: 2, width: '100%' }}>
+      <FormControl fullWidth>
         <InputLabel id={id}>{label}</InputLabel>
         <Select
           labelId={id}
@@ -28,5 +29,7 @@ export default function BasicSelect(props) {
           ))}
         </Select>
       </FormControl>
+    </Box>
+
   );
 }
