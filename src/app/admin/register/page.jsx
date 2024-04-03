@@ -19,7 +19,7 @@ export default function RegisterPage() {
         </Box>       
         <Box className="hidden sm:block h-screen">
           <Image
-            src="/assets/img/neon-pretzel-light.jpg"
+            src="/img/neon-pretzel-light.jpg"
             alt="Picture of the author"
             width={1200}
             height={3400}
