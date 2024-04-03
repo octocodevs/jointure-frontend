@@ -84,6 +84,12 @@ To run tests, run the following command
    npm test
    ```
 
+## Demo
+
+![Login view](./public/img/login.png)
+![Register view](./public/img/register.png)
+![Profile view](./public/img/profile.png)
+
 ## 👩‍💻 Developers
 
 **Front-end Team:**
