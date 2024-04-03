@@ -31,6 +31,7 @@ export const registerNewUser = async (userData) => {
 export const loginUser = async (userData) => {
     try {
         const response = await axios.post(`api/login`, userData);
+        console.log('sale?');
         return response.data;
     } catch (error) {
         throw error.response.data;
