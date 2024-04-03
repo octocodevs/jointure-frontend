@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 👥🤝 Project - Jointure Platform
 
-## Getting Started
+![Jointure Logo](./public/img/jointure-logo.png)
 
-First, run the development server:
+Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. This README provides an overview of the project's structure, technologies used, features, installation instructions, and contribution details.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📌 Requirements
+- Visual Studio Code
+- Node.js installed on the computer
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Technologies Used:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Frontend:
+  - Next.js
+  - React.js
+  - Tailwind CSS
+  - Material-UI (MUI)
+  - Axios
+  - Jest
+  - Cypress
+- Backend:
+  - PHP
+  - Laravel
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📁 Frontend File Structure:
 
-## Learn More
+- **.next:** Auto-generated files by Next.js during the build process.
+- **/node_modules:** Dependencies managed by npm.
+- **public/:** Static files accessible directly from the browser.
+- **src/:**
+  - **/app:**
+    - **/admin:**
+      - **/login:** Login related components and pages.
+      - **/register:** Register related components and pages.
+      - **/marketplace:** Components and pages related to the marketplace.
+      - **/newcollab:** Components and pages related to creating a new collaboration.
+      - **/inbox:** Components and pages related to the user's inbox.
+    - **/components:** Reusable UI components used across the application.
+      - **/MUI:** Material-UI components.
+    - **/services:** Axios API integration and other services.
+  - **/pages:** Main application pages.
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 Features:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Marketplace:** Display collaborations from various users.
+- **User Authentication:** Login and registration functionalities.
+- **Create Collaboration:** Users can create and publish collaboration posts.
+- **Inbox:** View incoming and pending collaboration proposals.
+- **Search Functionality:** Search collaborations by name.
+- **Responsive Design:** Optimized for desktop and mobile devices.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## ⚙️ Installation
+This repository is the Frontend where the visual part of the website is located. To install it on your computer, follow these steps:
 
-## Deploy on Vercel
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/octocodevs/jointure-frontend.git
+    ```
+2. Put in the terminal within the project
+    ```bash
+    cd jointure-frontend
+    ```
+    ```bash
+    npm install
+    ```
+3. To open and see the website in the terminal you have to enter
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> [!IMPORTANT]
+>
+> ## 🚨 Backend Repository
+This Frontend repository can be used with any Backend. Here is the link to our Backend repository if you want to use it with this Frontend:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🔗 [Backend link ](https://github.com/octocodevs/jointure-backend) 🔗
+
+
+## 🧪 Running Tests
+
+To run tests, run the following command
+
+   ```bash
+   npm test
+   ```
+
+## Demo
+
+![Login view](./public/img/login.png)
+![Marketplace view](./public/img/marketplace.png)
+![Profile view](./public/img/profile.png)
+
+
+## 👩‍💻 Developers
+
+**Front-end Team:**
+
+Stephanie Céspedes - [Linkedin profile](https://www.linkedin.com/in/stephanie-cespedes/)
+
+Grecia Landazuri - [Linkedin profile](https://www.linkedin.com/in/grecialh/)
+
+Carolina Dela - [Linkedin profile](https://www.linkedin.com/in/carolina-delfa-silvestre/)
+
+Vicki Robertson - [Linkedin profile](https://www.linkedin.com/in/vickirobertson/)
+
+Gabriela Irimia  - [Linkedin profile](https://www.linkedin.com/in/gabriela-irimia/)
+
+**Back-end Team:**
+
+Zohra Bellamine - [Linkedin profile](https://www.linkedin.com/in/z-bellamine/)
+
+Melissa Casola - [Linkedin profile](https://www.linkedin.com/in/melissa-casola/)
