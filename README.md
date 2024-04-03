@@ -87,8 +87,9 @@ To run tests, run the following command
 ## Demo
 
 ![Login view](./public/img/login.png)
-![Register view](./public/img/register.png)
+![Marketplace view](./public/img/marketplace.png)
 ![Profile view](./public/img/profile.png)
+
 
 ## 👩‍💻 Developers
 
