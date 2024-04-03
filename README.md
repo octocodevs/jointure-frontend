@@ -57,7 +57,9 @@ This repository is the Frontend where the visual part of the website is located.
    git clone https://github.com/octocodevs/jointure-frontend.git
    ```
 2. Put in the terminal within the project
-- cd jointure-frontend
+    ```bash
+   cd jointure-frontend
+   ```
    ```bash
     npm install
     ```
@@ -85,13 +87,19 @@ To run tests, run the following command
 **Front-end Team:**
 
 Stephanie Céspedes - [Linkedin profile](https://www.linkedin.com/in/stephanie-cespedes/)
+
 Grecia Landazuri - [Linkedin profile](https://www.linkedin.com/in/grecialh/)
+
 Carolina Dela - [Linkedin profile](https://www.linkedin.com/in/carolina-delfa-silvestre/)
+
 Vicki Robertson - [Linkedin profile](https://www.linkedin.com/in/vickirobertson/)
+
 Gabriela Irimia  - [Linkedin profile](https://www.linkedin.com/in/gabriela-irimia/)
 
 **Back-end Team:**
 
 Zohra Bellamine - [Linkedin profile](https://www.linkedin.com/in/z-bellamine/)
+
 Melissa Casola - [Linkedin profile](https://www.linkedin.com/in/melissa-casola/)
+
 Laura Artaza -[Linkedin profile](https://www.linkedin.com/in/laura-artaza/)
