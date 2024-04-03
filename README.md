@@ -1,6 +1,6 @@
 # 👥🤝 Jointure Platform
 
-![Jointure Logo](./public/img/logo.png)
+![Jointure Logo](./public/img/jointure-logo.png)
 
 Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. This README provides an overview of the project's structure, technologies used, features, installation instructions, and contribution details.
 
