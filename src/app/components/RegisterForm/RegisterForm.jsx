@@ -36,12 +36,10 @@ export default function Form() {
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
-        console.log("Name:", event.target.value);
     };
 
     const handleEmailChange = (event) => {
         setEmailValue(event.target.value);
-        console.log("Email:", event.target.value);
     };
 
     const handlePasswordChange = (event) => {
@@ -97,9 +95,6 @@ export default function Form() {
             subscription_type: subscriptionType,
         };
 
-        // const profies =  await getprofiles()
-        console.log('data', userData);
-        // console.log('profies', profies);
 
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {

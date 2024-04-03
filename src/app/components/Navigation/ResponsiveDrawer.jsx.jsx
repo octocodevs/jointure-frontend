@@ -18,8 +18,8 @@ import { LogoutRounded, PeopleRounded, HomeRounded, NoteAddRounded, DashboardRou
 const drawerWidth = 300;
 
 const menuItems = [
-  { text: 'Inicio', icon: <HomeRounded />, href: '/marketplace' },
-  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/login' },
+  { text: 'Inicio', icon: <HomeRounded />, href: '/admin/marketplace' },
+  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/admin/login' },
   { text: 'Bandeja de entrada', icon: <DashboardRounded />, href: '/admin/register' },
   { text: 'Crear propuesta', icon: <NoteAddRounded />, href: '/' },
   { text: 'Desconectarse', icon: <LogoutRounded />, href: '/' },

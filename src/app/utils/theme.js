@@ -74,12 +74,6 @@ const theme = createTheme({
 		  button: {
 			fontSize: '0.90rem',
 			fontWeight: 600,
-			'@media (min-width: 640px)': { 
-			  fontSize: '1.25rem',
-			},
-			'@media (min-width: 768px)': {
-			  fontSize: '1rem',
-			},
 		  },
 	},
 });
