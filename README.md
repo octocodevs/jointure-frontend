@@ -67,10 +67,10 @@ This repository is the Frontend where the visual part of the website is located.
     ```bash
     npm run dev
     ```
-    
+
 > [!IMPORTANT]
 >
-## 🚨 Backend Repository
+> ## 🚨 Backend Repository
 This Frontend repository can be used with any Backend. Here is the link to our Backend repository if you want to use it with this Frontend:
 
 🔗 [Backend link ](https://github.com/octocodevs/jointure-backend) 🔗
