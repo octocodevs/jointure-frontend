@@ -1,4 +1,4 @@
-# 👥🤝 Jointure Platform
+# 👥🤝 Project - Jointure Platform
 
 ![Jointure Logo](./public/img/jointure-logo.png)
 
@@ -53,20 +53,20 @@ Jointure is a platform that automates collaborations between brands from various
 This repository is the Frontend where the visual part of the website is located. To install it on your computer, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/octocodevs/jointure-frontend.git
-   ```
+    ```bash
+    git clone https://github.com/octocodevs/jointure-frontend.git
+    ```
 2. Put in the terminal within the project
     ```bash
-   cd jointure-frontend
-   ```
-   ```bash
+    cd jointure-frontend
+    ```
+    ```bash
     npm install
     ```
 3. To open and see the website in the terminal you have to enter
-  ```bash
+    ```bash
     npm run dev
-   ```
+    ```
 
 ## 🚨 Backend Repository
 This Frontend repository can be used with any Backend. Here is the link to our Backend repository if you want to use it with this Frontend:
@@ -78,9 +78,9 @@ This Frontend repository can be used with any Backend. Here is the link to our B
 
 To run tests, run the following command
 
-```bash
-  npm test
-```
+   ```bash
+   npm test
+   ```
 
 ## 👩‍💻 Developers
 
