@@ -10,6 +10,7 @@ import axios from 'axios';
 import { registerNewUser} from "../../../../services/axios"
 import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
+import LockIcon from '../mui/Icons/LockIcon';
 
 
 
@@ -121,8 +122,12 @@ export default function Form() {
     };
 
     return (
-        <Container className='h-screen py-20 max-h-[60vh]' overflow="auto">
+        <Container className='h-screen pt-4 max-h-[60vh]' overflow="auto">
+            <Box display="flex" alignItems="center" justifyContent="center">
+            <LockIcon />
+            </Box>
             <Typography variant="h2" align="center">Registro</Typography>
+            <Box className='pt-4 p-12 h-screen overflow-auto' sx={{ height: '70vh' }}>
             <form
                 noValidate
                 autoComplete="off"
@@ -285,6 +290,7 @@ export default function Form() {
                     </Button>
                 </Box>
             </form>
+            </Box>
             <Box>
                 <Typography
                     className="text-center"
