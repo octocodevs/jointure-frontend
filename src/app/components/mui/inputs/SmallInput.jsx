@@ -22,6 +22,7 @@ export default function SmallInput(props) {
       value={value}
       onChange={onChange}
       type={type}
+      size="small"
       />
     </Box>
   );
