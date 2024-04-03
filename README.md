@@ -110,3 +110,7 @@ Gabriela Irimia  - [Linkedin profile](https://www.linkedin.com/in/gabriela-irimi
 Zohra Bellamine - [Linkedin profile](https://www.linkedin.com/in/z-bellamine/)
 
 Melissa Casola - [Linkedin profile](https://www.linkedin.com/in/melissa-casola/)
+
+Laura Artaza - [Linkedin profile](https://www.linkedin.com/in/laura-artaza/)
+
+
