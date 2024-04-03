@@ -14,7 +14,6 @@ import {
 
 
 export default function CollabCard({ card }) {
-  console.log('cards', card)
   if (!card){
     return null
   }
