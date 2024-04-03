@@ -26,12 +26,17 @@ export default function Marketplace() {
   return (
     <ResponsiveDrawer>
         <Box sx={{
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '2rem',
+        padding: '2rem',
             }}>
-            <Grid container spacing={3}>
+            <Grid container /* spacing={1} */>
               {cards.map(card => (
-                <Grid key={card.id} xs={12} md={6}>
-                  <CollabCard card={card} />
+                <Grid key={card.id} xs={12} md={6} lg={4}>
+                  <Box sx={{ padding: '1rem' }}>
+                    <CollabCard card={card} />
+                  </Box>
                 </Grid>
               ))} 
             </Grid>
