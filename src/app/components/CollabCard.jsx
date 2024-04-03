@@ -9,69 +9,97 @@ import {
   Box,
   Button,
   Typography,
+  CardContent,
 } from "@mui/material";
 
 
-export default function CollabCard() {
+export default function CollabCard({ card }) {
   return (
-    <Card className="max-w-xs h-auto">
-      <CardMedia>
-        <Image
-          src={"/img/croissants.jpg"}
-          width={360}
-          height={400}
-          objectFit="cover"
+    <div>
+      <Card elevation={2} className="max-w-xs h-auto">
+        <CardMedia>
+          <Image
+            src={"/img/croissants.jpg"}
+            width={360}
+            height={400}
+            objectFit="cover"
+          />
+        </CardMedia>
+        <CardHeader 
+          avatar={
+              <Avatar 
+                  alt="logo"
+                  src="/img/donuts-logo.jpg"
+                  variant="rounded"
+                  className="mr-2 "
+              />
+          }
+          title={card.title}
         />
-      </CardMedia>
-      <CardHeader 
-        avatar={
-            <Avatar 
-                alt="logo"
-                src="/img/donuts-logo.jpg"
-                variant="rounded"
-                className="mr-2 "
-            />
-        }
-        title="Brand"
-      />
-      <Box
-        alignItems="left"
-        className="flex flex-row gap-2 items-start pl-4 pb-4"
-      >
-        <Chip
+        <Box
+          alignItems="left"
+          className="flex flex-row gap-2 items-start pl-4 pb-2"
+        >
+          <Chip
+            sx={{
+              backgroundColor: '#2EE09F'
+            }}          
+            label="Alimentación"
+            size="small"
+            variant="outlined"
+            
+          />
+          <Chip
+            sx={{
+              backgroundColor: '#06ABDC'
+            }} 
+            label={card.collab_type}
+            size="small"
+          />
+        </Box>
+        <CardContent>
+          <Typography
+            variant="h5" 
+            className="pl-1"
+            sx={{
+              fontSize: '16px',
+              fontWeight: 700
+            }}
+            >
+              {card.title}
+            </Typography>
+          <Typography variant="body2" className="px-1">
+            {card.description}
+          </Typography>
+        </CardContent>
+        <Box
           sx={{
-            backgroundColor: '#2EE09F'
-          }}          
-          label="Alimentación"
-          size="small"
-          variant="outlined"
-          
-        />
-        <Chip
-          sx={{
-            backgroundColor: '#06ABDC'
-          }} 
-          label="Co-branding"
-          size="small"
-        />
-      </Box>
-      <Typography variant="h6" className="text-bold pl-4">Colaboración</Typography>
-      <Typography variant="body2" className="px-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem dicta
-        voluptas ad omnis dolorum laborum modi illum facilis aliquid eligendi
-        odit?
-      </Typography>
-      <Button
-        sx={{
-          margin: 2
-        }}
-        className="flex flex-row items-start pb-8"
-        variant="contained"
-        color="primary"
-        size="small"
-      >
-        Ver más
-      </Button>
-    </Card>
+            paddingBottom: 1,
+            paddingLeft: 1
+          }}>
+          <Button
+            sx={{
+              margin: 1,
+            }}
+            variant="outlined"
+            color="primary"
+            size="small"
+          >
+            Ver más
+          </Button>
+          <Button
+            sx={{
+              margin: 1,
+            }}
+            className="flex flex-row items-start pb-8"
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            Gestionar
+          </Button>
+        </Box>
+      </Card>
+    </div>
   );
 }

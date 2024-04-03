@@ -7,9 +7,10 @@ axios.defaults.withCredentials = true;
 
 axios.defaults.baseURL = urlAPI;
 
-export const getCollaborations = async (page) => {
+export const getCollaborations = async () => {
     try {
-        const response = await axios.get(`api/marketplace?page=${page}`)
+        const response = await axios.get(`api/collaboration-proposals`)
+        console.log('entra', response.data.data)
         return response.data.data;
     } catch (error) {
         throw error.response.data;
