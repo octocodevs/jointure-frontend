@@ -5,15 +5,15 @@ import {
   Card,
   CardHeader,
   CardMedia,
-  Chip,
   Box,
   Button,
   Typography,
   CardContent,
 } from "@mui/material";
+import CustomChip from "../Buttons/CustomChip";
 
 
-export default function CollabCard({ card }) {
+export default function ProposalCard({ card }) {
   if (!card){
     return null
   }
@@ -57,27 +57,8 @@ export default function CollabCard({ card }) {
           alignItems="left"
           className="flex flex-wrap gap-2 items-start pl-4 py-2"
         >
-          <Chip
-            sx={{
-              backgroundColor: '#2EE09F',
-              fontWeight: 600,
-              px: '0.75rem',
-              py: '1rem'
-            }}          
-            label="Alimentación"
-            size="small"
-            
-          />
-          <Chip
-            sx={{
-              backgroundColor: '#06ABDC',
-              fontWeight: 600,
-              px: '0.75rem',
-              py: '1rem'
-            }} 
-            label={card.collab_type}
-            size="small"
-          />
+          <CustomChip backgroundColor="#2EE09F" label="Alimentación" />
+          <CustomChip backgroundColor="#06ABDC" label={card.collab_type} />
         </Box>
         <CardContent className="h-30">
           <Typography
