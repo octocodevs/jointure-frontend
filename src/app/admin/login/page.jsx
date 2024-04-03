@@ -7,7 +7,7 @@ import LockIcon from "@/app/components/mui/Icons/LockIcon";
 
 const Login = () => {
   return (
-    <Box className="flex justify-center items-center">
+    <Box className="flex justify-content items-center">
       <Box className="md:w-1/2 mt-24 flex justify-center items-center flex-col">
         <Box display="flex" alignItems="center" justifyContent="center">
           <LockIcon />
