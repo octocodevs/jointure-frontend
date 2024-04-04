@@ -22,7 +22,7 @@ export default function RegisterPage() {
             src="/img/neon-pretzel-light.jpg"
             alt="Picture of the author"
             width={1200}
-            height={3400}
+            height={600}
           />
         </Box>
       </Box>

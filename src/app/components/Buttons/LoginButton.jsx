@@ -17,7 +17,7 @@ const LoginButton = ({ to }) => {
                 style={{ textDecoration: 'none', width: '100%' }}
                 >
                 <Button variant="contained" style={buttonStyles} className='uppercase'>
-                    Enviar
+                
                 </Button>
             </Link>
         </Box>

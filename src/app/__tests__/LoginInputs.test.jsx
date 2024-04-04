@@ -1,40 +1,36 @@
-import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import axiosMock from 'axios-mock-adapter';
-import LoginInputs from '../LoginInputs';
-import { loginUser } from '../../../services/axios'; // Suponiendo que esta es tu función para iniciar sesión
+import React from "react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
+import LoginInputs from "./LoginInputs";
+import axios from "axios";
 
-describe('LoginInputs', () => {
-  let axiosMockInstance;
+jest.mock("axios");
 
-  beforeEach(() => {
-    axiosMockInstance = new axiosMock();
-  });
+describe("LoginInputs Component Integration Test", () => {
+  it("Iniciar sesión con credenciales válidas", async () => {
+    const mockResponse = { data: { access_token: "token_de_prueba" } };
+    axios.get.mockResolvedValueOnce(mockResponse);
 
-  afterEach(() => {
-    axiosMockInstance.restore();
-  });
+    const { getByLabelText, getByText, queryByText } = render(<LoginInputs />);
 
-  it('should submit form with valid data', async () => {
-    axiosMockInstance.onGet('/sanctum/csrf-cookie').reply(200);
-    axiosMockInstance.onPost('/login').reply(200, { success: true });
+    fireEvent.change(getByLabelText("E-mail"), {
+      target: { value: "correo@ejemplo.com" },
+    });
 
-    const { getByLabelText, getByText } = render(<LoginInputs />);
+    fireEvent.change(getByLabelText("Contraseña"), {
+      target: { value: "contraseña123" },
+    });
 
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' } });
-    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
-
-    fireEvent.submit(getByText('Iniciar sesión'));
+    fireEvent.click(getByText("Aceptar"));
 
     await waitFor(() => {
-      expect(loginUser).toHaveBeenCalledWith({
-        email: 'test@example.com',
-        password: 'password',
-        agree: true
+      expect(axios.get).toHaveBeenCalledWith("/sanctum/csrf-cookie");
+      expect(axios.post).toHaveBeenCalledWith("/login", {
+        email: "correo@ejemplo.com",
+        password: "contraseña123",
+        agree: false, // Suponiendo que por defecto el checkbox no está marcado
       });
+
+      // Aquí puedes agregar más expectativas según lo que se espera que haga el componente después de iniciar sesión
     });
   });
-
-  // Añade más pruebas según sea necesario para cubrir otros casos de uso
-});
+})

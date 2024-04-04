@@ -9,8 +9,7 @@ const LoginCard = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "729px",
-        width: "600px",
-        marginLeft: "28%"
+        width: "800px",
       }}
     ></Box>
   );
