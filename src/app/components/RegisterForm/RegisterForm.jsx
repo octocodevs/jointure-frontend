@@ -129,7 +129,7 @@ export default function Form() {
             <LockIcon />
             </Box>
             <Typography variant="h2" align="center">Registro</Typography>
-            <Box className='pt-4 p-12 h-screen overflow-auto' sx={{ height: '70vh' }}>
+            <Box  sx={{ height: '100vh' }}>
             <form
                 noValidate
                 autoComplete="off"
