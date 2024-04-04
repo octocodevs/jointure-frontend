@@ -27,6 +27,7 @@ export default function ProfileData() {
                             alt="Next.js Image"
                             width={300}
                             height={300}
+                            className='bg-cover h-full'
                         />
                     </Box>
 

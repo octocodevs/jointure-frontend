@@ -3,6 +3,7 @@ import ProfileData from '@/app/components/Profile/ProfileData'
 import Divider from '@mui/material/Divider';
 import { Box, Container, List } from '@mui/material';
 import IndividualProfile from '@/app/components/Profile/IndividualProfile';
+import CenteredTabs from '@/app/components/Profile/ProfileTabs';
 
 
 export default function ProfilePage() {
@@ -14,7 +15,7 @@ export default function ProfilePage() {
                 </Box>
                 <Divider variant="inset" component="li"/>
                 <Box sx={{ flexGrow: 1 }}>
-                    <IndividualProfile />
+                    <CenteredTabs />
                 </Box>
             </Box>
         </>
