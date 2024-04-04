@@ -12,19 +12,18 @@ import {
 } from "@mui/material";
 import CustomChip from "../Buttons/CustomChip";
 
-
 export default function ProposalCard({ card }) {
-  if (!card){
-    return null
+  if (!card) {
+    return null;
   }
 
   const lineClamp = {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'pre-wrap',
-    display: '-webkit-box',
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "pre-wrap",
+    display: "-webkit-box",
     WebkitLineClamp: 2,
-    WebkitBoxOrient: 'vertical'
+    WebkitBoxOrient: "vertical",
   };
 
   return (
@@ -36,44 +35,45 @@ export default function ProposalCard({ card }) {
             width={360}
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
-            sx={{objectFit: "cover"}}
+            sx={{ objectFit: "cover" }}
           />
         </CardMedia>
-        <CardHeader 
+        <CardHeader
           avatar={
-              <Avatar 
-                  alt="logo"
-                  src="/img/donuts-logo.jpg"
-/*                   {card.user.profile.image}
- */                  variant="rounded"
-                  className="mr-2 "
-              />
+            <Avatar
+              alt="logo"
+              src={card.user.profile.image}
+              variant="rounded"
+              className="mr-2 "
+            />
           }
           title={card.brand}
-          titleTypographyProps={{ 
-            sx: {...lineClamp, 
-                  fontWeight: 600}
-              }}
+          titleTypographyProps={{
+            sx: { ...lineClamp, fontWeight: 600 },
+          }}
         />
         <Box
           alignItems="left"
           className="flex flex-wrap gap-2 items-start pl-4 py-2"
         >
-          <CustomChip backgroundColor="#2EE09F" label={card.user.profile && card.user.profile.sector} />
+          <CustomChip
+            backgroundColor="#2EE09F"
+            label={card.user.profile && card.user.profile.sector}
+          />
           <CustomChip backgroundColor="#06ABDC" label={card.collab_type} />
         </Box>
         <CardContent className="h-32">
           <Typography
-            variant="h5" 
+            variant="h5"
             className="pl-1 line-clamp-1"
             sx={{
-              fontSize: '16px',
-              fontWeight: 700
+              fontSize: "16px",
+              fontWeight: 700,
             }}
             gutterBottom
-            >
-              {card.title}
-           </Typography>
+          >
+            {card.title}
+          </Typography>
           <Typography variant="body2" className="px-1 line-clamp-3">
             {card.description}
           </Typography>
@@ -81,8 +81,9 @@ export default function ProposalCard({ card }) {
         <Box
           sx={{
             paddingBottom: 2,
-            paddingLeft: 1
-          }}>
+            paddingLeft: 1,
+          }}
+        >
           <Button
             sx={{
               margin: 1,
