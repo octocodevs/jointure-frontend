@@ -71,7 +71,7 @@ const LoginInputs = () => {
     axios.get("/sanctum/csrf-cookie").then(() => {
       loginUser(formData)
         .then((res) => {
-          route.push("/");
+          route.push("/admin");
           route.refresh();
         })
         .catch((error) => {
