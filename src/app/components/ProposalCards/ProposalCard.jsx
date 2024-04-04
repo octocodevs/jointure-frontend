@@ -32,10 +32,11 @@ export default function ProposalCard({ card }) {
       <Card elevation={2} className="max-w-xs h-auto">
         <CardMedia>
           <Image
-            src={"/img/croissants.jpg"}
+            src={`${card.image}`}
             width={360}
             height={400}
-            objectFit="cover"
+            alt={`Imagen acerca de ${card.brand}`}
+            sx={{objectFit: "cover"}}
           />
         </CardMedia>
         <CardHeader 
@@ -43,11 +44,12 @@ export default function ProposalCard({ card }) {
               <Avatar 
                   alt="logo"
                   src="/img/donuts-logo.jpg"
-                  variant="rounded"
+/*                   {card.user.profile.image}
+ */                  variant="rounded"
                   className="mr-2 "
               />
           }
-          title={card.title}
+          title={card.brand}
           titleTypographyProps={{ 
             sx: {...lineClamp, 
                   fontWeight: 600}
@@ -57,10 +59,10 @@ export default function ProposalCard({ card }) {
           alignItems="left"
           className="flex flex-wrap gap-2 items-start pl-4 py-2"
         >
-          <CustomChip backgroundColor="#2EE09F" label="Alimentación" />
+          <CustomChip backgroundColor="#2EE09F" label={card.user.profile && card.user.profile.sector} />
           <CustomChip backgroundColor="#06ABDC" label={card.collab_type} />
         </Box>
-        <CardContent className="h-30">
+        <CardContent className="h-32">
           <Typography
             variant="h5" 
             className="pl-1 line-clamp-1"
@@ -91,7 +93,7 @@ export default function ProposalCard({ card }) {
           >
             Ver más
           </Button>
-          <Button
+          {/* <Button
             sx={{
               margin: 1,
             }}
@@ -101,7 +103,7 @@ export default function ProposalCard({ card }) {
             size="small"
           >
             Gestionar
-          </Button>
+          </Button> */}
         </Box>
       </Card>
     </div>
