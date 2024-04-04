@@ -15,7 +15,7 @@ import XIcon from '@mui/icons-material/X';
 
 export default function ProfileData() {
     return (
-        <ResponsiveDrawer>
+
             <Container className="flex min-h-auto flex-col items-center justify-between p-8">
                 <Typography variant="h2" className="text-center">
                     Mi perfil
@@ -187,6 +187,6 @@ export default function ProfileData() {
                     </Box>
                 </Box>
             </Container>
-        </ResponsiveDrawer>
+
     );
 }
