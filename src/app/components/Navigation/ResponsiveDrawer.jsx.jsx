@@ -4,23 +4,18 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import CustomAppBar from './CustomAppBar';
 import { LogoutRounded, PeopleRounded, HomeRounded, NoteAddRounded, DashboardRounded } from '@mui/icons-material';
+import MenuItem from './MenuItem';
+
 
 const drawerWidth = 300;
 
 const menuItems = [
   { text: 'Inicio', icon: <HomeRounded />, href: '/admin/marketplace' },
-  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/admin/login' },
-  { text: 'Bandeja de entrada', icon: <DashboardRounded />, href: '/admin/register' },
+  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/' },
+/*   { text: 'Dashboard', icon: <DashboardRounded />, href: '/' },*/
   { text: 'Crear propuesta', icon: <NoteAddRounded />, href: '/' },
   { text: 'Desconectarse', icon: <LogoutRounded />, href: '/' },
 ];
@@ -47,27 +42,11 @@ export default function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
-      <List>
-        {menuItems.map((item, index) => (
-          <ListItem
-            key={index}
-            disablePadding
-            component="a"
-            href={item.href}
-          >
-            <ListItemButton>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText
-                primary={
-                  <Typography variant="body2" fontSize={16}>
-                    {item.text}
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+        <List>
+          {menuItems.map((item, index) => (
+            <MenuItem key={index} index={index} {...item} />
+          ))}
+        </List>
     </div>
   );
 
@@ -84,7 +63,7 @@ export default function ResponsiveDrawer(props) {
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
