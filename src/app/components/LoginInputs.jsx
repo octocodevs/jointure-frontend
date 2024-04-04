@@ -94,7 +94,7 @@ const LoginInputs = () => {
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 6,
           }}
         >
           <TextField
@@ -133,11 +133,11 @@ const LoginInputs = () => {
                   />
                 }
                 label="Acepto las condiciones y la privacidad"
-                variant="body2"
+                variant="body1"
                 sx={{
                   marginTop: 2,
                   marginLeft: 0.5,
-                  marginBottom: 2,
+                  marginBottom: 1,
                 }}
               />
               {errorMessages.agree && (
@@ -154,7 +154,7 @@ const LoginInputs = () => {
 
       <Box mt={2}>
         {errorMessages.general && (
-          <Typography variant="body1" color="error">
+          <Typography variant="body2" color="error">
             {errorMessages.general}
           </Typography>
         )}
@@ -162,9 +162,10 @@ const LoginInputs = () => {
           ¿No estás registrado?{" "}
           <Link
             href="/admin/register"
-            color="primary"
-            className="font-bold underline"
-            style={{ fontFamily: "inherit" }}
+            color="secudary"
+            className="text-[#46A9B6] font-bold"
+            // style={{ fontFamily: "inherit" }}
+            
           >
             Regístrate aquí
           </Link>

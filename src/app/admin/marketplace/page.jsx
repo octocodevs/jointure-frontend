@@ -1,9 +1,12 @@
 import React from 'react'
+import ResponsiveDrawer from '../../components/Navigation/ResponsiveDrawer.jsx.jsx'
+import CardsGrid from '@/app/components/ProposalCards/CardsGrid.jsx'
 
-export default function page() {
+export default function Marketplace() {
+
   return (
-    <div>
-      Marketplace
-    </div>
+    <ResponsiveDrawer>
+        <CardsGrid />    
+    </ResponsiveDrawer>    
   )
 }
