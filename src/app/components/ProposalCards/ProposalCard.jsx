@@ -18,8 +18,6 @@ export default function ProposalCard({ card }) {
     return null
   }
 
-/*   console.log('cc', card.user.profile.sector)
- */
   const lineClamp = {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
