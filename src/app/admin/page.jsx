@@ -1,11 +1,12 @@
-import { Container, Typography } from '@mui/material'
-import ResponsiveDrawer from '../components/Navigation/ResponsiveDrawer.jsx';
-export default function Home() {
+import React from 'react'
+import ResponsiveDrawer from '../components/Navigation/ResponsiveDrawer.jsx'
+import CardsGrid from '@/app/components/ProposalCards/CardsGrid.jsx'
+
+export default function Marketplace() {
+
   return (
     <ResponsiveDrawer>
-      <Container className="flex min-h-screen flex-col items-center justify-between p-24">
-        <Typography variant="h1" className="text-red-600">Jointure</Typography>
-      </Container>
-    </ResponsiveDrawer>
-  );
+        <CardsGrid />    
+    </ResponsiveDrawer>    
+  )
 }
