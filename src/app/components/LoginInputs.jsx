@@ -94,7 +94,7 @@ const LoginInputs = () => {
       <form onSubmit={handleSubmit}>
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 6,
           }}
         >
           <TextField
