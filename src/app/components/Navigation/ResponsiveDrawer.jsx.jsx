@@ -13,11 +13,11 @@ import MenuItem from './MenuItem';
 const drawerWidth = 300;
 
 const menuItems = [
-  { text: 'Inicio', icon: <HomeRounded />, href: '/admin/marketplace' },
-  { text: 'Mi perfil', icon: <PeopleRounded />, href: '/' },
+  { text: 'Inicio', icon: <HomeRounded />, href: 'http://localhost:3000/admin' },
+  { text: 'Mi profile', icon: <PeopleRounded />, href: 'http://localhost:3000/admin/profile'},
 /*   { text: 'Dashboard', icon: <DashboardRounded />, href: '/' },*/
-  { text: 'Crear propuesta', icon: <NoteAddRounded />, href: '/' },
-  { text: 'Desconectarse', icon: <LogoutRounded />, href: '/' },
+  { text: 'Crear propuesta', icon: <NoteAddRounded />, href: 'http://localhost:3000/admin/newcollab' },
+  { text: 'Desconectarse', icon: <LogoutRounded />, href: 'http://localhost:3000' },
 ];
 
 export default function ResponsiveDrawer(props) {
