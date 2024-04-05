@@ -1,7 +1,6 @@
 import React from "react";
 import LoginInputs from "./components/LoginInputs";
 import { Box } from "@mui/material";
-import LoginCard from "./components/LoginCard";
 import LockIcon from "./components/mui/Icons/LockIcon";
 import Image from "next/image";
 
