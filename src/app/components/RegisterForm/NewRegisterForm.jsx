@@ -102,7 +102,7 @@ export default function Form() {
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
 
-                router.push("/");
+                router.push("/admin");
                 router.refresh()
             })
                 .catch((error) => {
