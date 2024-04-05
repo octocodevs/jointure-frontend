@@ -95,10 +95,6 @@ export default function Form() {
             subscription_type: subscriptionType,
         };
 
-        // const profies =  await getprofiles()
-        console.log('data', userData);
-        // console.log('profies', profies);
-
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
 
