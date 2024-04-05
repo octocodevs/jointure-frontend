@@ -101,7 +101,7 @@ Stephanie Céspedes - [Linkedin profile](https://www.linkedin.com/in/stephanie-c
 
 Grecia Landazuri - [Linkedin profile](https://www.linkedin.com/in/grecialh/)
 
-Carolina Dela - [Linkedin profile](https://www.linkedin.com/in/carolina-delfa-silvestre/)
+Carolina Delfa - [Linkedin profile](https://www.linkedin.com/in/carolina-delfa-silvestre/)
 
 Vicki Robertson - [Linkedin profile](https://www.linkedin.com/in/vickirobertson/)
 
