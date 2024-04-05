@@ -11,16 +11,18 @@ Jointure is a platform that automates collaborations between brands from various
 ## 🚀 Technologies Used:
 
 - Frontend:
-  - Next.js
-  - React.js
-  - Tailwind CSS
-  - Material-UI (MUI)
-  - Axios
-  - Jest
-  - Cypress
+  - Node.Js -> ^20.0.0
+  - Next.js -> 14.1.4
+  - React.js -> v. 18.0.0
+  - Tailwind CSS -> 3.3.0
+  - Material-UI (MUI) -> 5.15.11
+  - Axios -> 1.6.8
+  - Jest -> 29.7.0
+  - Cypress -> 13.7.2
 - Backend:
-  - PHP
-  - Laravel
+  - PHP -> ^8.0
+  - Laravel -> ^10.0.0
+  - PHPUnit -> ^7.1
 
 ## 📁 Frontend File Structure:
 
