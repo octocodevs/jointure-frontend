@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Login = () => {
   return (
-    <Box className="flex justify-center items-center">
+    <Box className="flex justify-center items-center h-screen">
       <Box className="md:w-1/2 mb-12 flex justify-center items-center flex-col">
         <Box display="flex" alignItems="center" justifyContent="center">
           <LockIcon />
