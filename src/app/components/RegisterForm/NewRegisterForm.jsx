@@ -102,7 +102,7 @@ export default function Form() {
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
 
-                router.push("/");
+                router.push("/admin");
                 router.refresh()
             })
                 .catch((error) => {
@@ -122,7 +122,7 @@ export default function Form() {
     };
 
     return (
-        <Container overflow="auto" className='pb-20 '>
+        <Container overflow="auto" className='pb-20'>
             <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
             <LockIcon />
             </Box>
