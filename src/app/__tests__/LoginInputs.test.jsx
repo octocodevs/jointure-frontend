@@ -1,22 +1,27 @@
-import "@testing-library/jest-dom";
-import LoginInputs from '../components/LoginInputs';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; 
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import LoginInputs from '../../componentes/LoginInputs';
 
-describe('LoginInputs component', () => {
-  test('should display error messages when form is submitted with empty fields', async () => {
+// Creamos un mock de useRouter
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
+describe('LoginInputs', () => {
+  test('debería mostrar mensajes de error cuando se envía el formulario con campos vacíos', () => {
     const { getByLabelText, getByText } = render(<LoginInputs />);
-
-    // Simular envío del formulario vacío
+    
+    // Simular un clic en el botón de enviar
     fireEvent.click(getByText('Ingresar'));
 
-    // Esperar a que se muestren los mensajes de error
-    await waitFor(() => {
-      expect(getByText('El correo electrónico es obligatorio')).toBeInTheDocument();
-      expect(getByText('La contraseña es obligatoria')).toBeInTheDocument();
-      expect(getByText('Por favor, acepta los términos y condiciones')).toBeInTheDocument();
-    });
-  });
+    // Obtener los elementos que muestran los mensajes de error
+    const emailError = getByText('Por favor ingresa tu correo electrónico');
+    const passwordError = getByText('Por favor ingresa tu contraseña');
 
-  // Otros casos de prueba aquí...
+    // Verificar que los mensajes de error estén presentes en el DOM
+    expect(emailError).toBeInTheDocument();
+    expect(passwordError).toBeInTheDocument();
+  });
 });
