@@ -11,8 +11,7 @@ export default function RegisterPage() {
     <Box className="h-screen">
       <Stack
       direction={{xs:'column', sm: 'row'}}
-      spacing={{xs: 1, sm: 2, md: 4}}
-      
+      spacing={{xs: 1, sm: 2, md: 4}}      
       >
       <Box display="flex" justifyContent="space-between" flexDirection={{ xs: 'column', md: 'row' }} gap={4} spacing={2}>
         <Box>
