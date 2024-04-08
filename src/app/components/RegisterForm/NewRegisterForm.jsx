@@ -36,20 +36,18 @@ export default function Form() {
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
-        console.log("Name:", event.target.value);
     };
 
     const handleEmailChange = (event) => {
         setEmailValue(event.target.value);
-        console.log("Email:", event.target.value);
     };
 
     const handlePasswordChange = (event) => {
         const value = event.target.value;
         setPasswordValue(value);
 
-        if (value.length < 6) {
-            setPasswordError('La contraseña debe tener al menos 6 caracteres');
+        if (value.length < 8) {
+            setPasswordError('La contraseña debe tener al menos 8 caracteres');
         } else {
             setPasswordError('');
         }
@@ -73,6 +71,10 @@ export default function Form() {
             setFormError(false);
         }
     }, [passwordError, confirmPasswordError]);
+
+    const handleCountryChange = (event) => {
+        setCountry(event.target.value);
+    };
 
     const handlePositionChange = (event) => {
         setPositionValue(event.target.value);
@@ -128,7 +130,7 @@ export default function Form() {
     };
 
     return (
-        <Container overflow="auto" className='pb-20 '>
+        <Container overflow="auto" className='pb-20'>
             <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
             <LockIcon />
             </Box>
@@ -234,22 +236,20 @@ export default function Form() {
                         }}
                         
                     />
-                    <BasicSelect
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
                         id="country"
                         label="País"
+                        type="text"
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        required
+                        onChange={handleCountryChange}
                         value={country}
-                        onChange={setCountry}
-                        options={[
-                            { value: 'España', label: 'España' },
-                            { value: 'Francia', label: 'Francia' },
-                            { value: 'Italia', label: 'Italia' },
-                        ]}
-                        sx={{
-                            '& .MuiInputLabel-root': { color: 'red' },
-                            '& .MuiSelect-root': { backgroundColor: 'lightblue' },
-                        }}
                     />
-
                     <TextField
                         sx={{
                             margin: '1rem',

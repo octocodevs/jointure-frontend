@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "./utils/ThemeRegistry";
 import theme from "./utils/theme";
+import AuthContextProvider from "@/contexts/authContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const montserrat = Montserrat({weight: ['100', '300', '400', '700', '900'] , subsets: ["latin"] });
@@ -17,9 +18,11 @@ export default function RootLayout({ children }) {
     <>
       <html lang="en">
         <body className={montserrat.className}>
+        <AuthContextProvider>
           <ThemeRegistry theme={theme}>
               {children}
           </ThemeRegistry>
+        </AuthContextProvider>
         </body>
       </html>
     </>

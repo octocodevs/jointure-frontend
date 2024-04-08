@@ -15,9 +15,11 @@ import LargeButton from "./Buttons/LargeButton";
 import axios from "axios";
 import { loginUser } from "../../../services/axios";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/contexts/authContext";
 
 const LoginInputs = () => {
   const route = useRouter();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,7 +36,7 @@ const LoginInputs = () => {
   };
 
   useEffect(() => {
-    console.log(formData);
+    
   }, [formData]);
 
   const handleSubmit = async (e) => {
@@ -68,11 +70,13 @@ const LoginInputs = () => {
       return;
     }
 
-    axios.get("/sanctum/csrf-cookie").then(() => {
+    
+      
       loginUser(formData)
         .then((res) => {
-          route.push("/admin");
-          route.refresh();
+          login(res.access_token);
+          route.push("/register");
+
         })
         .catch((error) => {
           console.log(error.response);
@@ -86,7 +90,7 @@ const LoginInputs = () => {
             setErrorMessages({ general: "Email o contraseña incorrecto" });
           }
         });
-    });
+    
   };
 
   return (
