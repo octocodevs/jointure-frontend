@@ -93,7 +93,7 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
     try {
       const response = await axios.delete(`api/marketplace/${collaborationId}`, collaborationId,{
         headers: {
-        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), 
+        "X-XSRF-TOKEN": Cookies.get("laravel_session"), 
         Authorization: `Bearer ${authToken}`, 
       },
     });
