@@ -20,7 +20,7 @@ export default function CreateProfileForm() {
     const [description, setDescription] = useState('');
     const [instagram, setInstagram] = useState('');
     const [linkedin, setLinkedin] = useState('');
-    const [socailX, setsocialX] = useState('');
+    const [socialX, setsocialX] = useState('');
     const [facebook, setFacebook] = useState('');
     const [tiktok, setTiktok] = useState('');
     const [spotify, setSpotify] = useState('');
@@ -33,15 +33,28 @@ export default function CreateProfileForm() {
 
 
       const profileData = {
+          image: image,  
           CIF: cifValue,
-          phone: phone,
-          /* password: passwordValue,
-          password_confirmation: confirmPasswordValue,
-          position: positionValue,
-          business_name: companyValue,
-          profile_type: profileValue,
-          country: country,
-          subscription_type: subscriptionType, */
+          legal_structure: legalStructure,
+          phone_number: phone,
+          email_contact: contactMail,
+          sector: sector,
+          activity: activity,
+          values: values,
+          business_size: businessSize,
+          market: market,
+          clients: clients,
+          sales_channels: salesChannels,
+          description: description,
+          social_network_instagram: instagram,
+          social_network_linkedin: linkedin,
+          social_network_x: socialX,
+          social_network_facebook: facebook,
+          social_network_tiktok: tiktok,
+          social_network_spotify: spotify,
+          social_network_youtube: youtube,
+          social_network_pinterest: pinterest,
+
       };
 
       axios.get('/sanctum/csrf-cookie').then(response => {
