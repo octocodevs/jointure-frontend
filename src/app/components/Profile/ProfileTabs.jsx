@@ -26,10 +26,10 @@ export default function CenteredTabs() {
             <CreatedProposals />
           )}
           {value === 1 && (
-            <Box>Contenido de "Propuestas sumadas"</Box>
+            <Box> Contenido de "Colaboraciones sumadas" Añadir componente "JoinedProposals"</Box>
           )}
           {value === 2 && (
-            <Box>Contenido de "Colaboraciones en marcha"</Box>
+            <Box>Contenido de "Colaboraciones en marcha", Añadir componente "InProgressCollabs"</Box>
           )}
         </Box>
       </Container>

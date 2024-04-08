@@ -6,7 +6,7 @@ import { useState,useEffect } from 'react';
 import { getCollaborations } from '../../../../../services/axios';
 
 
-export default function CreatedProposals () {
+export default function JoinedProposals () {
 
   const [cards, setCards] = useState([]);
   
@@ -41,4 +41,3 @@ export default function CreatedProposals () {
         </Box>
   )
 }
-

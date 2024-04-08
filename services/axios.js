@@ -112,3 +112,14 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
         throw error.response.data;
     }
 };
+
+
+//traer perfil por id
+export const getProfileById = async (userId) => {
+    try {
+        const response = await axios.get(`api/profile/${userId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};

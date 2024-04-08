@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import { Box, Container, Typography } from '@mui/material'
 import ResponsiveDrawer from '@/app/components/Navigation/ResponsiveDrawer.jsx';
@@ -12,8 +13,29 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 
+import { useState, useEffect } from 'react';
+import { getProfileById } from '../../../../services/axios'
+
 
 export default function ProfileData() {
+
+        const [companyName, setCompanyName] = useState(""); // Estado para almacenar el nombre de la empresa
+    
+        useEffect(() => {
+            // Función asincrónica para obtener el nombre de la empresa
+            const fetchCompanyName = async () => {
+                try {
+                    const profileData = await getProfileById(userId); // Llama a la función getProfileById
+                    setCompanyName(profileData.companyName); // Establece el nombre de la empresa en el estado
+                } catch (error) {
+                    console.error("Error al obtener el nombre de la empresa:", error);
+                }
+            };
+    
+            fetchCompanyName(); // Llama a la función para obtener el nombre de la empresa
+        }, []); // Ejecuta la llamada solo una vez al montar el componente
+
+
     return (
 
             <Container className="flex min-h-auto flex-col items-center justify-between p-8">
@@ -43,7 +65,7 @@ export default function ProfileData() {
                                 <ListItemText
                                     primary={
                                         <Typography variant="h3">
-                                            Nombre de la Compañía
+                                            Nombre de la Empresa
                                         </Typography>
                                     }
                                     secondary={
@@ -54,7 +76,7 @@ export default function ProfileData() {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                Cooker's House Petshop
+                                                {companyName}
                                             </Typography>
                                         </React.Fragment>
                                     }
