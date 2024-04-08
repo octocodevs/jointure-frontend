@@ -244,7 +244,7 @@ export default function CreateProfileForm() {
           business_size: businessSize,
           market: market,
           clients: clients,
-          sales_channels: salesChannels,
+          sales_channel: salesChannels,
           description: description,
           social_network_instagram: instagram,
           social_network_linkedin: linkedin,
@@ -357,7 +357,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           helperText="Escribe el link a tu X"
-          onChange={(e) => setsocialX(e.target.value)}
+          onChange={(e) => setSocialX(e.target.value)}
 
         />
 
@@ -508,7 +508,7 @@ export default function CreateProfileForm() {
           helperText="Selecciona el canal de venta de tu empresa"
           variant="outlined"
           color="secondary"
-          onChange={(e) => setXSalesChannels(e.target.value)}
+          onChange={(e) => setSalesChannels(e.target.value)}
         >
           {ChannelOptions.map((option) => (
             <MenuItem key={option.value} value={option.value}>
