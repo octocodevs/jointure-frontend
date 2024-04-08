@@ -17,7 +17,7 @@ export default function CreateProfile() {
           color="primary"
           text="guardar"
           text-uppercase
-          ></Button>
+          >GUARDAR</Button>
       </form>
     </Container>
   )

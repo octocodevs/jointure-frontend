@@ -25,11 +25,8 @@ export default function CreateProfileForm() {
   const [instagram, setInstagram] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [socialX, setsocialX] = useState('');
-  const [facebook, setFacebook] = useState('');
   const [tiktok, setTiktok] = useState('');
-  const [spotify, setSpotify] = useState('');
-  const [youtube, setYoutube] = useState('');
-  const [pinterest, setPinterest] = useState('');
+
 
   const legalStructureOptions = [
     {
@@ -62,7 +59,7 @@ export default function CreateProfileForm() {
     },
   ];
 
-  const sectorOptions  = [
+  const sectorOptions = [
     {
       value: 'Alimentación y bebidas',
       label: 'Alimentación y bebidas',
@@ -153,7 +150,7 @@ export default function CreateProfileForm() {
     },
   ]
 
-  const BusinessSizeOptions  = [
+  const BusinessSizeOptions = [
     {
       value: 'micro empresa',
       label: 'Micro empresa',
@@ -172,7 +169,7 @@ export default function CreateProfileForm() {
     },
   ]
 
-  const ChannelOptions  = [
+  const ChannelOptions = [
     {
       value: 'online',
       label: 'Online',
@@ -187,7 +184,7 @@ export default function CreateProfileForm() {
     },
   ]
 
-  const MarketOptions  = [
+  const MarketOptions = [
     {
       value: 'Local',
       label: 'Local',
@@ -215,7 +212,7 @@ export default function CreateProfileForm() {
 
   ]
 
-  const ClientsOptions  = [
+  const ClientsOptions = [
     {
       value: 'B2B',
       label: 'B2B',
@@ -319,6 +316,58 @@ export default function CreateProfileForm() {
           sx={{
             margin: '1rem',
           }}
+          id="social_network_instagram"
+          label="Instagram"
+          variant="outlined"
+          color="secondary"
+          helperText="Escribe el link a tu Instagram"
+          onChange={(e) => setInstagram(e.target.value)}
+
+        />
+
+        <TextField
+          sx={{
+            margin: '1rem',
+          }}
+          id="social_network_tiktok"
+          label="TikTok"
+          variant="outlined"
+          color="secondary"
+          helperText="Escribe el link a tu TikTok"
+          onChange={(e) => setTiktok(e.target.value)}
+
+        />
+   <br></br>
+        <TextField
+          sx={{
+            margin: '1rem',
+          }}
+          id="social_network_x"
+          label="X"
+          variant="outlined"
+          color="secondary"
+          helperText="Escribe el link a tu X"
+          onChange={(e) => setsocialX(e.target.value)}
+
+        />
+
+        <TextField
+          sx={{
+            margin: '1rem',
+          }}
+          id="social_network_linkedin"
+          label="LinkedIn"
+          variant="outlined"
+          color="secondary"
+          helperText="Escribe el link a tu LinkedIn"
+          onChange={(e) => setLinkedin(e.target.value)}
+
+        />
+
+        <TextField
+          sx={{
+            margin: '1rem',
+          }}
           id="description"
           label="Descripción"
           variant="outlined"
@@ -385,7 +434,7 @@ export default function CreateProfileForm() {
 
         />
 
-<TextField
+        <TextField
           sx={{
             margin: '1rem',
           }}
@@ -399,7 +448,7 @@ export default function CreateProfileForm() {
 
         />
 
-<TextField
+        <TextField
           sx={{
             margin: '1rem',
           }}
