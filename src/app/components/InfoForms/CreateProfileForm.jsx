@@ -1,15 +1,15 @@
-import { Container, Typography } from '@mui/material'
-import React from 'react'
-import { Email, PhoneRounded, ChatBubble, VideoCallRounded } from "@mui/icons-material";
-import OptionList from '@/app/components/Mui/inputs/OptionList';
-import OptionsSection from '@/app/components/InfoForms/OptionsSection';
+"use client"
+
+import { Container, Typography, TextField } from '@mui/material';
+import React, { useState } from 'react';
+
 
 
 
 export default function CreateProfileForm() {
 
 
-    const [cif, setCif] = useState('');
+    const [cifValue, setCifValue] = useState('');
     const [phone, setPhone] = useState('');
     const [description, setDescription] = useState('');
     const [legalStructure, setLegalStructure] = useState('');
@@ -22,10 +22,38 @@ export default function CreateProfileForm() {
 
 
     const handleCifChange = (event) => {
-        setCif(event.target.value);
+        setCifValue(event.target.value);
         console.log("CIF:", event.target.value);
     };
 
+    // handleSubmit code not completed yet
+    const handleSubmit = async () => {
+
+
+      const profileData = {
+          CIF: cifValue,
+          phone: phone,
+          /* password: passwordValue,
+          password_confirmation: confirmPasswordValue,
+          position: positionValue,
+          business_name: companyValue,
+          profile_type: profileValue,
+          country: country,
+          subscription_type: subscriptionType, */
+      };
+
+      axios.get('/sanctum/csrf-cookie').then(response => {
+          registerNewProfile(profileData).then((res) => {
+
+              router.push("/admin");
+              router.refresh()
+          })
+              .catch((error) => {
+                  console.error('Create profile failed:', error);
+
+              })
+      })
+  };
 
   return (
     <Container>
@@ -56,16 +84,28 @@ export default function CreateProfileForm() {
                             margin: '1rem',
                         }}
                         className="m-4"                        
-                        label="Nombre"
+                        label="Número de teléfono"
                         variant="outlined"
                         color="primary"
-                        fullWidth
                         required
                         onChange={(e) => setName(e.target.value)}
-                        onClick={()=> console.log('nombre añadido')}
-                        error={nameError}
-                    />
+/*                         error={phoneError}
+ */                    />
         
+        <TextField
+                    sx={{
+                        margin: '1rem',
+                    }}
+                    id="description"
+                    label="Descripción"
+                    
+                    variant="outlined"
+                    color="secondary"
+                    required
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={cif}
+                />
+
 {/*         <OptionsSection />
  */}
         <Button
