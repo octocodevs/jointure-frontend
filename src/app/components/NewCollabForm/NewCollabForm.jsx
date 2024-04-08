@@ -18,7 +18,7 @@ export default function NewCollabForm (){
     <Container overflow="auto" className='pb-20 '>
             <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
             </Box>
-            <Typography variant="h2" align="center">Nueva Colaboración</Typography>
+            <Typography variant="h2" align="center">Nueva propuesta de Colaboración</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
             <form
                 noValidate
