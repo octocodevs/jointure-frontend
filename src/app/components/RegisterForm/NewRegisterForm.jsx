@@ -12,6 +12,7 @@ import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
 import LockIcon from '../mui/Icons/LockIcon';
 
+import { ToastContainer, toast } from "react-toastify";
 
 
 export default function Form() {
@@ -31,6 +32,7 @@ export default function Form() {
     const [companyValue, setCompanyValue] = useState('');
     const [profileValue, setProfileValue] = useState('');
     const [subscriptionType, setSubscriptionType] = useState('');
+
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
@@ -97,7 +99,15 @@ export default function Form() {
 
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
-
+                toast.success("Registro exitoso!"),{
+                    position: "top-center",
+                    autoClose: 6000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    className: "bg-green-500 text-white rounded-md p-4",
+                    };
                 router.push("/admin");
                 router.refresh()
             })
@@ -124,6 +134,7 @@ export default function Form() {
             </Box>
             <Typography variant="h2" align="center">Registro</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
+            <ToastContainer />
             <form
                 noValidate
                 autoComplete="off"

@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import LockIcon from "./components/mui/Icons/LockIcon";
 import Image from "next/image";
 
+
 const Login = () => {
   return (
     <Box className="flex justify-center items-center h-screen">
