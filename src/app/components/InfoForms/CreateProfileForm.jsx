@@ -3,28 +3,30 @@
 import { Container, Typography, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
-
-
-
 export default function CreateProfileForm() {
 
-
+    const [image, setImage] = useState ('');
     const [cifValue, setCifValue] = useState('');
-    const [phone, setPhone] = useState('');
-    const [description, setDescription] = useState('');
     const [legalStructure, setLegalStructure] = useState('');
+    const [phone, setPhone] = useState('');
+    const [contactMail, setContactMail] = useState ('');
+    const [sector, setSector] = useState ('');
     const [activity, setActivity] = useState('');
+    const [values, setValues] = useState('');
     const [businessSize, setBusinessSize] = useState('');
     const [market, setMarket] = useState('');
     const [clients, setClients] = useState('');
+    const [salesChannels, setSalesChannels] = useState('');
+    const [description, setDescription] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [linkedin, setLinkedin] = useState('');
+    const [socailX, setsocialX] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [tiktok, setTiktok] = useState('');
+    const [spotify, setSpotify] = useState('');
+    const [youtube, setYoutube] = useState('');
+    const [pinterest, setPinterest] = useState('');
 
-
-
-
-    const handleCifChange = (event) => {
-        setCifValue(event.target.value);
-        console.log("CIF:", event.target.value);
-    };
 
     // handleSubmit code not completed yet
     const handleSubmit = async () => {
