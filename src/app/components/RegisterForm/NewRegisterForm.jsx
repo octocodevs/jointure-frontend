@@ -12,7 +12,7 @@ import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
 import LockIcon from '../mui/Icons/LockIcon';
 
-
+// import { ToastContainer, toast } from "react-toastify";
 
 export default function Form() {
 
@@ -100,6 +100,16 @@ export default function Form() {
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
 
+                // toast.success("Registro exitoso!"),{
+                //     position: toast.POSITION.TOP_CENTER,
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: false,
+                //     draggable: true,
+                //     className: "bg-green-500 text-white rounded-md p-4",
+                //     };
+
                 router.push("/admin");
                 router.refresh()
             })
@@ -126,6 +136,18 @@ export default function Form() {
             </Box>
             <Typography variant="h2" align="center">Registro</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
+            {/* <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"                    
+                /> */}
             <form
                 noValidate
                 autoComplete="off"

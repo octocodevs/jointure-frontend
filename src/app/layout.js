@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeRegistry from "./utils/ThemeRegistry";
 import theme from "./utils/theme";
 import AuthContextProvider from "@/contexts/authContext";
+// import "react-toastify/dist/ReactToastify.css";
 
 const montserrat = Montserrat({weight: ['100', '300', '400', '700', '900'] , subsets: ["latin"] });
 
