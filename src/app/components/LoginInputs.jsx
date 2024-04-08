@@ -15,9 +15,11 @@ import LargeButton from "./Buttons/LargeButton";
 import axios from "axios";
 import { loginUser } from "../../../services/axios";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/contexts/authContext";
 
 const LoginInputs = () => {
   const route = useRouter();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,7 +36,7 @@ const LoginInputs = () => {
   };
 
   useEffect(() => {
-    console.log(formData);
+    
   }, [formData]);
 
   const handleSubmit = async (e) => {
@@ -68,11 +70,13 @@ const LoginInputs = () => {
       return;
     }
 
-    axios.get("/sanctum/csrf-cookie").then(() => {
+    
+      
       loginUser(formData)
         .then((res) => {
+          login(res.access_token);
           route.push("/admin");
-          route.refresh();
+
         })
         .catch((error) => {
           console.log(error.response);
@@ -86,7 +90,7 @@ const LoginInputs = () => {
             setErrorMessages({ general: "Email o contraseña incorrecto" });
           }
         });
-    });
+    
   };
 
   return (
@@ -102,6 +106,7 @@ const LoginInputs = () => {
             margin="normal"
             label="E-mail"
             name="email"
+            id="email"
             value={formData.email}
             onChange={handleChange}
             error={!!errorMessages.email}
@@ -113,6 +118,7 @@ const LoginInputs = () => {
             type="password"
             label="Contraseña"
             name="password"
+            id="password"
             value={formData.password}
             onChange={handleChange}
             error={!!errorMessages.password}
@@ -128,6 +134,7 @@ const LoginInputs = () => {
                   <Checkbox
                     color="primary"
                     name="agree"
+                    id="agree"
                     checked={formData.agree}
                     onChange={handleChange}
                   />
@@ -148,7 +155,7 @@ const LoginInputs = () => {
         </Box>
 
         <Box>
-          <LargeButton type="submit" />
+          <LargeButton type="submit" id="submit"/>
         </Box>
       </form>
 
@@ -164,7 +171,6 @@ const LoginInputs = () => {
             href="/admin/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
-            // style={{ fontFamily: "inherit" }}
             
           >
             Regístrate aquí
