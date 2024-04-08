@@ -1,24 +1,24 @@
-import InfoButton from '@/app/components/Buttons/InfoButton'
-import { Container, Typography } from '@mui/material'
+import { Container, Typography, Button } from '@mui/material'
 import React from 'react'
-import { Email, PhoneRounded, ChatBubble, VideoCallRounded } from "@mui/icons-material";
-import OptionList from '@/app/components/InfoForms/OptionList';
-
-const communicationOptions = [
-  { value: 'email', label: 'Email', icon: <Email /> },
-  { value: 'phone', label: 'Phone', icon: <PhoneRounded/> },
-  { value: 'chat', label: 'Chat', icon: <ChatBubble/> },
-  { value: 'video', label: 'Video Call', icon: <VideoCallRounded /> },
-];
+import CreateProfileForm from '@/app/components/InfoForms/CreateProfileForm'
 
 export default function CreateProfile() {
   return (
     <Container>
-        <Typography variant='h1' justifyContent='center'>
+      <form>
+        <Typography variant='h1' color="primary" justifyContent='center'>
             Crear perfil de empresa
         </Typography>
-        <OptionList options={communicationOptions} /* onSelect={handleOptionSelect} */ />
-        <InfoButton/>
+        <CreateProfileForm />
+
+        
+        <Button
+          type="submit"
+          color="primary"
+          text="guardar"
+          text-uppercase
+          ></Button>
+      </form>
     </Container>
   )
 }

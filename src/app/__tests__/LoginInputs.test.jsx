@@ -1,27 +1,40 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import LoginInputs from '../../componentes/LoginInputs';
+import "@testing-library/jest-dom";
+import React from "react";
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import LoginInputs from '../components/LoginInputs';
+import { useRouter } from 'next/navigation';
+import 'jest-localstorage-mock';
 
-// Creamos un mock de useRouter
-jest.mock('next/router', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
 }));
 
-describe('LoginInputs', () => {
-  test('debería mostrar mensajes de error cuando se envía el formulario con campos vacíos', () => {
-    const { getByLabelText, getByText } = render(<LoginInputs />);
+describe('LoginInputs component', () => {
+  it('should show error messages when form is submitted with empty fields', async () => {
+   
+    useRouter.mockReturnValue({});
+
     
-    // Simular un clic en el botón de enviar
-    fireEvent.click(getByText('Ingresar'));
+    const { getByLabelText, getByText, queryByText } = render(<LoginInputs />);
+    
+    fireEvent.click(getByText('Enviar'));
 
-    // Obtener los elementos que muestran los mensajes de error
-    const emailError = getByText('Por favor ingresa tu correo electrónico');
-    const passwordError = getByText('Por favor ingresa tu contraseña');
+    await waitFor(() => {
+      expect(getByText('El correo electrónico es obligatorio')).toBeInTheDocument();
+      expect(getByText('La contraseña es obligatoria')).toBeInTheDocument();
+      expect(getByText('Por favor, acepta los términos y condiciones')).toBeInTheDocument();
+    });
 
-    // Verificar que los mensajes de error estén presentes en el DOM
-    expect(emailError).toBeInTheDocument();
-    expect(passwordError).toBeInTheDocument();
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' }});
+    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' }});
+    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
+    fireEvent.click(getByText('Enviar'));
+
+
+    await waitFor(() => {
+      expect(queryByText('El correo electrónico es obligatorio')).toBeNull();
+      expect(queryByText('La contraseña es obligatoria')).toBeNull();
+      expect(queryByText('Por favor, acepta los términos y condiciones')).toBeNull();
+    });
   });
 });
