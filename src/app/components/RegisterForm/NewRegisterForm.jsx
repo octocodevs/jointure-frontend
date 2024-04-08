@@ -100,8 +100,8 @@ export default function Form() {
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
                 toast.success("Registro exitoso!"),{
-                    position: "top-center",
-                    autoClose: 6000,
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: false,
