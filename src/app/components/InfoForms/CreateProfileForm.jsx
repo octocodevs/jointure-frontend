@@ -1,7 +1,7 @@
 "use client"
 
-import { Container, Typography, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { Container, Typography, TextField, Button } from '@mui/material';
+import React, { useState } from 'react'
 
 
 
@@ -19,12 +19,6 @@ export default function CreateProfileForm() {
     const [clients, setClients] = useState('');
 
 
-
-
-    const handleCifChange = (event) => {
-        setCifValue(event.target.value);
-        console.log("CIF:", event.target.value);
-    };
 
     // handleSubmit code not completed yet
     const handleSubmit = async () => {
@@ -62,9 +56,7 @@ export default function CreateProfileForm() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <Typography variant='h1' color="primary" justifyContent='center'>
-            Crear perfil de empresa
-        </Typography>
+       
 
         <TextField
                     sx={{
@@ -75,8 +67,8 @@ export default function CreateProfileForm() {
                     variant="outlined"
                     color="secondary"
                     required
-                    onChange={handleCifChange}
-                    value={cif}
+                    onChange={(e) => setCifValue(e.target.value)}
+                   
                 />
 
 <TextField
@@ -88,7 +80,7 @@ export default function CreateProfileForm() {
                         variant="outlined"
                         color="primary"
                         required
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setPhone(e.target.value)}
 /*                         error={phoneError}
  */                    />
         
@@ -98,13 +90,18 @@ export default function CreateProfileForm() {
                     }}
                     id="description"
                     label="Descripción"
-                    
                     variant="outlined"
                     color="secondary"
-                    required
+                    fullWidth
+                    multiline
+                    rows={4}
                     onChange={(e) => setDescription(e.target.value)}
-                    value={cif}
+                    
                 />
+
+
+
+        
 
 {/*         <OptionsSection />
  */}
