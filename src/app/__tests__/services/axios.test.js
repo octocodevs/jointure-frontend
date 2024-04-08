@@ -1,6 +1,7 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as api from '../../../../services/axios';
+
 describe('Funciones de Axios', () => {
     let mock;
   
@@ -63,6 +64,12 @@ describe('Funciones de Axios', () => {
   
         expect(newCollaboration).toEqual({ id: 1, ...collaborationData });
       });
+  
+      it('debería manejar errores al crear una colaboración', async () => {
+        mock.onPost('/api/marketplace').reply(500);
+  
+        await expect(api.createCollaboration({}, '')).rejects.toThrow();
+      });
     });
   
     describe('updateCollaboration', () => {
@@ -85,6 +92,12 @@ describe('Funciones de Axios', () => {
         const response = await api.deleteCollaboration(collaborationId);
   
         expect(response).toEqual(undefined);
+      });
+  
+      it('debería manejar errores al eliminar una colaboración', async () => {
+        mock.onDelete(`/api/marketplace/1`).reply(500);
+  
+        await expect(api.deleteCollaboration(1)).rejects.toThrow();
       });
     });
   });
