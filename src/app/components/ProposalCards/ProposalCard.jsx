@@ -17,6 +17,8 @@ export default function ProposalCard({ card }) {
     return null;
   }
 
+  const URL_IMG = 'http://localhost:8000/storage'
+
   const lineClamp = {
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -26,12 +28,13 @@ export default function ProposalCard({ card }) {
     WebkitBoxOrient: "vertical",
   };
 
+  
   return (
     <div>
       <Card elevation={2} className="max-w-xs h-auto">
         <CardMedia>
           <Image
-            src={ card.image && `http://localhost:8000/storage/${card.image}`}
+            src={ card.image && `${URL_IMG}/${card.image}`}
             width={360}
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
