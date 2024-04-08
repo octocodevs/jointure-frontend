@@ -95,14 +95,10 @@ export default function Form() {
             subscription_type: subscriptionType,
         };
 
-        // const profies =  await getprofiles()
-        console.log('data', userData);
-        // console.log('profies', profies);
-
         axios.get('/sanctum/csrf-cookie').then(response => {
             registerNewUser(userData).then((res) => {
 
-                router.push("/");
+                router.push("/admin");
                 router.refresh()
             })
                 .catch((error) => {
@@ -122,12 +118,12 @@ export default function Form() {
     };
 
     return (
-        <Container className='h-screen pt-4 max-h-[60vh]' overflow="auto">
-            <Box display="flex" alignItems="center" justifyContent="center">
+        <Container overflow="auto" className='pb-20 '>
+            <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
             <LockIcon />
             </Box>
             <Typography variant="h2" align="center">Registro</Typography>
-            <Box className='pt-4 p-12 h-screen overflow-auto' sx={{ height: '70vh' }}>
+            <Box className='px-16 pt-12' overflow="auto" >
             <form
                 noValidate
                 autoComplete="off"

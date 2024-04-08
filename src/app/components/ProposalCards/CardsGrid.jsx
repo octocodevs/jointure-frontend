@@ -24,10 +24,10 @@ export default function CardsGrid() {
 
   return (
         <Box sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '2rem',
-        padding: '2rem',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '2rem',
+          padding: '2rem',
             }}>
             <Grid container>
               {cards.map(card => (
