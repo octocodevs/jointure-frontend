@@ -68,25 +68,19 @@ const LoginInputs = () => {
       return;
     }
 
-    axios.get("/sanctum/csrf-cookie").then(() => {
-      loginUser(formData)
-        .then((res) => {
-          route.push("/admin");
-          route.refresh();
-        })
-        .catch((error) => {
-          console.log(error.response);
-          if (
-            error.response &&
-            error.response.data &&
-            error.response.data.errors
-          ) {
-            setErrorMessages(error.response.data.errors);
-          } else {
-            setErrorMessages({ general: "Email o contraseña incorrecto" });
-          }
-        });
-    });
+    try {
+      await axios.get("/sanctum/csrf-cookie");
+      const res = await loginUser(formData);
+      route.push("/admin");
+      route.refresh();
+    } catch (error) {
+      console.log(error.response);
+      if (error.response && error.response.data && error.response.data.errors) {
+        setErrorMessages(error.response.data.errors);
+      } else {
+        setErrorMessages({ general: "Email o contraseña incorrecto" });
+      }
+    }
   };
 
   return (
@@ -167,7 +161,6 @@ const LoginInputs = () => {
             href="/admin/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
-            
           >
             Regístrate aquí
           </Link>

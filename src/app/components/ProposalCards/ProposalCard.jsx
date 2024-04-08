@@ -34,11 +34,12 @@ export default function ProposalCard({ card }) {
       <Card elevation={2} className="max-w-xs h-auto">
         <CardMedia>
           <Image
-            src={ card.image && `${URL_IMG}/${card.image}`}
+            // src={ card.image && `${URL_IMG}/${card.image}`}
             width={360}
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
             sx={{ objectFit: "cover" }}
+            src={ card.image}
           />
         </CardMedia>
         <CardHeader
