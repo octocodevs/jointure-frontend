@@ -8,21 +8,36 @@ import Toolbar from '@mui/material/Toolbar';
 import CustomAppBar from './CustomAppBar';
 import { LogoutRounded, PeopleRounded, HomeRounded, NoteAddRounded, DashboardRounded } from '@mui/icons-material';
 import MenuItem from './MenuItem';
-
+import { useRouter } from 'next/navigation';
+import { useAuthContext } from '@/contexts/authContext';
+import Cookies from 'js-cookie';
+import { logoutUser } from '../../../../services/axios';
 
 const drawerWidth = 300;
-
-const menuItems = [
-  { text: 'Inicio', icon: <HomeRounded />, href: 'http://localhost:3000/admin' },
-  { text: 'Mi profile', icon: <PeopleRounded />, href: 'http://localhost:3000/admin/profile'},
-/*   { text: 'Dashboard', icon: <DashboardRounded />, href: '/' },*/
-  { text: 'Crear propuesta', icon: <NoteAddRounded />, href: 'http://localhost:3000/admin/newcollab' },
-  { text: 'Desconectarse', icon: <LogoutRounded />, href: 'http://localhost:3000' },
-];
 
 export default function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+
+  const { logout, getAuthToken } = useAuthContext();
+  const router = useRouter();
+
+  const authToken = getAuthToken();
+
+  const handleLogout = () => {
+    console.log(authToken);
+    Cookies.remove("laravel_session", { domain: "localhost", path: "/" });
+    logout();
+    logoutUser(authToken);
+    router.push('/');
+  };
+
+  const menuItems = [
+    { text: 'Inicio', icon: <HomeRounded />, href: 'http://localhost:3000/admin' },
+    { text: 'Mi profile', icon: <PeopleRounded />, href: 'http://localhost:3000/admin/profile'},
+    { text: 'Crear propuesta', icon: <NoteAddRounded />, href: 'http://localhost:3000/admin/newcollab' },
+    { text: 'Desconectarse', icon: <LogoutRounded />, action: handleLogout },
+  ];
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -97,3 +112,4 @@ export default function ResponsiveDrawer(props) {
     </Box>
   );
 }
+
