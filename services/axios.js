@@ -104,7 +104,7 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
 
   
 
-  export const getprofiles = async () => {
+  export const getProfiles = async () => {
     try {
         const response = await axios.get(`api/profile`)
         return response.data;
