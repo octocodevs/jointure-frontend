@@ -34,12 +34,11 @@ export default function Form() {
 
     const handleNameChange = (event) => {
         setNameValue(event.target.value);
-        console.log("Name:", event.target.value);
+        
     };
 
     const handleEmailChange = (event) => {
         setEmailValue(event.target.value);
-        console.log("Email:", event.target.value);
     };
 
     const handlePasswordChange = (event) => {

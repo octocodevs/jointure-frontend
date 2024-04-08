@@ -26,13 +26,16 @@ export default function AuthContextProvider({ children }) {
     
 
     const logout = useCallback(function () {
-
         Cookies.remove("laravel_session");
+        Cookies.remove("XSRF-TOKEN");
+        Cookies.remove("laravel_session", { domain: "localhost" })
+        Cookies.remove("laravel_session", { domain: "localhost", path: "/" });
+        
         
     }, []);
 
     const getAuthToken = useCallback(() => {
-        const authTokens = Cookies.get("laravel_session");
+        const authTokens = Cookies.get("XSRF-TOKEN");
         return authTokens ? authTokens : null;
     }, []);
 
