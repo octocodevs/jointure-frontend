@@ -18,23 +18,25 @@ import { getProfileById } from '../../../../services/axios'
 
 
 export default function ProfileData() {
+        
+    const [profileData, setProfileData] = useState(null);
 
-        const [companyName, setCompanyName] = useState(""); // Estado para almacenar el nombre de la empresa
-    
-        useEffect(() => {
-            // Función asincrónica para obtener el nombre de la empresa
-            const fetchCompanyName = async () => {
-                try {
-                    const profileData = await getProfileById(userId); // Llama a la función getProfileById
-                    setCompanyName(profileData.companyName); // Establece el nombre de la empresa en el estado
-                } catch (error) {
-                    console.error("Error al obtener el nombre de la empresa:", error);
-                }
-            };
-    
-            fetchCompanyName(); // Llama a la función para obtener el nombre de la empresa
-        }, []); // Ejecuta la llamada solo una vez al montar el componente
+    useEffect(() => {
+        const fetchProfileData = async () => {
+            try {
+                // Obtener el userId del usuario autenticado desde las cookies
+                const userId = getUserIdFromCookies(); // Implementa esta función según tu lógica de manejo de cookies
 
+                // Obtener los datos del perfil del usuario actual
+                const data = await getProfileById(userId);
+                setProfileData(data);
+            } catch (error) {
+                console.error('Error al obtener los datos del perfil:', error);
+            }
+        };
+
+        fetchProfileData();
+    }, []);
 
     return (
 
@@ -42,10 +44,11 @@ export default function ProfileData() {
                 <Typography variant="h2" className="text-center">
                     Mi perfil
                 </Typography>
+                {profileData && (
                 <Box className="flex h-auto flex-row items-start justify-around pt-8">
                     <Box className="pt-5 p-8">
                         <Image
-                            src="/img/pet-shop.jpg"
+                            src={profileData.image}
                             alt="Next.js Image"
                             width={300}
                             height={300}
@@ -65,7 +68,7 @@ export default function ProfileData() {
                                 <ListItemText
                                     primary={
                                         <Typography variant="h3">
-                                            Nombre de la Empresa
+                                            Nombre de la empresa
                                         </Typography>
                                     }
                                     secondary={
@@ -76,7 +79,7 @@ export default function ProfileData() {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                {companyName}
+                                                {profileData.business_name}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -94,7 +97,7 @@ export default function ProfileData() {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                Barcelona
+                                                {profileData.user.country}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -105,7 +108,7 @@ export default function ProfileData() {
                                 <ListItemText
                                     primary={
                                         <Typography variant="h3">
-                                            Descripción y valores
+                                            {profileData.description}
                                         </Typography>
                                     }
                                     secondary={
@@ -149,7 +152,7 @@ export default function ProfileData() {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                Comercio
+                                                {profileData.sector}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -171,7 +174,7 @@ export default function ProfileData() {
                                                 variant="caption"
                                                 color="text.primary"
                                             >
-                                                Empresa
+                                                {profileData.legal_structure}
                                             </Typography>
                                         </React.Fragment>
                                     }
@@ -208,6 +211,7 @@ export default function ProfileData() {
                         </List>
                     </Box>
                 </Box>
+                )}
             </Container>
 
     );
