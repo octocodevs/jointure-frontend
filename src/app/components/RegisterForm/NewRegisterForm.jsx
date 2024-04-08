@@ -110,7 +110,7 @@ export default function Form() {
                     draggable: true,
                     className: "bg-green-500 text-white rounded-md p-4",
                     };
-                router.push("/admin");
+                router.push("/register");
                 router.refresh()
             })
                 .catch((error) => {
