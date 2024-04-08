@@ -75,7 +75,7 @@ const LoginInputs = () => {
       loginUser(formData)
         .then((res) => {
           login(res.access_token);
-          route.push("/admin");
+          route.push("/register");
 
         })
         .catch((error) => {
