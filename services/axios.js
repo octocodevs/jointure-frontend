@@ -112,3 +112,14 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
         throw error.response.data;
     }
 };
+
+ 
+export const newProfile = async () => {
+    try {
+        const response = await axios.post(`api/profile`)
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
