@@ -49,50 +49,50 @@ export default function ProposalDetailData() {
   const [dense] = React.useState(false);
 
   return (
-    <Box sx={{ 
+    <Box sx={{
 
-      flexGrow: 1, 
+      flexGrow: 1,
       maxWidth: 752,
       mt: 4,
-      }}>
+    }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Demo>
-          <List dense={dense}>
-    {generate(
-    <ListItem />,
-    <BusinessIcon />,
-    "Sector",
-    "Alimentación"
-  )}
-  {generate(
-  <ListItem />,
-  <LocationOnIcon />,
-  "Ubicación",
-  "Barcelona"
-)}
-  {generate(
-    <ListItem />,
-    <StorefrontIcon />,
-    "Canales de venta",
-    "Offline"
-  )}
-  {generate(
-  <ListItem />,
-  <FavoriteIcon />,
-  "Valores",
-  "vegano"
-)}
-  {generate(
-    <ListItem />,
-    <DescriptionIcon />,
-    "Descripción",
-    "Lorem Ipsum"
-  )}
-</List>
+            <List dense={dense}>
+              {generate(
+                <ListItem />,
+                <BusinessIcon />,
+                "Sector",
+                "Alimentación"
+              )}
+              {generate(
+                <ListItem />,
+                <LocationOnIcon />,
+                "Ubicación",
+                "Barcelona"
+              )}
+              {generate(
+                <ListItem />,
+                <StorefrontIcon />,
+                "Canales de venta",
+                "Offline"
+              )}
+              {generate(
+                <ListItem />,
+                <FavoriteIcon />,
+                "Valores",
+                "vegano"
+              )}
+              {generate(
+                <ListItem />,
+                <DescriptionIcon />,
+                "Descripción",
+                "Lorem Ipsum"
+              )}
+            </List>
           </Demo>
         </Grid>
-        
+
       </Grid>
     </Box>
   );

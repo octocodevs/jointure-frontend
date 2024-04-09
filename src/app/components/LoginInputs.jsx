@@ -166,7 +166,7 @@ const LoginInputs = () => {
         <Typography variant="body1" color="textSecondary">
           ¿No estás registrado?{" "}
           <Link
-            href="http://localhost:3000/register"
+            href="/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
 

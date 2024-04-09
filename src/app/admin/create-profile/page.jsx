@@ -5,22 +5,19 @@ import CreateProfileForm from '@/app/components/InfoForms/CreateProfileForm'
 export default function CreateProfile() {
   return (
     <Container>
-      <form>
-        <Typography variant='h1' color="primary" justifyContent='center'>
+      
+        <Typography 
+          variant='h1' color="primary"
+          className='pl-10 pt-4'
+          sx={{ 
+            margin: 'auto',
+            display: 'block',
+            textAlign: 'center'
+            }}>
             Crear perfil de empresa
         </Typography>
-
-  
-        <CreateProfileForm />
-
         
-        <Button
-          type="submit"
-          color="primary"
-          text="guardar"
-          text-uppercase
-          >GUARDAR</Button>
-      </form>
+        <CreateProfileForm />
     </Container>
   )
 }

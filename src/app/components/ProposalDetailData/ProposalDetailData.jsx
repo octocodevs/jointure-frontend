@@ -68,44 +68,44 @@ export default function ProposalDetailData() {
   const [dense] = React.useState(false);
 
   return (
-    <Box sx={{ 
+    <Box sx={{
 
-      flexGrow: 1, 
+      flexGrow: 1,
       maxWidth: 752,
       mt: 4,
-      }}>
+    }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Demo>
-          <List dense={dense}>
-  {generate(
-    <ListItem />,
-    <EventIcon />,
-    "Fecha del evento",
-    data && data.collab_start_date
-  )}
-  {generate(
-    <ListItem />,
-    <EventAvailableIcon />,
-    "Fecha límite del evento",
-    data && data.collab_end_date
-  )}
-  {generate(
-    <ListItem />,
-    <FlagIcon />,
-    "Objetivos y Metas",
-    data && data.objectives
-  )}
-  {generate(
-    <ListItem />,
-    <DescriptionIcon />,
-    "Propuesta",
-    data && data.proposal
-  )}
-</List>
+            <List dense={dense}>
+              {generate(
+                <ListItem />,
+                <EventIcon />,
+                "Fecha del evento",
+                data && data.collab_start_date
+              )}
+              {generate(
+                <ListItem />,
+                <EventAvailableIcon />,
+                "Fecha límite del evento",
+                data && data.collab_end_date
+              )}
+              {generate(
+                <ListItem />,
+                <FlagIcon />,
+                "Objetivos y Metas",
+                data && data.objectives
+              )}
+              {generate(
+                <ListItem />,
+                <DescriptionIcon />,
+                "Propuesta",
+                data && data.proposal
+              )}
+            </List>
           </Demo>
         </Grid>
-        
+
       </Grid>
     </Box>
   );
