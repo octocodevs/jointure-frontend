@@ -24,7 +24,7 @@ export default function CreateProfileForm() {
   const [description, setDescription] = useState('');
   const [instagram, setInstagram] = useState('');
   const [linkedin, setLinkedin] = useState('');
-  const [socialX, setsocialX] = useState('');
+  const [socialX, setSocialX] = useState('');
   const [tiktok, setTiktok] = useState('');
 
 
@@ -229,8 +229,8 @@ export default function CreateProfileForm() {
 
 
   // handleSubmit code not completed yet
-  const handleSubmit = async () => {
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const profileData = {
       image: image,
@@ -254,22 +254,19 @@ export default function CreateProfileForm() {
       social_network_spotify: spotify,
       social_network_youtube: youtube,
       social_network_pinterest: pinterest,
-
     };
 
-    axios.get('/sanctum/csrf-cookie').then(response => {
-      registerNewProfile(profileData).then((res) => {
+    try { 
+      await axios.get('/sanctum/csrf-cookie');
 
-        router.push("/admin");
-        router.refresh()
-      })
-        .catch((error) => {
-          console.error('Create profile failed:', error);
-
-        })
-    })
-  };
-
+      const response = await axios.post('/api/profile', profileData);
+      console.log('Profile created', response.data)
+    } catch (error) {
+      console.error('Create profile failed', error);
+    }
+  }
+  
+ 
   return (
     <Container>
       <form
@@ -325,7 +322,7 @@ export default function CreateProfileForm() {
           color="secondary"
           fullWidth
           helperText="Escribe tu e-mail de contacto"
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => setContactMail(e.target.value)}
 
         />
 
