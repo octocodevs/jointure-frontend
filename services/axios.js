@@ -126,10 +126,8 @@ export const createNewProfile = async (userData) => {
             'Content-Type': 'multipart/form-data'
         }
         
-
-        console.log("entrando", userData);
         const response = await axios.post(`api/profile`, userData, { headers }); 
-        console.log(response, "saliendo");
+
         return response.data;
     } catch (error) {
         console.error('Error al crear el perfil', error);

@@ -240,51 +240,27 @@ export default function CreateProfileForm() {
     e.preventDefault();
     setFormSubmitted(true);
 
-    const profileData = {
-      image: image,
-      CIF: cifValue,
-      legal_structure: legalStructure,
-      phone_number: phone,
-      email_contact: contactMail,
-      sector: sector,
-      activity: activity,
-      values: values,
-      business_size: businessSize,
-      market: market,
-      clients: clients,
-      sales_channel: salesChannels,
-      description: description,
-      social_network_instagram: instagram,
-      social_network_linkedin: linkedin,
-      social_network_x: socialX,
-      social_network_tiktok: tiktok,
-    };
+    const profileData = new FormData();
 
+    profileData.append('CIF', cifValue);
+    profileData.append('legal_structure', legalStructure);
+    profileData.append('phone_number', phone);
+    profileData.append('email_contact', contactMail);
+    profileData.append('sector', sector);
+    profileData.append('activity', activity);
+    profileData.append('values', values);
+    profileData.append('business_size', businessSize);
+    profileData.append('market', market);
+    profileData.append('clients', clients);
+    profileData.append('sales_channels', salesChannels);
+    profileData.append('description', description);
+    profileData.append('social_network_instagram', instagram);
+    profileData.append('social_network_linkedin', linkedin);
+    profileData.append('social_network_x', socialX);
+    profileData.append('social_network_tiktok', tiktok);
 
-    const profileDataSend = new FormData();
-    // profileDataSend.append('image', profileData.image);
-    profileDataSend.append('CIF', cifValue);
-    // profileDataSend.append('legal_structure', profileData.legalStructure);
-    // profileDataSend.append('phone_number', profileData.phone);
-    // profileDataSend.append('email_contact', profileData.contactMail);
-    profileDataSend.append('sector', profileData.sector);
-    // profileDataSend.append('activity', profileData.activity);
-    // profileDataSend.append('values', profileData.values);
-    // profileDataSend.append('business_size', profileData.businessSize);
-    // profileDataSend.append('market', profileData.market);
-    // profileDataSend.append('clients', profileData.clients);
-    // profileDataSend.append('sales_channel', profileData.salesChannels);
     
-    // profileDataSend.append('description', profileData.description);
-    // profileDataSend.append('social_network_instagram', profileData.instagram);
-    // profileDataSend.append('social_network_linkedin', profileData.linkedin);
-    // profileDataSend.append('social_network_x', profileData.socialX);
-    // profileDataSend.append('social_network_tiktok', profileData.tiktok);
-  
-    console.log(profileDataSend.sector, "estoy en el profileData.sector");
-    console.log(profileData, "estoy en el profileData");
-    console.log(profileDataSend, "estoy en el profileDataSend");
-    console.log(cifValue, "estoy en el cifValue");
+    profileData.append('image', image);
 
     createNewProfile(profileData)
       .then((res) => {
