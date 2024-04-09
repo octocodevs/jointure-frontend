@@ -25,7 +25,6 @@ export default function ResponsiveDrawer(props) {
   const authToken = getAuthToken();
 
   const handleLogout = () => {
-    console.log(authToken);
     Cookies.remove("laravel_session", { domain: "localhost", path: "/" });
     logout();
     logoutUser(authToken);

@@ -11,13 +11,15 @@ import { registerNewUser} from "../../../../services/axios"
 import BasicSelect from '../mui/inputs/BasicSelect';
 import CheckboxLabels from '../mui/inputs/Checkbox';
 import LockIcon from '../mui/Icons/LockIcon';
+import { useAuthContext } from '@/contexts/authContext';
 
 
 
 export default function Form() {
 
     
-    const router = useRouter()
+    const router = useRouter();
+    const {login} = useAuthContext()
 
     const [nameValue, setNameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
@@ -97,17 +99,16 @@ export default function Form() {
             subscription_type: subscriptionType,
         };
 
-        axios.get('/sanctum/csrf-cookie').then(response => {
-            registerNewUser(userData).then((res) => {
-
-                router.push("/admin");
-                router.refresh()
-            })
-                .catch((error) => {
-                    console.error('Login failed:', error);
-
-                })
+        
+        registerNewUser(userData).then((res) => {
+            login(res.access_token);
+            router.push("/admin");
         })
+            .catch((error) => {
+                console.error('Login failed:', error);
+
+            })
+        
     };
 
     const handleButtonClick = (e) => {
