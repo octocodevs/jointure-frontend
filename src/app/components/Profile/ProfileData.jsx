@@ -1,5 +1,5 @@
 'use client'
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Divider } from '@mui/material';
 import Image from 'next/image';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -12,31 +12,22 @@ import { useAuthContext } from '../../../contexts/authContext';
 import Spinner from '../../components/Spinner';
 
 export default function ProfileData() {
-    const { getAuthToken } = useAuthContext();
+    // const { getAuthToken } = useAuthContext();
     const [profileData, setProfileData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const authToken = getAuthToken();
-    //             if (!authToken) {
-    //                 setIsLoading(false);
-    //                 // Manejar el caso en el que no hay token de autenticación
-    //                 return;
-    //             }
-    //             const data = await getProfileById(authToken);
-    //             setProfileData(data);
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             setIsLoading(false);
-    //             console.error("Error al obtener el perfil:", error);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, [getAuthToken]);
+    useEffect(() => {
+        const user_id = localStorage.getItem( "user_id" );
+        if (user_id) {
+            getProfileById(user_id).then((res) => {
+                console.log("Profile Data: ", res);
+                setProfileData(res);
+                setIsLoading(false);
+            }).catch((err) => {
+                console.error(err);
+            });
+        }
+    }, []);
 
     return (
         <Container className="flex min-h-auto flex-col items-center justify-between p-8">
@@ -49,7 +40,7 @@ export default function ProfileData() {
                 <Box className="flex h-auto flex-row items-start justify-around pt-8">
                     <Box className="pt-5 p-8">
                         <Image
-                            src={profileData.image}
+                            src={`http://localhost:8000/storage/${profileData.image}`}
                             alt="Next.js Image"
                             width={300}
                             height={300}
@@ -59,12 +50,12 @@ export default function ProfileData() {
 
                     <Box>
                         <Typography variant="h3">Nombre de la empresa</Typography>
-                        <Typography variant="caption">{profileData.business_name}</Typography>
-                        <Divider variant="inset" component="li" />
+                        <Typography variant="caption">{profileData.user.business_name}</Typography>
+                        <Divider variant="inset" component=""/>
 
                         <Typography variant="h3">Ubicación</Typography>
                         <Typography variant="caption">{profileData.user.country}</Typography>
-                        <Divider variant="inset" component="li" />
+                        <Divider variant="inset" component="" />
 
                         <Typography variant="h3">Descripción</Typography>
                         <Typography variant="caption">{profileData.description}</Typography>
@@ -73,11 +64,11 @@ export default function ProfileData() {
                     <Box>
                         <Typography variant="h3">Sector</Typography>
                         <Typography variant="caption">{profileData.sector}</Typography>
-                        <Divider variant="inset" component="li" />
+                        <Divider variant="inset" component="" />
 
                         <Typography variant="h3">Tipo de negocio</Typography>
                         <Typography variant="caption">{profileData.legal_structure}</Typography>
-                        <Divider variant="inset" component="li" />
+                        <Divider variant="inset" component="" />
 
                         <Typography variant="h3">Redes sociales</Typography>
                         <Typography variant="caption">

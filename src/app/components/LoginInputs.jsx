@@ -35,9 +35,9 @@ const LoginInputs = () => {
     }));
   };
 
-  // useEffect(() => {
-
-  // }, [formData]);
+  const handleLoginSuccess = (userId) => {
+    localStorage.setItem("user_id", userId)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,6 +73,7 @@ const LoginInputs = () => {
     loginUser(formData)
       .then((res) => {
         login(res.access_token);
+        handleLoginSuccess(res.user.id);
         route.push("/admin");
 
       })
