@@ -14,8 +14,7 @@ export default function ImageUpload() {
                 type="submit"
                 color="primary"
                 text-uppercase
-
-            >
+                 >
                 Haz click aquí
 
             </Button>

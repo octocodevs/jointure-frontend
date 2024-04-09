@@ -585,17 +585,14 @@ export default function CreateProfileForm() {
           </Grid>
         </Grid>
 
-
-
-
-        {/*         <OptionsSection />
- */}
         <Button
           type="submit"
           color="primary"
-          text="guardar"
-          text-uppercase
-        ></Button>
+          variant="contained"
+          >
+          GUARDAR
+          </Button>
+
       </form>
     </Container>
   )
