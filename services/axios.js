@@ -19,9 +19,9 @@ export const getCollaborations = async () => {
 
 export const registerNewUser = async (userData) => {
     try {
-        
+
         const response = await axios.post(`api/register`, userData);
-        
+
         return response.data;
     } catch (error) {
         console.log(error);
@@ -89,26 +89,25 @@ export const updateCollaboration = async (collaborationId, collaborationData) =>
 }
 
 //delete Collaboration
-
 export const deleteCollaboration = async (collaborationId, authToken) => {
     try {
-      const response = await axios.delete(`api/marketplace/${collaborationId}`, collaborationId,{
-        headers: {
-        "X-XSRF-TOKEN": Cookies.get("laravel_session"), 
-        Authorization: `Bearer ${authToken}`, 
-      },
-    });
-      return response.data;
+        const response = await axios.delete(`api/marketplace/${collaborationId}`, collaborationId, {
+            headers: {
+                "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"),
+                Authorization: `Bearer ${authToken}`,
+            },
+        });
+        return response.data;
     } catch (error) {
-      console.error("Error al eliminar colaboración:", error);
-      throw error;
+        console.error("Error al eliminar colaboración:", error);
+        throw error;
     }
-  };
+};
 
 
-  
 
-  export const getprofiles = async () => {
+
+export const getprofiles = async () => {
     try {
         const response = await axios.get(`api/profile`)
         return response.data;
@@ -116,24 +115,3 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
         throw error.response.data;
     }
 };
-
- 
-export const newProfile = async () => {
-    try {
-        const response = await axios.post(`api/profile`)
-        return response.data;
-    } catch (error) {
-        throw error.response.data;
-    }
-};
-
-export const getCollaborationById = async (collabId) => {
-    console.log(collabId);
-    try {
-      const response = await axios.get(`api/collaboration-proposals/${collabId}`);
-      return response.data.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-
