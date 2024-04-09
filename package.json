@@ -16,14 +16,16 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource/montserrat": "^5.0.17",
     "@fontsource/roboto": "^5.0.12",
-    "@mui/icons-material": "^5.15.14",
+    "@mui/icons-material": "^5.15.15",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.15",
     "@mui/material-nextjs": "^5.15.11",
     "js-cookie": "^3.0.5",
     "next": "^14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
