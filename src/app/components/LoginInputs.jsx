@@ -35,9 +35,9 @@ const LoginInputs = () => {
     }));
   };
 
-  useEffect(() => {
-    
-  }, [formData]);
+  // useEffect(() => {
+
+  // }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,27 +70,25 @@ const LoginInputs = () => {
       return;
     }
 
-    
-      
-      loginUser(formData)
-        .then((res) => {
-          login(res.access_token);
-          route.push("/admin");
+    loginUser(formData)
+      .then((res) => {
+        login(res.access_token);
+        route.push("/admin");
 
-        })
-        .catch((error) => {
-          console.log(error.response);
-          if (
-            error.response &&
-            error.response.data &&
-            error.response.data.errors
-          ) {
-            setErrorMessages(error.response.data.errors);
-          } else {
-            setErrorMessages({ general: "Email o contraseña incorrecto" });
-          }
-        });
-    
+      })
+      .catch((error) => {
+        console.log(error);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          setErrorMessages(error.response.data.errors);
+        } else {
+          setErrorMessages({ general: "Email o contraseña incorrecto" });
+        }
+      });
+
   };
 
   return (
@@ -155,7 +153,7 @@ const LoginInputs = () => {
         </Box>
 
         <Box>
-          <LargeButton type="submit" id="submit"/>
+          <LargeButton type="submit" id="submit" />
         </Box>
       </form>
 
@@ -171,6 +169,7 @@ const LoginInputs = () => {
             href="http://localhost:3000/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
+
           >
             Regístrate aquí
           </Link>

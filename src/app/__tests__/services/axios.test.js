@@ -87,7 +87,7 @@ describe('Funciones de Axios', () => {
     describe('deleteCollaboration', () => {
       it('debería eliminar una colaboración exitosamente', async () => {
         const collaborationId = 1;
-        mock.onDelete(`/api/marketplace/${collaborationId}`).reply(200);
+        mock.onDelete(`/api/collaboration-proposals/${collaborationId}`).reply(200);
   
         const response = await api.deleteCollaboration(collaborationId);
   
@@ -95,7 +95,7 @@ describe('Funciones de Axios', () => {
       });
   
       it('debería manejar errores al eliminar una colaboración', async () => {
-        mock.onDelete(`/api/marketplace/1`).reply(500);
+        mock.onDelete(`/api/collaboration-proposals/1`).reply(500);
   
         await expect(api.deleteCollaboration(1)).rejects.toThrow();
       });
