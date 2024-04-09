@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from 'next/link';
 import {
   Avatar,
   Card,
@@ -28,7 +29,7 @@ export default function ProposalCard({ card }) {
     WebkitBoxOrient: "vertical",
   };
 
-  
+
   return (
     <div>
       <Card elevation={2} className="max-w-xs h-auto">
@@ -39,6 +40,7 @@ export default function ProposalCard({ card }) {
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
             sx={{ objectFit: "cover" }}
+
           />
         </CardMedia>
         <CardHeader
@@ -87,27 +89,19 @@ export default function ProposalCard({ card }) {
             paddingLeft: 1,
           }}
         >
-          <Button
-            sx={{
-              margin: 1,
-            }}
-            variant="outlined"
-            color="primary"
-            size="small"
-          >
-            Ver más
-          </Button>
-          {/* <Button
-            sx={{
-              margin: 1,
-            }}
-            className="flex flex-row items-start pb-8"
-            variant="contained"
-            color="primary"
-            size="small"
-          >
-            Gestionar
-          </Button> */}
+          <Link href={`/admin/proposaldetail/${card.id}`} passHref>
+            <Button
+              sx={{
+                margin: 1,
+              }}
+              variant="outlined"
+              color="primary"
+              size="small"
+              component="a"
+            >
+              Ver más
+            </Button>
+          </Link>
         </Box>
       </Card>
     </div>
