@@ -70,6 +70,10 @@ export default function Form() {
         }
     }, [passwordError, confirmPasswordError]);
 
+    const handleCountryChange = (event) => {
+        setCountry(event.target.value);
+    };
+
     const handlePositionChange = (event) => {
         setPositionValue(event.target.value);
     };
@@ -116,7 +120,7 @@ export default function Form() {
     };
 
     return (
-        <Container overflow="auto" className='pb-20 '>
+        <Container overflow="auto" className='pb-20'>
             <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
             <LockIcon />
             </Box>
@@ -227,11 +231,12 @@ export default function Form() {
                         }}
                         id="country"
                         label="País"
+                        type="text"
                         variant="outlined"
                         color="primary"
                         fullWidth
                         required
-                        onChange={setCountry}
+                        onChange={handleCountryChange}
                         value={country}
                     />
                     <TextField

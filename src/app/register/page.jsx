@@ -14,9 +14,9 @@ export default function RegisterPage() {
       spacing={{xs: 1, sm: 2, md: 4}}      
       >
       <Box display="flex" justifyContent="space-between" flexDirection={{ xs: 'column', md: 'row' }} gap={4} spacing={2}>
-        <Box>
+        <Box className="">
           <Form
-            className="h-full"
+            
           />
         </Box>       
         <Box className="hidden sm:block ">
