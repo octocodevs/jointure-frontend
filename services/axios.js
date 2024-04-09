@@ -7,6 +7,18 @@ axios.defaults.withCredentials = true;
 
 axios.defaults.baseURL = urlAPI;
 
+const axiosInstance = axios.create({
+    baseURL: 'http://example.com/api', // Reemplaza con la URL base de tu API
+    withCredentials: true, // Incluir cookies en las solicitudes
+  });
+  
+  // Agregar un interceptor de solicitud para incluir el token CSRF en los encabezados
+  axiosInstance.interceptors.request.use((config) => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    config.headers['X-CSRF-TOKEN'] = csrfToken;
+    return config;
+  });
+
 export const getCollaborations = async () => {
     try {
         const response = await axios.get(`api/collaboration-proposals`)
@@ -112,5 +124,17 @@ export const getprofiles = async () => {
         return response.data;
     } catch (error) {
         throw error.response.data;
+    }
+};
+
+export const createNewProfile = async (userData) => {
+    try {
+        console.log("entrando", userData);
+        const response = await axios.post(`api/profile`, userData);
+        console.log(response, "saliendo");
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response;
     }
 };
