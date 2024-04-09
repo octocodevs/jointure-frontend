@@ -104,7 +104,7 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
 
 
 
-export const getprofiles = async () => {
+export const getProfiles = async () => {
     try {
         const response = await axios.get(`api/profile`)
         return response.data;
@@ -116,12 +116,43 @@ export const getprofiles = async () => {
 export const getCollaborationById = async (collabId) => {
     console.log(collabId);
     try {
-      const response = await axios.get(`api/collaboration-proposals/${collabId}`);
-      return response.data.data;
+        const response = await axios.get(`api/collaboration-proposals/${collabId}`);
+        return response.data.data;
     } catch (error) {
-      throw error.response.data;
+        throw error.response.data;
     }
 };
+
+
+//traer perfil por id
+export const getProfileById = async (userId) => {
+    try {
+        const token = Cookies.get('laravel_session');
+        const headers = {Authorization:`Bearer ${token}`};
+        
+        const response = await axios.get(`api/profile/${userId}`, {headers});
+    
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+
+//traer únicamente mis propuestas de colaboración
+
+export const getMyCollaborations = async () => {
+    try {
+        const token = Cookies.get('laravel_session');
+        const headers = {Authorization:`Bearer ${token}`};
+        
+        const response = await axios.get(`api/my-collaboration-proposals`, {headers});
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+<<<<<<< HEAD
 
 //Post new collab
 
@@ -136,3 +167,5 @@ export const createNewCollab = async (userData) => {
         throw error.response;
     }
 };
+=======
+>>>>>>> 4190f60bf0eb7340b7de7f5bd89c1719b0bb7495

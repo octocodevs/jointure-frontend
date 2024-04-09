@@ -47,7 +47,8 @@ export default function ProposalCard({ card }) {
           avatar={
             <Avatar
               alt="logo"
-              src={card.user.profile.image}
+              // src={card.user.profile.image ? card.user.profile.image : '/img/croissants.jpg' }
+              src={card.user && card.user.profile.image ? card.user.profile.image : '/img/croissants.jpg'  }
               variant="rounded"
               className="mr-2 "
             />

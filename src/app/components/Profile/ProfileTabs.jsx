@@ -8,28 +8,32 @@ import { Container } from '@mui/material';
 import CreatedProposals from './Proposals/CreatedProposals';
 
 export default function CenteredTabs() {
-  const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(0);
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+  
+    return (
+      <Container>
+        <Box sx={{ bgcolor: 'background.paper' }}>
+          <Tabs value={value} onChange={handleChange} centered>
+            <Tab label="Propuestas creadas" />
+            <Tab label="Propuestas sumadas" />
+            <Tab label="Colaboraciones en marcha" />
+          </Tabs>
+          {value === 0 && (
+            <CreatedProposals />
+          )}
+          {value === 1 && (
+            <Box> Contenido de "Colaboraciones sumadas" Añadir componente "JoinedProposals"</Box>
+          )}
+          {value === 2 && (
+            <Box>Contenido de "Colaboraciones en marcha", Añadir componente "InProgressCollabs"</Box>
+          )}
+        </Box>
+      </Container>
+    );
+  }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    // Aquí puedes gestionar la visualización del contenido según la pestaña seleccionada
-  };
-
-  return (
-
-      <Box sx={{ bgcolor: 'background.paper' }}>
-        <Tabs value={value} onChange={handleChange} centered>
-          <Tab label="Propuestas creadas">
-            <h1>hola</h1>
-          </Tab>
-          <Tab label="Propuestas sumadas">
-            {/* Contenido de "Propuestas sumadas" */}
-          </Tab>
-          <Tab label="Colaboraciones en marcha">
-            {/* Contenido de "Colaboraciones en marcha" */}
-          </Tab>
-        </Tabs>
-      </Box>
-  );
-}
 
