@@ -33,7 +33,7 @@ export default function CreateProfileForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
 
-  const {getAuthToken} = useAuthContext();
+  const { getAuthToken } = useAuthContext();
   const router = useRouter();
 
   const legalStructureOptions = [
@@ -238,8 +238,7 @@ export default function CreateProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true); 
-
+    setFormSubmitted(true);
 
     const profileData = {
       image: image,
@@ -260,23 +259,44 @@ export default function CreateProfileForm() {
       social_network_x: socialX,
       social_network_tiktok: tiktok,
     };
-    console.log(profileData, "estoy en el");
-      /* await axios.get('/sanctum/csrf-cookie'); */
-      
-      const token = getAuthToken();
-      console.log(token);
 
-      createNewProfile(profileData)
-        .then((res) => {
-          router.push("/admin")
-          console.log('Profile created', res)
-        })
-        .catch ((error) => {
-        console.error('Create profile failed', error);
-    })
-  }
+
+    const profileDataSend = new FormData();
+    // profileDataSend.append('image', profileData.image);
+    profileDataSend.append('CIF', cifValue);
+    // profileDataSend.append('legal_structure', profileData.legalStructure);
+    // profileDataSend.append('phone_number', profileData.phone);
+    // profileDataSend.append('email_contact', profileData.contactMail);
+    profileDataSend.append('sector', profileData.sector);
+    // profileDataSend.append('activity', profileData.activity);
+    // profileDataSend.append('values', profileData.values);
+    // profileDataSend.append('business_size', profileData.businessSize);
+    // profileDataSend.append('market', profileData.market);
+    // profileDataSend.append('clients', profileData.clients);
+    // profileDataSend.append('sales_channel', profileData.salesChannels);
+    
+    // profileDataSend.append('description', profileData.description);
+    // profileDataSend.append('social_network_instagram', profileData.instagram);
+    // profileDataSend.append('social_network_linkedin', profileData.linkedin);
+    // profileDataSend.append('social_network_x', profileData.socialX);
+    // profileDataSend.append('social_network_tiktok', profileData.tiktok);
   
- 
+    console.log(profileDataSend.sector, "estoy en el profileData.sector");
+    console.log(profileData, "estoy en el profileData");
+    console.log(profileDataSend, "estoy en el profileDataSend");
+    console.log(cifValue, "estoy en el cifValue");
+
+    createNewProfile(profileData)
+      .then((res) => {
+        router.push("/admin")
+        console.log('Profile created', res)
+      })
+      .catch((error) => {
+        console.error('Create profile failed', error);
+      })
+  }
+
+
   return (
     <Container className='mt-8'>
       <form
@@ -285,7 +305,23 @@ export default function CreateProfileForm() {
         onSubmit={handleSubmit}
       >
         <Box className="mb-6">
-          <ImageUpload />
+          <TextField
+            sx={{
+              margin: '1rem',
+            }}
+            id="image"
+            label="sube tu imagen"
+            type="file"
+            fullWidth
+            required
+            variant="outlined"
+            color="primary"
+            InputLabelProps={{ shrink: true }}
+            // value={imageValue}
+            // onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage(e.target.files[0])}
+
+          />
         </Box>
 
         <Grid container spacing={2}>
@@ -594,7 +630,7 @@ export default function CreateProfileForm() {
             display: 'block'
           }}         >
           GUARDAR
-          </Button>
+        </Button>
 
       </form>
     </Container>
