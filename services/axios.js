@@ -16,6 +16,7 @@ export const getCollaborations = async () => {
     }
 };
 
+
 export const registerNewUser = async (userData) => {
     try {
 
@@ -112,6 +113,16 @@ export const getprofiles = async () => {
         return response.data;
     } catch (error) {
         throw error.response.data;
+    }
+};
+
+export const getCollaborationById = async (collabId) => {
+    console.log(collabId);
+    try {
+      const response = await axios.get(`api/collaboration-proposals/${collabId}`);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
     }
 };
 
