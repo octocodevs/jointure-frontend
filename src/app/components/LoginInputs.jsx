@@ -15,9 +15,11 @@ import LargeButton from "./Buttons/LargeButton";
 import axios from "axios";
 import { loginUser } from "../../../services/axios";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/contexts/authContext";
 
 const LoginInputs = () => {
   const route = useRouter();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,9 +35,9 @@ const LoginInputs = () => {
     }));
   };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  // useEffect(() => {
+
+  // }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,25 +70,25 @@ const LoginInputs = () => {
       return;
     }
 
-    axios.get("/sanctum/csrf-cookie").then(() => {
-      loginUser(formData)
-        .then((res) => {
-          route.push("/admin");
-          route.refresh();
-        })
-        .catch((error) => {
-          console.log(error.response);
-          if (
-            error.response &&
-            error.response.data &&
-            error.response.data.errors
-          ) {
-            setErrorMessages(error.response.data.errors);
-          } else {
-            setErrorMessages({ general: "Email o contraseña incorrecto" });
-          }
-        });
-    });
+    loginUser(formData)
+      .then((res) => {
+        login(res.access_token);
+        route.push("/admin");
+
+      })
+      .catch((error) => {
+        console.log(error);
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          setErrorMessages(error.response.data.errors);
+        } else {
+          setErrorMessages({ general: "Email o contraseña incorrecto" });
+        }
+      });
+
   };
 
   return (
@@ -151,7 +153,7 @@ const LoginInputs = () => {
         </Box>
 
         <Box>
-          <LargeButton type="submit" id="submit"/>
+          <LargeButton type="submit" id="submit" />
         </Box>
       </form>
 
@@ -167,7 +169,7 @@ const LoginInputs = () => {
             href="/admin/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
-            
+
           >
             Regístrate aquí
           </Link>

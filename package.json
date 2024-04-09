@@ -23,7 +23,9 @@
     "js-cookie": "^3.0.5",
     "next": "^14.1.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
