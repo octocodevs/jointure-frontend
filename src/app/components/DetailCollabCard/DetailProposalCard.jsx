@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { getCollaborationById } from '../../../../services/axios.js';
 import styled from "@emotion/styled";
 import { Container, Paper, Typography } from "@mui/material";
