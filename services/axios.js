@@ -107,7 +107,7 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
 
 
 
-export const getprofiles = async () => {
+export const getProfiles = async () => {
     try {
         const response = await axios.get(`api/profile`)
         return response.data;
@@ -130,8 +130,24 @@ export const getCollaborationById = async (collabId) => {
 //traer perfil por id
 export const getProfileById = async (userId) => {
     try {
-        const response = await axios.get(`api/profile/${userId}`);
+        const token = Cookies.get('laravel_session');
+        const headers = {Authorization:`Bearer ${token}`};
+        console.log('entrando a mi perfil',userId)
+        const response = await axios.get(`api/profile/${userId}`, {headers});
+        console.log('saliendo')
         return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+
+//traer únicamente mis propuestas de colaboración
+
+export const getMyCollaborations = async () => {
+    try {
+        const response = await axios.get(`api/my-collaboration-proposals`)
+        return response.data.data;
     } catch (error) {
         throw error.response.data;
     }
