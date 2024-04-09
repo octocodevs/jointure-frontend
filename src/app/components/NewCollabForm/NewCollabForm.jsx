@@ -1,17 +1,20 @@
 
 'use client'
-import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
 import BasicSelect from '../Mui/inputs/BasicSelect'
-import CheckboxLabels from '../Mui/inputs/Checkbox'
-import Link from 'next/link'
 import { KeyboardArrowRight } from '@mui/icons-material'
 import { useState } from 'react'
+import { createNewCollab } from "../../../../services/axios";
+// import { useAuthContext } from '@/contexts/authContext';
+import { useRouter } from 'next/navigation';
 
 
 
 export default function NewCollabForm() {
 
+    const router = useRouter();
+    // const {login} = useAuthContext()
     const [brandValue, setBrandValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
@@ -20,6 +23,8 @@ export default function NewCollabForm() {
     const [collabEndDate, setCollabEndDate] = useState('');
     const [collabType, setCollabType] = useState('');
     const [duration, setDuration] = useState('');
+    const [compensationValue, setCompensationValue] = useState('');
+    const [compensationAmountValue, setCompensationAmountValue] = useState('');
     const [costValue, setCostValue] = useState('');
     const [objectivesValue, setObjectivesValue] = useState('');
     const [idealCollaboratorsValue, setIdealCollaboratorsValue] = useState('');
@@ -32,11 +37,11 @@ export default function NewCollabForm() {
     const [termsAndConditionsValue, setTermsAndConditionsValue] = useState('');
     const [observationsValue, setObservationsValue] = useState('');
     const [publicOrPrivate, setPublicOrPrivate] = useState('');
-    const [collabLimitValue, setCollabLimitValue] = useState('');
+    const [collabLimitChecked, setCollabLimitChecked] = React.useState(0);
     const [limitValue, setLimitValue] = useState('');
     const [adStartDate, setAdStartDate] = useState('');
     const [adEndDate, setAdEndDate] = useState('');
-    const [sendNotification, setSendNotification] = useState(false);
+    const [sendNotification, setSendNotification] = useState(0);
 
     const handleBrandChange = (event) => {
         setBrandValue(event.target.value);
@@ -62,12 +67,12 @@ export default function NewCollabForm() {
         setCollabEndDate(event.target.value);
     };
 
-    const handleCollabTypeChange = (event) => {
-        setCollabType(event.target.value);
+    const handleCompensationValueChange = (event) => {
+        setCompensationValue(event.target.value);
     };
 
-    const handleDurationChange = (event) => {
-        setDuration(event.target.value);
+    const handleCompensationAmountValueChange = (event) => {
+        setCompensationAmountValue(event.target.value);
     };
 
     const handleCostChange = (event) => {
@@ -114,12 +119,12 @@ export default function NewCollabForm() {
         setObservationsValue(event.target.value);
     };
 
-    const handlePublicOrPrivateChange = (event) => {
-        setPublicOrPrivate(event.target.value);
-    };
+    // const handlePublicOrPrivateChange = (event) => {
+    //     setPublicOrPrivate(event.target.value);
+    // };
 
     const handleCollabLimitChange = (event) => {
-        setCollabLimitValue(event.target.value);
+        event.target.checked?setCollabLimitChecked(1):setCollabLimitChecked(0)
     };
 
     const handleLimitChange = (event) => {
@@ -135,53 +140,65 @@ export default function NewCollabForm() {
     };
 
     const handleSendNotificationChange = (event) => {
-        setSendNotification(event.target.checked);
+        event.target.checked?setSendNotification(1):setSendNotification(0)
+
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
 
-        console.log({
+        const userData = {
             brand: brandValue,
             title: titleValue,
             description: descriptionValue,
             image: imageValue,
-            collabStartDate: collabStartDate,
-            collabEndDate: collabEndDate,
-            collabType: collabType,
+            collab_start_date: collabStartDate,
+            collab_end_date: collabEndDate,
+            collab_type: collabType,
             duration: duration,
+            compensation:compensationValue,
+            compensation_amount:compensationAmountValue,
             cost: costValue,
             objectives: objectivesValue,
-            idealCollaborators: idealCollaboratorsValue,
+            ideal_collaborators: idealCollaboratorsValue,
             proposal: proposalValue,
             responsibility: responsibilityValue,
             planning: planningValue,
-            operationsAndSales: operationsAndSalesValue,
+            operations_and_sales: operationsAndSalesValue,
             marketing: marketingValue,
-            economicAgreements: economicAgreementsValue,
-            termsAndConditions: termsAndConditionsValue,
+            economic_agreements: economicAgreementsValue,
+            terms_and_conditions: termsAndConditionsValue,
             observations: observationsValue,
-            publicOrPrivate: publicOrPrivate,
-            collabLimit: collabLimitValue,
+            public_or_private: publicOrPrivate,
+            collab_limit: collabLimitChecked,
             limit: limitValue,
-            adStartDate: adStartDate,
-            adEndDate: adEndDate,
-            sendNotification: sendNotification,
+            ad_start_date: adStartDate,
+            ad_end_date: adEndDate,
+            send_notification: sendNotification,
 
 
-        });
+        };
+        console.log(userData);
+        createNewCollab(userData).then((res) => {
+        console.log(res)
+            // login(res.access_token);
+            router.push("/admin");
+        })
+            .catch((error) => {
+                console.error('Login failed:', error);
+
+            })
     };
 
     return (
         <Container overflow="auto" className='pb-20 '>
-            <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
-            </Box>
+            {/* <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
+            </Box> */}
             <Typography variant="h2" align="center">Crear propuesta de Colaboración</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
                 <form
                     noValidate
                     autoComplete="off"
-
+                    onSubmit={handleSubmit}
                 >
                     <TextField
                         sx={{
@@ -236,7 +253,7 @@ export default function NewCollabForm() {
                         label="sube tu imagen"
                         type="file"
                         fullWidth
-                        required
+                        
                         variant="outlined"
                         color="primary"
                         InputLabelProps={{ shrink: true }}
@@ -280,7 +297,7 @@ export default function NewCollabForm() {
                         id="collab_type"
                         label="Tipo de colaboración"
                         value={collabType}
-                        onChange={handleCollabTypeChange}
+                        onChange={setCollabType}
                         options={[
                             { value: 'Co-Branding', label: 'Co-Branding' },
                             { value: 'Co-Licensing', label: 'Co-Licensing' },
@@ -300,7 +317,7 @@ export default function NewCollabForm() {
                         id="duration"
                         label="Duración"
                         value={duration}
-                        onChange={handleDurationChange}
+                        onChange={setDuration}
                         options={[
                             { value: 'puntual', label: 'puntual' },
                             { value: 'periódica', label: 'periódica' },
@@ -310,6 +327,34 @@ export default function NewCollabForm() {
                             '& .MuiInputLabel-root': { color: 'red' },
                             '& .MuiSelect-root': { backgroundColor: 'lightblue' },
                         }}
+                    />
+                        <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="compensation"
+                        label="Compensación"
+                        type="text"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        value={compensationValue}
+                        onChange={handleCompensationValueChange}
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="compensation_amount"
+                        label="Monto de compensación"
+                        type="number"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        value={compensationAmountValue}
+                        onChange={handleCompensationAmountValueChange}
                     />
                     <TextField
                         sx={{
@@ -323,7 +368,7 @@ export default function NewCollabForm() {
                         variant="outlined"
                         color="primary"
                         value={costValue}
-                        onChnage={handleCostChange}
+                        onChange={handleCostChange}
                     />
 
                     <TextField
@@ -477,10 +522,10 @@ export default function NewCollabForm() {
                         id="public_or_private"
                         label="público o privado"
                         value={publicOrPrivate}
-                        onChange={handlePublicOrPrivateChange}
+                        onChange={setPublicOrPrivate}
                         options={[
-                            { value: 'public', label: 'Público' },
-                            { value: 'private', label: 'Privado' },
+                            { value: 'public', label: 'publico' },
+                            { value: 'private', label: 'privado' },
                         ]}
                         sx={{
                             '& .MuiInputLabel-root': { color: 'red' },
@@ -488,25 +533,54 @@ export default function NewCollabForm() {
                         }}
                     />
 
-                    <FormGroup sx={{ marginLeft: 2 }}>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Límitar colaboraciones"
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <FormGroup sx={{ marginLeft: 2, marginTop: 3 }}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={collabLimitChecked}
+                                            onChange={handleCollabLimitChange}
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Límitar colaboraciones"
+                                />
+                            </FormGroup>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                sx={{
+                                    marginLeft: '1rem',
+                                    marginTop: '1rem',
+                                    marginBottom: '1rem',
+                                    width: '100%',
+                                }}
+                                id="limit"
+                                label="Límite"
+                                type="number"
+                                required
+                                variant="outlined"
+                                color="primary"
+                                value={limitValue}
+                                onChange={handleLimitChange}
+                            />
+                        </Grid>
+                        </Grid>
+
+                        {/* <Box className="w-full flex flex-row">
+                        <FormGroup sx={{ marginLeft: 2 }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={collabLimitChecked}
+                                    onChange={handleCollabLimitChange}
+                                    color="primary"
+                                />
+                            }
+                            label="Límitar colaboraciones"
                         />
                     </FormGroup>
-
-                    {/* <TextField
-                        sx={{
-                            margin: '1rem',
-                        }}
-                        id="collab_limit"
-                        label="Límite de colaboraciones"
-                        type="number"
-                        fullWidth
-                        required
-                        variant="outlined"
-                        color="primary"
-                        value={collabLimitValue}
-                        onChange={handleCollabLimitChange}
-                    /> */}
 
                     <TextField
                         sx={{
@@ -519,63 +593,75 @@ export default function NewCollabForm() {
                         required
                         variant="outlined"
                         color="primary"
+                        value={limitValue}
+                        onChange={handleLimitChange}
 
                     />
-
-                    <TextField
-                        sx={{
-                            margin: '1rem',
-                        }}
-                        id="ad_start_date"
-                        label="Fecha de inicio del anuncio"
-                        type="date"
-                        fullWidth
-                        required
-                        variant="outlined"
-                        color="primary"
-                        InputLabelProps={{ shrink: true }}
-                        value={adStartDate}
-                        onChange={handleAdStartDateChange}
-                    />
-
-                    <TextField
-                        sx={{
-                            margin: '1rem',
-                        }}
-                        id="ad_end_date"
-                        label="Fecha final del anuncio"
-                        type="date"
-                        fullWidth
-                        required
-                        variant="outlined"
-                        color="primary"
-                        InputLabelProps={{ shrink: true }}
-                        value={adEndDate}
-                        onChange={handleAdEndDateChange}
-                    />
+                    </Box> */}
 
 
-                    <FormGroup sx={{ marginLeft: 2 }}>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Enviar notificaciones"
-                        />
-                    </FormGroup>
-
-
-
-
-                    <Box>
-                        <Button
-
-                            type="submit"
-                            color="primary"
-                            variant="contained"
-                            endIcon={<KeyboardArrowRight />}
+                        <TextField
+                            sx={{
+                                margin: '1rem',
+                            }}
+                            id="ad_start_date"
+                            label="Fecha de inicio del anuncio"
+                            type="date"
                             fullWidth
-                            sx={{ m: 2, }}
-                        >
-                            Enviar
-                        </Button>
-                    </Box>
+                            required
+                            variant="outlined"
+                            color="primary"
+                            InputLabelProps={{ shrink: true }}
+                            value={adStartDate}
+                            onChange={handleAdStartDateChange}
+                        />
+
+                        <TextField
+                            sx={{
+                                margin: '1rem',
+                            }}
+                            id="ad_end_date"
+                            label="Fecha final del anuncio"
+                            type="date"
+                            fullWidth
+                            required
+                            variant="outlined"
+                            color="primary"
+                            InputLabelProps={{ shrink: true }}
+                            value={adEndDate}
+                            onChange={handleAdEndDateChange}
+                        />
+
+
+                        <FormGroup sx={{ marginLeft: 2 }}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={sendNotification}
+                                        onChange={handleSendNotificationChange}
+                                        color="primary"
+                                    />
+                                }
+                                label="Enviar notificaciones"
+                            />
+                        </FormGroup>
+
+
+
+
+                        <Box>
+                            <Button
+
+                                type="submit"
+                                color="primary"
+                                variant="contained"
+                                endIcon={<KeyboardArrowRight />}
+                                fullWidth
+                                sx={{ m: 2, }}
+                            >
+                                Enviar
+                            </Button>
+                        </Box>
                 </form>
             </Box>
 

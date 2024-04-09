@@ -114,3 +114,17 @@ export const getprofiles = async () => {
         throw error.response.data;
     }
 };
+
+//Post new collab
+
+export const createNewCollab = async (userData) => {
+    try {
+
+        const response = await axios.post(`api/collaboration-proposals `, userData);
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response;
+    }
+};
