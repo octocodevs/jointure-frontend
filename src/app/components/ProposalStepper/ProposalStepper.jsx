@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ResponsiveDrawer from '../Navigation/ResponsiveDrawer.jsx';
 import ProposalDetailData from '../ProposalDetailData/ProposalDetailData.jsx';
+import { Container } from '@mui/material';
+import ProposalDetailBrandData from '../ProposalDetailData/ProposalDetailBrandData.jsx';
 
 const steps = ['Propuesta', 'Marca', 'Conecta'];
 
@@ -35,8 +37,8 @@ export default function ProposalStepper() {
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
-        ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
+        ? 
+          
           steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
@@ -63,8 +65,10 @@ export default function ProposalStepper() {
   };
 
   return (
-    <ResponsiveDrawer>
-    <Box sx={{ width: '100%' }}>
+    <Container className="flex min-h-auto flex-col items-center justify-between p-8">
+    <Box sx={{ 
+      width: '100%',
+     }}>
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
@@ -92,34 +96,35 @@ export default function ProposalStepper() {
             <ProposalDetailData />
           </div>}
           {activeStep === 1 && <div>
-            <ProposalDetailData />
+            <ProposalDetailBrandData />
           </div>}
-          {activeStep === 2 && <Typography>¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado
-Acepto las condiciones de la colaboración.</Typography>}
+          {activeStep === 2 && <Typography>¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado.
+          </Typography>}
             
           
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
+                variant="outlined"
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
-                Back
+                Anterior
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
-                Next
+              <Button variant="contained" onClick={handleNext} sx={{ mr: 1 }} style={{ display: activeStep === steps.length - 1 ? 'none' : 'inline' }}>
+                Siguiente
               </Button>
               {activeStep === steps.length - 1 && (
-  <Button onClick={handleComplete}>Finish</Button>
+  <Button onClick={handleComplete}>Colaborar</Button>
 )}
             </Box>
           </React.Fragment>
         )}
       </div>
     </Box>
-    </ResponsiveDrawer>
+    </Container>
   );
 }

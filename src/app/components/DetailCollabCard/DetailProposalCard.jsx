@@ -1,15 +1,39 @@
 'use client';
 
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getCollaborationById } from '../../../../services/axios.js';
 import styled from "@emotion/styled";
-import { Chip, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import ResponsiveDrawer from "../Navigation/ResponsiveDrawer.jsx";
+import CustomChip from "../Buttons/CustomChip.jsx";
 
 
 
 export default function DetailProposalCard() {
+
+  const [data, setData] = useState(null);
+
+  const pathname = usePathname().split("/");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCollaborationById(pathname[3]);
+        setData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData(pathname[3]);
+  }, []);
+
+
+ 
   const Img = styled('img')({
-    width: 200,
+    width: 320,
     height: '100%',
     objectFit: 'cover',
     objectPosition: 'center',
@@ -18,53 +42,50 @@ export default function DetailProposalCard() {
   
   
   return (
-    <ResponsiveDrawer>
-      <Typography variant="h2" className="text-center">
+    <Container className="flex min-h-auto flex-col items-center justify-between p-8">
+
+      <>
+      <Typography variant="h2" className="">
         Propuesta de colaboración
       </Typography>
       <Paper
       sx={{
+        
+        width: '100%',
         display: 'flex',
         mt: 5,
         alignItems: 'center',
         gap: 2,
         overflow: 'hidden',
+        flexDirection: { xs: 'column', sm: 'row' },
       }}
       >
-        <Img src="/img/croissants.jpg" alt="croissants" />
-        <Box>
-          <Typography variant="h6">Cafetería Delicious</Typography>
-          <Typography variant="body1">Colaboremos</Typography>
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem dicta
-            fugit, quibusdam, quod, quos dolorum voluptate quas magnam
-            exercitationem quia molestias. Quisquam, quas. Quisquam, quas.
-          </Typography>
+      <Img src="/img/donuts-logo.jpg" alt="croissants" />
+        
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
+            <Typography variant="h4">{data && data.brand}</Typography>
+            <Typography variant="h5">{data && data.title}</Typography>
+            <Typography variant="body1">
+              {data && data.description}
+            </Typography>
+
           <Box
-        alignItems="left"
-        className="flex flex-row gap-2 items-start pl-4 pb-4"
-      >
-        <Chip
-          sx={{
-            backgroundColor: '#2EE09F'
-          }}          
-          label="Alimentación"
-          size="small"
-          variant="outlined"
-          
-        />
-        <Chip
-          sx={{
-            backgroundColor: '#06ABDC'
-          }} 
-          label="Co-branding"
-          size="small"
-        />
-      </Box>
+          alignItems="left"
+          className="flex flex-row gap-2 items-start justify-start"
+        >
+        <CustomChip backgroundColor="#2EE09F" label={data && data.user && data.user.profile && data.user.profile.sector} />
+        <CustomChip backgroundColor="#06ABDC" label={data && data.collab_type} />
         </Box>
+      </Box>
         
       </Paper>
-
-    </ResponsiveDrawer>
+      </>
+      </Container>
   )
 }

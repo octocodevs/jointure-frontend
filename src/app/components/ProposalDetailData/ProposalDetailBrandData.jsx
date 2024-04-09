@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { getCollaborationById } from '../../../../services/axios.js';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -9,10 +7,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
-import EventIcon from '@mui/icons-material/Event';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import FlagIcon from '@mui/icons-material/Flag';
 import DescriptionIcon from '@mui/icons-material/Description';
+import BusinessIcon from '@mui/icons-material/Business';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 
@@ -47,24 +46,6 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 export default function ProposalDetailData() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const pathname = window.location.pathname;
-      const collabId = pathname.split("/").pop();
-
-      try {
-        const data = await getCollaborationById(collabId);
-        setData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const [dense] = React.useState(false);
 
   return (
@@ -78,29 +59,35 @@ export default function ProposalDetailData() {
         <Grid item xs={12} md={6}>
           <Demo>
           <List dense={dense}>
-  {generate(
+    {generate(
     <ListItem />,
-    <EventIcon />,
-    "Fecha del evento",
-    data && data.collab_start_date
+    <BusinessIcon />,
+    "Sector",
+    "Alimentación"
   )}
   {generate(
-    <ListItem />,
-    <EventAvailableIcon />,
-    "Fecha límite del evento",
-    data && data.collab_end_date
-  )}
+  <ListItem />,
+  <LocationOnIcon />,
+  "Ubicación",
+  "Barcelona"
+)}
   {generate(
     <ListItem />,
-    <FlagIcon />,
-    "Objetivos y Metas",
-    data && data.objectives
+    <StorefrontIcon />,
+    "Canales de venta",
+    "Offline"
   )}
+  {generate(
+  <ListItem />,
+  <FavoriteIcon />,
+  "Valores",
+  "vegano"
+)}
   {generate(
     <ListItem />,
     <DescriptionIcon />,
-    "Propuesta",
-    data && data.proposal
+    "Descripción",
+    "Lorem Ipsum"
   )}
 </List>
           </Demo>
