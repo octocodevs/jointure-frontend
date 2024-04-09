@@ -132,9 +132,9 @@ export const getProfileById = async (userId) => {
     try {
         const token = Cookies.get('laravel_session');
         const headers = {Authorization:`Bearer ${token}`};
-        console.log('entrando a mi perfil',userId)
+        
         const response = await axios.get(`api/profile/${userId}`, {headers});
-        console.log('saliendo')
+    
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -146,7 +146,10 @@ export const getProfileById = async (userId) => {
 
 export const getMyCollaborations = async () => {
     try {
-        const response = await axios.get(`api/my-collaboration-proposals`)
+        const token = Cookies.get('laravel_session');
+        const headers = {Authorization:`Bearer ${token}`};
+        
+        const response = await axios.get(`api/my-collaboration-proposals`, {headers});
         return response.data.data;
     } catch (error) {
         throw error.response.data;
