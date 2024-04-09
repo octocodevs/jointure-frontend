@@ -1,36 +1,40 @@
+import "@testing-library/jest-dom";
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import LoginInputs from "./LoginInputs";
-import axios from "axios";
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import LoginInputs from '../components/LoginInputs';
+import { useRouter } from 'next/navigation';
+import 'jest-localstorage-mock';
 
-jest.mock("axios");
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
 
-describe("LoginInputs Component Integration Test", () => {
-  it("Iniciar sesión con credenciales válidas", async () => {
-    const mockResponse = { data: { access_token: "token_de_prueba" } };
-    axios.get.mockResolvedValueOnce(mockResponse);
+describe('LoginInputs component', () => {
+  it('should show error messages when form is submitted with empty fields', async () => {
+   
+    useRouter.mockReturnValue({});
 
+    
     const { getByLabelText, getByText, queryByText } = render(<LoginInputs />);
-
-    fireEvent.change(getByLabelText("E-mail"), {
-      target: { value: "correo@ejemplo.com" },
-    });
-
-    fireEvent.change(getByLabelText("Contraseña"), {
-      target: { value: "contraseña123" },
-    });
-
-    fireEvent.click(getByText("Aceptar"));
+    
+    fireEvent.click(getByText('Enviar'));
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith("/sanctum/csrf-cookie");
-      expect(axios.post).toHaveBeenCalledWith("/login", {
-        email: "correo@ejemplo.com",
-        password: "contraseña123",
-        agree: false, // Suponiendo que por defecto el checkbox no está marcado
-      });
+      expect(getByText('El correo electrónico es obligatorio')).toBeInTheDocument();
+      expect(getByText('La contraseña es obligatoria')).toBeInTheDocument();
+      expect(getByText('Por favor, acepta los términos y condiciones')).toBeInTheDocument();
+    });
 
-      // Aquí puedes agregar más expectativas según lo que se espera que haga el componente después de iniciar sesión
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' }});
+    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' }});
+    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
+    fireEvent.click(getByText('Enviar'));
+
+
+    await waitFor(() => {
+      expect(queryByText('El correo electrónico es obligatorio')).toBeNull();
+      expect(queryByText('La contraseña es obligatoria')).toBeNull();
+      expect(queryByText('Por favor, acepta los términos y condiciones')).toBeNull();
     });
   });
-})
+});

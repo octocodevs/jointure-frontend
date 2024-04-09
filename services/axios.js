@@ -32,7 +32,6 @@ export const registerNewUser = async (userData) => {
 export const loginUser = async (userData) => {
     try {
         const response = await axios.post(`api/login`, userData);
-        console.log('sale?');
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -40,8 +39,12 @@ export const loginUser = async (userData) => {
 };
 
 export const logoutUser = async (authToken) => {
-    const response = await axios.post('/api/logout');
     try {
+        const response = await axios.post('api/logout', {}, {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        });
         console.log(response.data.message);
     } catch (error) {
         console.error('Error al cerrar sesión:', error.response.data);
@@ -91,7 +94,7 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
     try {
       const response = await axios.delete(`api/marketplace/${collaborationId}`, collaborationId,{
         headers: {
-        "X-XSRF-TOKEN": Cookies.get("XSRF-TOKEN"), 
+        "X-XSRF-TOKEN": Cookies.get("laravel_session"), 
         Authorization: `Bearer ${authToken}`, 
       },
     });
@@ -114,6 +117,16 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
     }
 };
 
+ 
+export const newProfile = async () => {
+    try {
+        const response = await axios.post(`api/profile`)
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
 export const getCollaborationById = async (collabId) => {
     console.log(collabId);
     try {
@@ -123,3 +136,4 @@ export const getCollaborationById = async (collabId) => {
       throw error.response.data;
     }
   };
+

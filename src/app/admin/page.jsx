@@ -1,6 +1,7 @@
 import React from 'react'
-import ResponsiveDrawer from '../../components/Navigation/ResponsiveDrawer.jsx.jsx'
+import ResponsiveDrawer from '../components/Navigation/ResponsiveDrawer.jsx'
 import CardsGrid from '@/app/components/ProposalCards/CardsGrid.jsx'
+
 
 export default function Marketplace() {
 

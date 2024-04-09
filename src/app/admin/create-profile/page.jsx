@@ -1,0 +1,27 @@
+import { Container, Typography, Button } from '@mui/material'
+import React from 'react'
+import CreateProfileForm from '@/app/components/InfoForms/CreateProfileForm'
+import ImageUpload from '@/app/components/Buttons/ImageUpload'
+
+export default function CreateProfile() {
+  return (
+    <Container>
+      <form>
+        <Typography variant='h1' color="primary" justifyContent='center'>
+            Crear perfil de empresa
+        </Typography>
+
+  
+        <CreateProfileForm />
+
+        
+        <Button
+          type="submit"
+          color="primary"
+          text="guardar"
+          text-uppercase
+          >GUARDAR</Button>
+      </form>
+    </Container>
+  )
+}
