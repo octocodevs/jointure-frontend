@@ -259,11 +259,11 @@ export default function CreateProfileForm() {
     console.log(profileData, "estoy en el");
       /* await axios.get('/sanctum/csrf-cookie'); */
       
+      const token = getAuthToken();
+      console.log(token);
 
       createNewProfile(profileData)
         .then((res) => {
-          const token = getAuthToken();
-          console.log(token);
           router.push("/admin")
           console.log('Profile created', res)
         })
