@@ -3,6 +3,7 @@
 import { Container, TextField, Button, MenuItem, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import ImageUpload from '../Buttons/ImageUpload';
+import axios from 'axios';
 
 
 
@@ -228,7 +229,6 @@ export default function CreateProfileForm() {
   ]
 
 
-  // handleSubmit code not completed yet
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -249,12 +249,9 @@ export default function CreateProfileForm() {
       social_network_instagram: instagram,
       social_network_linkedin: linkedin,
       social_network_x: socialX,
-      social_network_facebook: facebook,
       social_network_tiktok: tiktok,
-      social_network_spotify: spotify,
-      social_network_youtube: youtube,
-      social_network_pinterest: pinterest,
     };
+    console.log(profileData);
 
     try { 
       await axios.get('/sanctum/csrf-cookie');
