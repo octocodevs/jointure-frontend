@@ -131,17 +131,6 @@ export const getprofiles = async () => {
     }
 };
 
-<<<<<<< HEAD
-export const getCollaborationById = async (collabId) => {
-    console.log(collabId);
-    try {
-      const response = await axios.get(`api/collaboration-proposals/${collabId}`);
-      return response.data.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  };
-=======
 export const createNewProfile = async (userData) => {
     try {
         const token = Cookies.get('laravel_session')
@@ -156,4 +145,3 @@ export const createNewProfile = async (userData) => {
         throw error.response;
     }
 };
->>>>>>> 39d6d519e31d08d5acefc2408825feb1756fa940
