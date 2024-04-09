@@ -70,8 +70,6 @@ const LoginInputs = () => {
       return;
     }
 
-    
-      
       loginUser(formData)
         .then((res) => {
           login(res.access_token);
@@ -79,7 +77,7 @@ const LoginInputs = () => {
 
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error);
           if (
             error.response &&
             error.response.data &&
