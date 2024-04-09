@@ -1,11 +1,26 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+// import { useAuthContext } from "@/contexts/authContext";
 
 const urlAPI = "http://localhost:8000/";
+
+// const { logout, getAuthToken } = useAuthContext();
 
 axios.defaults.withCredentials = true;
 
 axios.defaults.baseURL = urlAPI;
+
+// const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:8000/', // Reemplaza con la URL base de tu API
+//     withCredentials: true, // Incluir cookies en las solicitudes
+//   });
+  
+//   // Agregar un interceptor de solicitud para incluir el token CSRF en los encabezados
+//   axiosInstance.interceptors.request.use((config) => {
+//     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+//     config.headers['X-CSRF-TOKEN'] = csrfToken;
+//     return config;
+//   });
 
 export const getCollaborations = async () => {
     try {
@@ -116,6 +131,7 @@ export const getprofiles = async () => {
     }
 };
 
+<<<<<<< HEAD
 export const getCollaborationById = async (collabId) => {
     console.log(collabId);
     try {
@@ -125,3 +141,19 @@ export const getCollaborationById = async (collabId) => {
       throw error.response.data;
     }
   };
+=======
+export const createNewProfile = async (userData) => {
+    try {
+        const token = Cookies.get('laravel_session')
+        const headers = { Authorization: `Bearer ${token}` }; // Configurar el encabezado de autorización
+
+        console.log("entrando", userData);
+        const response = await axios.post(`api/profile`, userData, { headers }); // Incluir los encabezados en la solicitud
+        console.log(response, "saliendo");
+        return response.data;
+    } catch (error) {
+        console.error('Error al crear el perfil', error);
+        throw error.response;
+    }
+};
+>>>>>>> 39d6d519e31d08d5acefc2408825feb1756fa940

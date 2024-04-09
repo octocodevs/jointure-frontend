@@ -4,6 +4,9 @@ import { Container, TextField, Box, Button, MenuItem, Grid } from '@mui/material
 import React, { useState } from 'react';
 import ImageUpload from '../Buttons/ImageUpload';
 import axios from 'axios';
+import { useAuthContext } from '@/contexts/authContext';
+import { createNewProfile } from '../../../../services/axios';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -30,6 +33,8 @@ export default function CreateProfileForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
 
+  const {getAuthToken} = useAuthContext();
+  const router = useRouter();
 
   const legalStructureOptions = [
     {
@@ -255,16 +260,20 @@ export default function CreateProfileForm() {
       social_network_x: socialX,
       social_network_tiktok: tiktok,
     };
-    console.log(profileData);
+    console.log(profileData, "estoy en el");
+      /* await axios.get('/sanctum/csrf-cookie'); */
+      
+      const token = getAuthToken();
+      console.log(token);
 
-    try { 
-      await axios.get('/sanctum/csrf-cookie');
-
-      const response = await axios.post('/api/profile', profileData);
-      console.log('Profile created', response.data)
-    } catch (error) {
-      console.error('Create profile failed', error);
-    }
+      createNewProfile(profileData)
+        .then((res) => {
+          router.push("/admin")
+          console.log('Profile created', res)
+        })
+        .catch ((error) => {
+        console.error('Create profile failed', error);
+    })
   }
   
  
