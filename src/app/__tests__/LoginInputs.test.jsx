@@ -44,10 +44,9 @@ describe("LoginInputs", () => {
   });
 
   test("debe mostrar mensaje de error si la autenticación falla", async () => {
-    // Mockear respuesta de axios cuando se obtiene la cookie CSRF
+    
     axios.get.mockResolvedValueOnce();
   
-    // Mockear respuesta de axios cuando se intenta iniciar sesión y falla
     axios.post.mockRejectedValueOnce({
       response: {
         data: {
