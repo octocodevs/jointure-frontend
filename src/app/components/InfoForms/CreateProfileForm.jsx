@@ -1,6 +1,6 @@
 "use client"
 
-import { Container, TextField, Button, MenuItem, Grid } from '@mui/material';
+import { Container, TextField, Box, Button, MenuItem, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import ImageUpload from '../Buttons/ImageUpload';
 import axios from 'axios';
@@ -27,6 +27,8 @@ export default function CreateProfileForm() {
   const [linkedin, setLinkedin] = useState('');
   const [socialX, setSocialX] = useState('');
   const [tiktok, setTiktok] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
 
 
   const legalStructureOptions = [
@@ -231,6 +233,8 @@ export default function CreateProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormSubmitted(true); 
+
 
     const profileData = {
       image: image,
@@ -265,14 +269,15 @@ export default function CreateProfileForm() {
   
  
   return (
-    <Container>
+    <Container className='mt-8'>
       <form
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-
-        <ImageUpload />
+        <Box className="mb-6">
+          <ImageUpload />
+        </Box>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -286,8 +291,9 @@ export default function CreateProfileForm() {
               color="secondary"
               fullWidth
               required
-              helperText="Escribe tu CIF"
               onChange={(e) => setCifValue(e.target.value)}
+              helperText={formSubmitted && !cifValue ? "Escribe tu CIF" : ""}
+              error={formSubmitted && !cifValue}
             />
           </Grid>
 
@@ -303,7 +309,8 @@ export default function CreateProfileForm() {
               color="primary"
               fullWidth
               required
-              helperText="Escribe tu número de teléfono"
+              helperText={formSubmitted && !phone ? "Escribe tu número de teléfono" : ""}
+              error={formSubmitted && !phone}
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
@@ -318,9 +325,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Escribe tu e-mail de contacto"
           onChange={(e) => setContactMail(e.target.value)}
-
         />
 
         <Grid container spacing={2}>
@@ -334,9 +339,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu Instagram"
               onChange={(e) => setInstagram(e.target.value)}
-
             />
           </Grid>
 
@@ -350,9 +353,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu TikTok"
               onChange={(e) => setTiktok(e.target.value)}
-
             />
           </Grid>
         </Grid>
@@ -368,9 +369,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu X"
               onChange={(e) => setSocialX(e.target.value)}
-
             />
           </Grid>
 
@@ -384,9 +383,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu LinkedIn"
               onChange={(e) => setLinkedin(e.target.value)}
-
             />
           </Grid>
         </Grid>
@@ -403,9 +400,7 @@ export default function CreateProfileForm() {
           fullWidth
           multiline
           rows={4}
-          helperText="Escribe la descripción de tu marca"
           onChange={(e) => setDescription(e.target.value)}
-
         />
 
         <Grid container spacing={2}>
@@ -418,7 +413,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Estructura legal"
-              helperText="Selecciona la estructura legal de tu empresa"
+              helperText={formSubmitted && !legalStructure ? "Selecciona la estructura legal de tu empresa" : ""}
+              error={formSubmitted && !legalStructure}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -441,7 +437,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Sector"
-              helperText="Selecciona el sector al que pertenece tu empresa"
+              helperText={formSubmitted && !sector ? "Selecciona el sector al que pertenece tu empresa" : ""}
+              error={formSubmitted && !sector}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -465,9 +462,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Escribe la actividad de tu empresa"
           onChange={(e) => setActivity(e.target.value)}
-
         />
 
         <TextField
@@ -479,9 +474,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Lista los valores de tu empresa"
           onChange={(e) => setValues(e.target.value)}
-
         />
 
         <Grid container spacing={2}>
@@ -494,7 +487,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Tamaño de la empresa"
-              helperText="Selecciona el tamaño de tu empresa"
+              helperText={formSubmitted && !businessSize ? "Selecciona el tamaño de tu empresa" : ""}
+              error={formSubmitted && !businessSize}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -516,7 +510,6 @@ export default function CreateProfileForm() {
               id="market"
               select
               label="Mercado"
-              helperText="Selecciona el mercado de tu empresa"
               variant="outlined"
               color="secondary"
               fullWidth
@@ -541,7 +534,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Canal de venta"
-              helperText="Selecciona el canal de venta de tu empresa"
+              helperText={formSubmitted && !salesChannels ? "Selecciona el canal de venta de tu empresa" : ""}
+              error={formSubmitted && !salesChannels}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -564,7 +558,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Clientes"
-              helperText="Selecciona el modelo de clientes de tu empresa"
+              helperText={formSubmitted && !clients ? "Selecciona el modelo de clientes de tu empresa" : ""}
+              error={formSubmitted && !clients}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -583,7 +578,12 @@ export default function CreateProfileForm() {
           type="submit"
           color="primary"
           variant="contained"
-          >
+          sx={{
+            margin: 'auto',
+            marginTop: 6,
+            marginBottom: 8,
+            display: 'block'
+          }}         >
           GUARDAR
           </Button>
 
