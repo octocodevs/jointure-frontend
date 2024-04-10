@@ -20,8 +20,12 @@ This [user flow diagram](https://whimsical.com/web-jointure-HPxbvzLT6opPSX7vJjeB
 - [Developers](#developers)
 
 ## Requirements
+
 - Visual Studio Code
-- Node.js, Composer, and xampp or mamp installed on your device
+- Node.js 
+- Composer
+- Xampp or mamp
+
 
 ## Technologies:
 
