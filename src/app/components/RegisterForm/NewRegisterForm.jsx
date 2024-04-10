@@ -84,6 +84,10 @@ export default function Form() {
         setCompanyValue(event.target.value);
     };
 
+    const handleLoginSuccess = (userId) => {
+        localStorage.setItem("user_id", userId)
+    }
+
     const handleSubmit = async () => {
 
 
@@ -102,6 +106,7 @@ export default function Form() {
         
         registerNewUser(userData).then((res) => {
             login(res.access_token);
+            handleLoginSuccess(res.user.id);
             router.push("/admin/create-profile");
         })
             .catch((error) => {
