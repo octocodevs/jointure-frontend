@@ -35,9 +35,6 @@ const LoginInputs = () => {
     }));
   };
 
-  // useEffect(() => {
-
-  // }, [formData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,20 +72,20 @@ const LoginInputs = () => {
         login(res.access_token);
         route.push("/admin");
 
-      })
-      .catch((error) => {
-        console.log(error);
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          setErrorMessages(error.response.data.errors);
-        } else {
-          setErrorMessages({ general: "Email o contraseña incorrecto" });
-        }
-      });
-
+        })
+        .catch((error) => {
+          console.log(error);
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            setErrorMessages(error.response.data.errors);
+          } else {
+            setErrorMessages({ general: "Email o contraseña incorrecto" });
+          }
+        });
+    
   };
 
   return (

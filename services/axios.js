@@ -37,8 +37,12 @@ export const loginUser = async (userData) => {
 };
 
 export const logoutUser = async (authToken) => {
-    const response = await axios.post('/api/logout');
     try {
+        const response = await axios.post('api/logout', {}, {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        });
         console.log(response.data.message);
     } catch (error) {
         console.error('Error al cerrar sesión:', error.response.data);
