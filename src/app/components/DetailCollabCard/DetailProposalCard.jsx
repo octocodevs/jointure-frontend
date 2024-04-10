@@ -59,7 +59,7 @@ export default function DetailProposalCard() {
         flexDirection: { xs: 'column', sm: 'row' },
       }}
       >
-      <Img src="/img/donuts-logo.jpg" alt="croissants" />
+      <Img src={data && data.image} alt="Imagen de la propuesta" />
         
         <Box
           sx={{
