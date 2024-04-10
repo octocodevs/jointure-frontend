@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from 'react';
 import { getCollaborationById } from '../../../../services/axios.js';
 import styled from "@emotion/styled";
-import { Container, Paper, Typography } from "@mui/material";
+import { Container, Paper, Typography, CardMedia } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomChip from "../Buttons/CustomChip.jsx";
 
@@ -29,10 +29,8 @@ export default function DetailProposalCard() {
     fetchData(pathname[3]);
   }, []);
 
-
  
   const Img = styled('img')({
-    width: 320,
     height: '100%',
     objectFit: 'cover',
     objectPosition: 'center',
@@ -50,25 +48,37 @@ export default function DetailProposalCard() {
       <Paper
       sx={{
         
-        width: '100%',
-        display: 'flex',
-        mt: 5,
-        alignItems: 'center',
-        gap: 2,
-        overflow: 'hidden',
-        flexDirection: { xs: 'column', sm: 'row' },
+         width: '100%',
+          display: 'flex',
+          mt: 5,
+          gap: 2,
+          overflow: 'hidden',
+          flexDirection: { xs: 'column', sm: 'row' },
       }}
       >
-      <Img src={data && data.image} alt="Imagen de la propuesta" />
-        
+
+      <CardMedia
+      sx={{
+        width: { sm: '40%' },
+        flexShrink: 0,
+      }}
+      >
+        <Img src={data && data.image} alt="Imagen de la propuesta" />
+      </CardMedia>
+
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: 2,
+            padding: 2,
           }}
         >
-            <Typography variant="h4">{data && data.brand}</Typography>
+            <Typography variant="h4"
+            sx={{
+              fontWeight: 700,
+            }}
+            >{data && data.brand}</Typography>
             <Typography variant="h5">{data && data.title}</Typography>
             <Typography variant="body1">
               {data && data.description}
