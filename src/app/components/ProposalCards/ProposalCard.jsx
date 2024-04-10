@@ -29,7 +29,7 @@ export default function ProposalCard({ card }) {
     WebkitBoxOrient: "vertical",
   };
 
-  
+
   return (
     <div>
       <Card elevation={2} className="max-w-xs h-auto">
@@ -40,7 +40,6 @@ export default function ProposalCard({ card }) {
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
             sx={{ objectFit: "cover" }}
-
           />
         </CardMedia>
         <CardHeader
@@ -85,25 +84,25 @@ export default function ProposalCard({ card }) {
           </Typography>
         </CardContent>
         <Box
-  sx={{
-    paddingBottom: 2,
-    paddingLeft: 1,
-  }}
->
-  <Link href={`/admin/proposaldetail/${card.id}`} passHref>
-    <Button
-      sx={{
-        margin: 1,
-      }}
-      variant="outlined"
-      color="primary"
-      size="small"
-      component="a"
-    >
-      Ver más
-    </Button>
-  </Link>
-</Box>
+          sx={{
+            paddingBottom: 2,
+            paddingLeft: 1,
+          }}
+        >
+          <Link href={`/admin/proposaldetail/${card.id}`} passHref>
+            <Button
+              sx={{
+                margin: 1,
+              }}
+              variant="outlined"
+              color="primary"
+              size="small"
+              component="a"
+            >
+              Ver más
+            </Button>
+          </Link>
+        </Box>
       </Card>
     </div>
   );

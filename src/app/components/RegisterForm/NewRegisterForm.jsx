@@ -84,6 +84,10 @@ export default function Form() {
         setCompanyValue(event.target.value);
     };
 
+    const handleLoginSuccess = (userId) => {
+        localStorage.setItem("user_id", userId)
+    }
+
     const handleSubmit = async () => {
 
 
@@ -102,7 +106,8 @@ export default function Form() {
         
         registerNewUser(userData).then((res) => {
             login(res.access_token);
-            router.push("/admin");
+            handleLoginSuccess(res.user.id);
+            router.push("/admin/create-profile");
         })
             .catch((error) => {
                 console.error('Login failed:', error);
@@ -293,7 +298,7 @@ export default function Form() {
                     className="text-center"
                     variant="body1">
                     ¿Ya tienes una cuenta?
-                    <Link href="/admin/login">
+                    <Link href="/">
                         <span className="text-[#46A9B6] font-bold">
                             Inicia sesión aquí
                         </span>

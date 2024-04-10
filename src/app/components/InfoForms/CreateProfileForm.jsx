@@ -1,8 +1,12 @@
 "use client"
 
-import { Container, TextField, Button, MenuItem, Grid } from '@mui/material';
+import { Container, TextField, Box, Button, MenuItem, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import ImageUpload from '../Buttons/ImageUpload';
+import axios from 'axios';
+import { useAuthContext } from '@/contexts/authContext';
+import { createNewProfile } from '../../../../services/axios';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -24,9 +28,11 @@ export default function CreateProfileForm() {
   const [description, setDescription] = useState('');
   const [instagram, setInstagram] = useState('');
   const [linkedin, setLinkedin] = useState('');
-  const [socialX, setsocialX] = useState('');
+  const [socialX, setSocialX] = useState('');
   const [tiktok, setTiktok] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const router = useRouter();
 
   const legalStructureOptions = [
     {
@@ -228,57 +234,66 @@ export default function CreateProfileForm() {
   ]
 
 
-  // handleSubmit code not completed yet
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
 
+    const profileData = new FormData();
 
-    const profileData = {
-      image: image,
-      CIF: cifValue,
-      legal_structure: legalStructure,
-      phone_number: phone,
-      email_contact: contactMail,
-      sector: sector,
-      activity: activity,
-      values: values,
-      business_size: businessSize,
-      market: market,
-      clients: clients,
-      sales_channel: salesChannels,
-      description: description,
-      social_network_instagram: instagram,
-      social_network_linkedin: linkedin,
-      social_network_x: socialX,
-      social_network_facebook: facebook,
-      social_network_tiktok: tiktok,
-      social_network_spotify: spotify,
-      social_network_youtube: youtube,
-      social_network_pinterest: pinterest,
+    profileData.append('CIF', cifValue);
+    profileData.append('legal_structure', legalStructure);
+    profileData.append('phone_number', phone);
+    profileData.append('email_contact', contactMail);
+    profileData.append('sector', sector);
+    profileData.append('activity', activity);
+    profileData.append('values', values);
+    profileData.append('business_size', businessSize);
+    profileData.append('market', market);
+    profileData.append('clients', clients);
+    profileData.append('sales_channels', salesChannels);
+    profileData.append('description', description);
+    profileData.append('social_network_instagram', instagram);
+    profileData.append('social_network_linkedin', linkedin);
+    profileData.append('social_network_x', socialX);
+    profileData.append('social_network_tiktok', tiktok);
 
-    };
+    
+    profileData.append('image', image);
 
-    axios.get('/sanctum/csrf-cookie').then(response => {
-      registerNewProfile(profileData).then((res) => {
-
-        router.push("/admin");
-        router.refresh()
+    createNewProfile(profileData)
+      .then((res) => {
+        router.push("/admin")
       })
-        .catch((error) => {
-          console.error('Create profile failed:', error);
+      .catch((error) => {
+        console.error('Create profile failed', error);
+      })
+  }
 
-        })
-    })
-  };
 
   return (
-    <Container>
+    <Container className='mt-8'>
       <form
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
       >
+        <Box className="mb-6">
+          <TextField
+            sx={{
+              margin: '1rem',
+            }}
+            id="image"
+            label="sube tu imagen"
+            type="file"
+            fullWidth
+            required
+            variant="outlined"
+            color="primary"
+            InputLabelProps={{ shrink: true }}
+            onChange={(e) => setImage(e.target.files[0])}
 
-        <ImageUpload />
+          />
+        </Box>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -292,8 +307,9 @@ export default function CreateProfileForm() {
               color="secondary"
               fullWidth
               required
-              helperText="Escribe tu CIF"
               onChange={(e) => setCifValue(e.target.value)}
+              helperText={formSubmitted && !cifValue ? "Escribe tu CIF" : ""}
+              error={formSubmitted && !cifValue}
             />
           </Grid>
 
@@ -309,7 +325,8 @@ export default function CreateProfileForm() {
               color="primary"
               fullWidth
               required
-              helperText="Escribe tu número de teléfono"
+              helperText={formSubmitted && !phone ? "Escribe tu número de teléfono" : ""}
+              error={formSubmitted && !phone}
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
@@ -324,9 +341,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Escribe tu e-mail de contacto"
-          onChange={(e) => setDescription(e.target.value)}
-
+          onChange={(e) => setContactMail(e.target.value)}
         />
 
         <Grid container spacing={2}>
@@ -340,9 +355,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu Instagram"
               onChange={(e) => setInstagram(e.target.value)}
-
             />
           </Grid>
 
@@ -356,9 +369,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu TikTok"
               onChange={(e) => setTiktok(e.target.value)}
-
             />
           </Grid>
         </Grid>
@@ -374,9 +385,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu X"
               onChange={(e) => setSocialX(e.target.value)}
-
             />
           </Grid>
 
@@ -390,9 +399,7 @@ export default function CreateProfileForm() {
               variant="outlined"
               color="secondary"
               fullWidth
-              helperText="Escribe el link a tu LinkedIn"
               onChange={(e) => setLinkedin(e.target.value)}
-
             />
           </Grid>
         </Grid>
@@ -409,9 +416,7 @@ export default function CreateProfileForm() {
           fullWidth
           multiline
           rows={4}
-          helperText="Escribe la descripción de tu marca"
           onChange={(e) => setDescription(e.target.value)}
-
         />
 
         <Grid container spacing={2}>
@@ -424,7 +429,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Estructura legal"
-              helperText="Selecciona la estructura legal de tu empresa"
+              helperText={formSubmitted && !legalStructure ? "Selecciona la estructura legal de tu empresa" : ""}
+              error={formSubmitted && !legalStructure}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -447,7 +453,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Sector"
-              helperText="Selecciona el sector al que pertenece tu empresa"
+              helperText={formSubmitted && !sector ? "Selecciona el sector al que pertenece tu empresa" : ""}
+              error={formSubmitted && !sector}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -471,9 +478,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Escribe la actividad de tu empresa"
           onChange={(e) => setActivity(e.target.value)}
-
         />
 
         <TextField
@@ -485,9 +490,7 @@ export default function CreateProfileForm() {
           variant="outlined"
           color="secondary"
           fullWidth
-          helperText="Lista los valores de tu empresa"
           onChange={(e) => setValues(e.target.value)}
-
         />
 
         <Grid container spacing={2}>
@@ -500,7 +503,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Tamaño de la empresa"
-              helperText="Selecciona el tamaño de tu empresa"
+              helperText={formSubmitted && !businessSize ? "Selecciona el tamaño de tu empresa" : ""}
+              error={formSubmitted && !businessSize}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -522,7 +526,6 @@ export default function CreateProfileForm() {
               id="market"
               select
               label="Mercado"
-              helperText="Selecciona el mercado de tu empresa"
               variant="outlined"
               color="secondary"
               fullWidth
@@ -547,7 +550,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Canal de venta"
-              helperText="Selecciona el canal de venta de tu empresa"
+              helperText={formSubmitted && !salesChannels ? "Selecciona el canal de venta de tu empresa" : ""}
+              error={formSubmitted && !salesChannels}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -570,7 +574,8 @@ export default function CreateProfileForm() {
               select
               required
               label="Clientes"
-              helperText="Selecciona el modelo de clientes de tu empresa"
+              helperText={formSubmitted && !clients ? "Selecciona el modelo de clientes de tu empresa" : ""}
+              error={formSubmitted && !clients}
               variant="outlined"
               color="secondary"
               fullWidth
@@ -585,17 +590,19 @@ export default function CreateProfileForm() {
           </Grid>
         </Grid>
 
-
-
-
-        {/*         <OptionsSection />
- */}
         <Button
           type="submit"
           color="primary"
-          text="guardar"
-          text-uppercase
-        ></Button>
+          variant="contained"
+          sx={{
+            margin: 'auto',
+            marginTop: 6,
+            marginBottom: 8,
+            display: 'block'
+          }}         >
+          GUARDAR
+        </Button>
+
       </form>
     </Container>
   )

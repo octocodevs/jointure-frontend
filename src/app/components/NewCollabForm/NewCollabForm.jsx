@@ -178,15 +178,15 @@ export default function NewCollabForm() {
 
         };
         console.log(userData);
-        createNewCollab(userData).then((res) => {
-        console.log(res)
-            // login(res.access_token);
-            router.push("/admin");
-        })
-            .catch((error) => {
-                console.error('Login failed:', error);
+        // createNewCollab(userData).then((res) => {
+        // console.log(res)
+        //     // login(res.access_token);
+        //     router.push("/admin");
+        // })
+        //     .catch((error) => {
+        //         console.error('Login failed:', error);
 
-            })
+        //     })
     };
 
     return (

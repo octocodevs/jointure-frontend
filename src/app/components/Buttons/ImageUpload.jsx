@@ -1,23 +1,46 @@
-import React from 'react';
-import { Button, Box, Typography } from '@mui/material';
+'use client'
+
+import { useState } from 'react';
+import { Button, Box, Typography, TextField } from '@mui/material';
 import { CloudUpload } from '@mui/icons-material';
 
 export default function ImageUpload() {
+    const [imageValue, setImageValue] = useState('');
+
+    const handleImageChange = (event) => {
+        setImageValue(event.target.value);
+    };
+    const handleUploadClick = () => {
+        document.getElementById('fileInput').click();
+    };
     return (
         <Box className="flex flex-col items-center">
+            <TextField
+                    sx={{
+                        margin: '1rem',
+                    }}
+                    id="image"
+                    label="sube tu imagen"
+                    type="file"
+                    fullWidth
+                    required
+                    variant="outlined"
+                    color="primary"
+                    InputLabelProps={{ shrink: true }}
+                    value={imageValue}
+                    onChange={handleImageChange}
+                    
+                />
             <Button
                 component="label"
                 role={undefined}
                 variant="contained"
                 tabIndex={-1}
                 startIcon={<CloudUpload />}
-                type="submit"
                 color="primary"
-                text-uppercase
-
+                onClick={handleUploadClick}
             >
                 Haz click aquí
-
             </Button>
 
             <Box className="flex flex-col mt-4">
