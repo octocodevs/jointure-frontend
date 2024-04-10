@@ -4,6 +4,8 @@
 
 Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. Alongside [this backend repository](https://github.com/octocodevs/jointure-backend/tree/main), this fullstack project involves the creation of a responsive website that allows users to explore, create, and manage collaborations. 
 
+This [user flow diagram](https://whimsical.com/web-jointure-HPxbvzLT6opPSX7vJjeBSZ) demonstrates the user's path from the existing [Jointure website](https://jointurenow.myshopify.com/) to the platform designed and implemented in this project. 
+
 ![Marketplace view](./public/img/marketplace2.png)
 
 ## Table of Contents
