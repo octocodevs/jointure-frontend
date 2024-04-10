@@ -29,7 +29,9 @@ export default function DetailProposalCard() {
     fetchData(pathname[3]);
   }, []);
 
- 
+
+  const URL_IMG = 'http://localhost:8000/storage';
+
   const Img = styled('img')({
     height: '100%',
     objectFit: 'cover',
@@ -63,7 +65,9 @@ export default function DetailProposalCard() {
         flexShrink: 0,
       }}
       >
-        <Img src={data && data.image} alt="Imagen de la propuesta" />
+        <Img 
+        src={data && data.image && (data.image.startsWith('http') ? data.image : `${URL_IMG}/${data.image}`)} alt="Imagen de la propuesta" 
+        />
       </CardMedia>
 
         <Box
@@ -78,7 +82,9 @@ export default function DetailProposalCard() {
             sx={{
               fontWeight: 700,
             }}
-            >{data && data.brand}</Typography>
+            >
+            {data && data.brand}
+            </Typography>
             <Typography variant="h5">{data && data.title}</Typography>
             <Typography variant="body1">
               {data && data.description}
@@ -92,7 +98,6 @@ export default function DetailProposalCard() {
         <CustomChip backgroundColor="#06ABDC" label={data && data.collab_type} />
         </Box>
       </Box>
-        
       </Paper>
       </>
       </Container>
