@@ -1,8 +1,6 @@
 import React from 'react'
 import ProfileData from '@/app/components/Profile/ProfileData'
-import Divider from '@mui/material/Divider';
-import { Box, Container, List } from '@mui/material';
-import IndividualProfile from '@/app/components/Profile/IndividualProfile';
+import { Box } from '@mui/material';
 import CenteredTabs from '@/app/components/Profile/ProfileTabs';
 import ResponsiveDrawer from '@/app/components/Navigation/ResponsiveDrawer.jsx';
 

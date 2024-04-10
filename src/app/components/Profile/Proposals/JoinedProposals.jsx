@@ -1,43 +1,16 @@
-'use client'
-import React from 'react'
-import { Box, Grid } from '@mui/material'
-import ProposalCard from '../../ProposalCards/ProposalCard';
-import { useState,useEffect } from 'react';
-import { getCollaborations } from '../../../../../services/axios';
+import { Typography, Box } from '@mui/material';
+import React from 'react';
+import ConstructionIcon from '@mui/icons-material/Construction';
 
 
-export default function JoinedProposals () {
-
-  const [cards, setCards] = useState([]);
-  
-  useEffect(() => {
-    const fetchData = async() => {
-      try{
-        const response = await getCollaborations();
-        setCards(response);
-      }catch(error){
-        console.error('Error fetching data:', error);
-      }
-    } 
-    fetchData();
-  }, []);
+export default function JoinedProposals() {
 
   return (
-    <Box sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '2rem',
-        padding: '2rem',
-            }}>
-            <Grid container>
-              {cards.map(card => (
-                <Grid key={card.id} xs={12} md={6} lg={4}>
-                  <Box sx={{ padding: '1rem' }}>
-                    <ProposalCard card={card} />
-                  </Box>
-                </Grid>
-              ))} 
-            </Grid>
-        </Box>
+    <Box className="flex justify-center items-center flex-col h-auto mt-12">
+      <Box>
+        <ConstructionIcon sx={{ color: '#60b7c2', fontSize: '5rem' }} />
+      </Box>
+      <Typography variant='h2'>En construcción</Typography>
+    </Box>
   )
 }

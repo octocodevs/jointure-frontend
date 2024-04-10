@@ -186,8 +186,8 @@ export default function NewCollabForm() {
 
     return (
         <Container overflow="auto" className='pb-20 '>
-            <Typography variant="h2" align="center">Crear propuesta de Colaboración</Typography>
-            <Box className='px-16 pt-12' overflow="auto" >
+            <Typography variant="h2" className="text-center" align="center">Crear propuesta de Colaboración</Typography>
+            <Box className=' px-1 overflow-auto pt-8 md:px-16 md:pt-12 lg:px-16 lg:pt-12' >
                 <form
                     noValidate
                     autoComplete="off"

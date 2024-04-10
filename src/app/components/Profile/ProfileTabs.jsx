@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Container } from '@mui/material';
 import CreatedProposals from './Proposals/CreatedProposals';
+import InProgressCollabs from './Proposals/InProgressCollabs';
+import JoinedProposals from './Proposals/JoinedProposals';
 
 export default function CenteredTabs() {
     const [value, setValue] = React.useState(0);
@@ -16,8 +18,15 @@ export default function CenteredTabs() {
   
     return (
       <Container>
-        <Box sx={{ bgcolor: 'background.paper' }}>
-          <Tabs value={value} onChange={handleChange} centered>
+        <Box sx={{ bgcolor: 'background.paper',overflowX: 'auto' }} >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          centered
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+        >
             <Tab label="Propuestas creadas" />
             <Tab label="Propuestas sumadas" />
             <Tab label="Colaboraciones en marcha" />
@@ -26,10 +35,10 @@ export default function CenteredTabs() {
             <CreatedProposals />
           )}
           {value === 1 && (
-            <Box> Contenido de "Colaboraciones sumadas" Añadir componente "JoinedProposals"</Box>
+            <InProgressCollabs />
           )}
           {value === 2 && (
-            <Box>Contenido de "Colaboraciones en marcha", Añadir componente "InProgressCollabs"</Box>
+            <JoinedProposals />
           )}
         </Box>
       </Container>
