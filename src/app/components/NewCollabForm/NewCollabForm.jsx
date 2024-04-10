@@ -37,11 +37,11 @@ export default function NewCollabForm() {
     const [termsAndConditionsValue, setTermsAndConditionsValue] = useState('');
     const [observationsValue, setObservationsValue] = useState('');
     const [publicOrPrivate, setPublicOrPrivate] = useState('');
-    const [collabLimitChecked, setCollabLimitChecked] = React.useState(0);
+    const [collabLimitChecked, setCollabLimitChecked] = React.useState(false);
     const [limitValue, setLimitValue] = useState('');
     const [adStartDate, setAdStartDate] = useState('');
     const [adEndDate, setAdEndDate] = useState('');
-    const [sendNotification, setSendNotification] = useState(0);
+    const [sendNotification, setSendNotification] = useState(false);
 
     const handleBrandChange = (event) => {
         setBrandValue(event.target.value);

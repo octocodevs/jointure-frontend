@@ -40,7 +40,7 @@ export default function ProposalCard({ card }) {
             height={400}
             alt={`Imagen acerca de ${card.brand}`}
             sx={{ objectFit: "cover" }}
-            src={ card.image}
+
           />
         </CardMedia>
         <CardHeader
