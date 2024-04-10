@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { getProfileById } from '../../../../services/axios.js';
+import { getCollaborationById } from '../../../../services/axios.js';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -53,10 +53,10 @@ export default function ProposalDetailData() {
   useEffect(() => {
     const fetchData = async () => {
       const pathname = window.location.pathname;
-      const userId = pathname.split("/").pop();
+      const collabId = pathname.split("/").pop();
 
       try {
-        const data = await getProfileById(userId);
+        const data = await getCollaborationById(collabId);
         setData(data);
       } catch (error) {
         console.error(error);
@@ -84,7 +84,7 @@ export default function ProposalDetailData() {
                 <ListItem />,
                 <BusinessIcon />,
                 "Sector",
-                data && data.sector
+                data && data.user.profile.sector
               )}
               {generate(
                 <ListItem />,
@@ -96,19 +96,19 @@ export default function ProposalDetailData() {
                 <ListItem />,
                 <StorefrontIcon />,
                 "Canales de venta",
-                data && data.sales_channels
+                data && data.user.profile.sales_channels
               )}
               {generate(
                 <ListItem />,
                 <FavoriteIcon />,
                 "Valores",
-                data && data.values
+                data && data.user.profile.values
               )}
               {generate(
                 <ListItem />,
                 <DescriptionIcon />,
                 "Descripción",
-                data && data.description
+                data && data.user.profile.description
               )}
             </List>
           </Demo>
