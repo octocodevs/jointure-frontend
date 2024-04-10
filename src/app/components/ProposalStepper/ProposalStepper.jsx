@@ -98,7 +98,7 @@ export default function ProposalStepper() {
           {activeStep === 1 && <div>
             <ProposalDetailBrandData />
           </div>}
-          {activeStep === 2 && <Typography>¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado.
+          {activeStep === 2 && <Typography sx={{ mt: 3, mb: 1, pl: 2, }}>¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado.
           </Typography>}
             
           
