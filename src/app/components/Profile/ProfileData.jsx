@@ -48,7 +48,7 @@ export default function ProfileData() {
                         />
                     </Box>
 
-                    <Box className="pt-5 p-8">
+                    <Box className="pt-5 p-8 w-2/4">
                         <Typography variant="h3">Nombre de la empresa</Typography>
                         <Typography variant="caption">{profileData.user.business_name}</Typography>
                         <Divider variant="inset" component="" sx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }}/>
@@ -61,14 +61,14 @@ export default function ProfileData() {
                         <Typography variant="caption">{profileData.description}</Typography>
                     </Box>
 
-                    <Box className="pt-5 p-8">
+                    <Box className="pt-5 p-8 w-3/4">
                         <Typography variant="h3">Sector</Typography>
                         <Typography variant="caption">{profileData.sector}</Typography>
                         <Divider variant="inset" component="" sx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }} />
 
                         <Typography variant="h3">Tipo de negocio</Typography>
                         <Typography variant="caption">{profileData.legal_structure}</Typography>
-                        <Divider variant="inset" component="" ssx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }} />
+                        <Divider variant="inset" component="" ssx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0, marginBottom:1}} />
 
                         <Typography variant="h3">Redes sociales</Typography>
                         <Typography variant="caption">
