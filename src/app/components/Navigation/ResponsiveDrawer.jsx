@@ -33,7 +33,7 @@ export default function ResponsiveDrawer(props) {
 
   const menuItems = [
     { text: 'Inicio', icon: <HomeRounded />, href: 'http://localhost:3000/admin' },
-    { text: 'Mi profile', icon: <PeopleRounded />, href: 'http://localhost:3000/admin/profile'},
+    { text: 'Mi perfil', icon: <PeopleRounded />, href: 'http://localhost:3000/admin/profile'},
     { text: 'Crear propuesta', icon: <NoteAddRounded />, href: 'http://localhost:3000/admin/newcollab' },
     { text: 'Desconectarse', icon: <LogoutRounded />, action: handleLogout },
   ];

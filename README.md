@@ -2,29 +2,45 @@
 
 ![Jointure Logo](./public/img/jointure-logo.png)
 
-Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. This README provides an overview of the project's structure, technologies used, features, installation instructions, and contribution details.
+Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. Alongside [this back-end repository](https://github.com/octocodevs/jointure-backend/tree/main), this fullstack project involves the creation of a responsive website that allows users to explore, create, and manage collaborations. 
 
-## 📌 Requirements
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Technologies](#technologies)
+- [Frontend File Structure](#frontend-file-structure)
+- [Features](#features)
+- [Installation](#installation)
+- [Backend Repo](#backend-link)
+- [Running Tests](#running-tests)
+- [Demo](#demo)
+- [Developers](#developers)
+
+## Requirements
 - Visual Studio Code
-- Node.js installed on the computer
+- Node.js and Composer installed on your device
 
-## 🚀 Technologies Used:
+## Technologies:
 
 - Frontend:
-  - Node.Js -> ^20.0.0
+  - Node.Js -> 20.0.0
   - Next.js -> 14.1.4
-  - React.js -> v. 18.0.0
+  - React.js -> 18.0.0
   - Tailwind CSS -> 3.3.0
   - Material-UI (MUI) -> 5.15.11
   - Axios -> 1.6.8
   - Jest -> 29.7.0
   - Cypress -> 13.7.2
-- Backend:
-  - PHP -> ^8.0
-  - Laravel -> ^10.0.0
-  - PHPUnit -> ^7.1
 
-## 📁 Frontend File Structure:
+- Backend:
+  - PHP -> 8.0
+  - Laravel -> 10.0.0
+  - PHPUnit -> 7.1
+  - Composer -> 2.6.6
+  - MySQL -> 8.0
+  - Sanctum -> 3.3
+
+## Frontend File Structure:
 
 - **.next:** Auto-generated files by Next.js during the build process.
 - **/node_modules:** Dependencies managed by npm.
@@ -35,23 +51,23 @@ Jointure is a platform that automates collaborations between brands from various
       - **/login:** Login related components and pages.
       - **/register:** Register related components and pages.
       - **/marketplace:** Components and pages related to the marketplace.
-      - **/newcollab:** Components and pages related to creating a new collaboration.
+      - **/newcollab:** Components and pages related to creating a new collaboration proposal.
       - **/inbox:** Components and pages related to the user's inbox.
     - **/components:** Reusable UI components used across the application.
       - **/MUI:** Material-UI components.
     - **/services:** Axios API integration and other services.
   - **/pages:** Main application pages.
 
-## 📚 Features:
+## Features:
 
 - **Marketplace:** Display collaborations from various users.
 - **User Authentication:** Login and registration functionalities.
-- **Create Collaboration:** Users can create and publish collaboration posts.
+- **Create Collaboration Proposal:** Users can create and publish collaboration proposal posts.
 - **Inbox:** View incoming and pending collaboration proposals.
 - **Search Functionality:** Search collaborations by name.
 - **Responsive Design:** Optimized for desktop and mobile devices.
 
-## ⚙️ Installation
+## Installation
 This repository is the Frontend where the visual part of the website is located. To install it on your computer, follow these steps:
 
 1. Clone the repository:
@@ -70,15 +86,7 @@ This repository is the Frontend where the visual part of the website is located.
     npm run dev
     ```
 
-> [!IMPORTANT]
->
-> ## 🚨 Backend Repository
-This Frontend repository can be used with any Backend. Here is the link to our Backend repository if you want to use it with this Frontend:
-
-🔗 [Backend link ](https://github.com/octocodevs/jointure-backend) 🔗
-
-
-## 🧪 Running Tests
+## Running Tests
 
 To run tests, run the following command
 
@@ -88,29 +96,25 @@ To run tests, run the following command
 
 ## Demo
 
-![Login view](./public/img/login.png)
+![Login](./public/img/login.png)
 ![Marketplace view](./public/img/marketplace.png)
-![Profile view](./public/img/profile.png)
+![Marketplace view](./public/img/marketplace2.png)
+![Profile](./public/img/profile.png)
 
 
-## 👩‍💻 Developers
+## Developers
 
-**Front-end Team:**
+[Stephanie Céspedes](https://www.linkedin.com/in/stephanie-cespedes/) <br>
+[Vicki Robertson](https://www.linkedin.com/in/vickirobertson/) <br>
+[Grecia Landazuri](https://www.linkedin.com/in/grecialh/) <br>
+[Carolina Delfa](https://www.linkedin.com/in/carolina-delfa-silvestre/) <br>
+[Gabriela Irimia](https://www.linkedin.com/in/gabriela-irimia/) <br>
+[Zohra Bellamine](https://www.linkedin.com/in/z-bellamine/) <br>
+[Melissa Casola](https://www.linkedin.com/in/melissa-casola/) <br>
+[Laura Artaza](https://www.linkedin.com/in/laura-artaza/) <br>
 
-Stephanie Céspedes - [Linkedin profile](https://www.linkedin.com/in/stephanie-cespedes/)
 
-Grecia Landazuri - [Linkedin profile](https://www.linkedin.com/in/grecialh/)
+---
 
-Carolina Delfa - [Linkedin profile](https://www.linkedin.com/in/carolina-delfa-silvestre/)
+Back to: [Table of Contents](#table-of-contents)
 
-Vicki Robertson - [Linkedin profile](https://www.linkedin.com/in/vickirobertson/)
-
-Gabriela Irimia  - [Linkedin profile](https://www.linkedin.com/in/gabriela-irimia/)
-
-**Back-end Team:**
-
-Zohra Bellamine - [Linkedin profile](https://www.linkedin.com/in/z-bellamine/)
-
-Melissa Casola - [Linkedin profile](https://www.linkedin.com/in/melissa-casola/)
-
-Laura Artaza -[Linkedin profile](https://www.linkedin.com/in/laura-artaza/)
