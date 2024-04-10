@@ -1,17 +1,20 @@
 
 'use client'
-import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, TextField, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Container, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material'
 import React from 'react'
 import BasicSelect from '../Mui/inputs/BasicSelect'
-import CheckboxLabels from '../Mui/inputs/Checkbox'
-import Link from 'next/link'
 import { KeyboardArrowRight } from '@mui/icons-material'
 import { useState } from 'react'
+import { createNewCollab } from "../../../../services/axios";
+// import { useAuthContext } from '@/contexts/authContext';
+import { useRouter } from 'next/navigation';
 
 
 
-export default function NewCollabForm (){
+export default function NewCollabForm() {
 
+    const router = useRouter();
+    // const {login} = useAuthContext()
     const [brandValue, setBrandValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
@@ -20,6 +23,8 @@ export default function NewCollabForm (){
     const [collabEndDate, setCollabEndDate] = useState('');
     const [collabType, setCollabType] = useState('');
     const [duration, setDuration] = useState('');
+    const [compensationValue, setCompensationValue] = useState('');
+    const [compensationAmountValue, setCompensationAmountValue] = useState('');
     const [costValue, setCostValue] = useState('');
     const [objectivesValue, setObjectivesValue] = useState('');
     const [idealCollaboratorsValue, setIdealCollaboratorsValue] = useState('');
@@ -32,7 +37,7 @@ export default function NewCollabForm (){
     const [termsAndConditionsValue, setTermsAndConditionsValue] = useState('');
     const [observationsValue, setObservationsValue] = useState('');
     const [publicOrPrivate, setPublicOrPrivate] = useState('');
-    const [collabLimitValue, setCollabLimitValue] = useState('');
+    const [collabLimitChecked, setCollabLimitChecked] = React.useState(false);
     const [limitValue, setLimitValue] = useState('');
     const [adStartDate, setAdStartDate] = useState('');
     const [adEndDate, setAdEndDate] = useState('');
@@ -50,9 +55,9 @@ export default function NewCollabForm (){
         setDescriptionValue(event.target.value);
     };
 
-    const handleImageChange = (event) => {
-        setImageValue(event.target.value);
-    };
+    // const handleImageChange = (event) => {
+    //     setImageValue(event.target.files[0]);
+    // };
 
     const handleCollabStartDateChange = (event) => {
         setCollabStartDate(event.target.value);
@@ -62,12 +67,12 @@ export default function NewCollabForm (){
         setCollabEndDate(event.target.value);
     };
 
-    const handleCollabTypeChange = (event) => {
-        setCollabType(event.target.value);
+    const handleCompensationValueChange = (event) => {
+        setCompensationValue(event.target.value);
     };
 
-    const handleDurationChange = (event) => {
-        setDuration(event.target.value);
+    const handleCompensationAmountValueChange = (event) => {
+        setCompensationAmountValue(event.target.value);
     };
 
     const handleCostChange = (event) => {
@@ -114,12 +119,12 @@ export default function NewCollabForm (){
         setObservationsValue(event.target.value);
     };
 
-    const handlePublicOrPrivateChange = (event) => {
-        setPublicOrPrivate(event.target.value);
-    };
+    // const handlePublicOrPrivateChange = (event) => {
+    //     setPublicOrPrivate(event.target.value);
+    // };
 
     const handleCollabLimitChange = (event) => {
-        setCollabLimitValue(event.target.value);
+        event.target.checked ? setCollabLimitChecked(1) : setCollabLimitChecked(0)
     };
 
     const handleLimitChange = (event) => {
@@ -135,152 +140,194 @@ export default function NewCollabForm (){
     };
 
     const handleSendNotificationChange = (event) => {
-        setSendNotification(event.target.checked);
+        event.target.checked ? setSendNotification(1) : setSendNotification(0)
+
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // const userData = {
+        //     brand: brandValue,
+        //     title: titleValue,
+        //     description: descriptionValue,
+        //     image: imageValue,
+        //     collab_start_date: collabStartDate,
+        //     collab_end_date: collabEndDate,
+        //     collab_type: collabType,
+        //     duration: duration,
+        //     compensation: compensationValue,
+        //     compensation_amount: compensationAmountValue,
+        //     cost: costValue,
+        //     objectives: objectivesValue,
+        //     ideal_collaborators: idealCollaboratorsValue,
+        //     proposal: proposalValue,
+        //     responsibility: responsibilityValue,
+        //     planning: planningValue,
+        //     operations_and_sales: operationsAndSalesValue,
+        //     marketing: marketingValue,
+        //     economic_agreements: economicAgreementsValue,
+        //     terms_and_conditions: termsAndConditionsValue,
+        //     observations: observationsValue,
+        //     public_or_private: publicOrPrivate,
+        //     collab_limit: collabLimitChecked,
+        //     limit: limitValue,
+        //     ad_start_date: adStartDate,
+        //     ad_end_date: adEndDate,
+        //     send_notification: sendNotification,
+
+        // };
+
+        const data = new FormData();
+
+        data.append('brand', brandValue);
+        data.append('title', titleValue);
+        data.append('description', descriptionValue);
         
-        console.log({
-            brand: brandValue,
-            title: titleValue,
-            description: descriptionValue,
-            image: imageValue,
-            collabStartDate: collabStartDate,
-            collabEndDate: collabEndDate,
-            collabType: collabType,
-            duration: duration,
-            cost: costValue,
-            objectives: objectivesValue,
-            idealCollaborators: idealCollaboratorsValue,
-            proposal: proposalValue,
-            responsibility: responsibilityValue,
-            planning: planningValue,
-            operationsAndSales: operationsAndSalesValue,
-            marketing: marketingValue,
-            economicAgreements: economicAgreementsValue,
-            termsAndConditions: termsAndConditionsValue,
-            observations: observationsValue,
-            publicOrPrivate: publicOrPrivate,
-            collabLimit: collabLimitValue,
-            limit: limitValue,
-            adStartDate: adStartDate,
-            adEndDate: adEndDate,
-            sendNotification: sendNotification,
+        data.append('collab_start_date', collabStartDate);
+        data.append('collab_end_date', collabEndDate);
+        data.append('collab_type', collabType);
+        data.append('duration', duration);
+        data.append('compensation', compensationValue);
+        data.append('compensation_amount', compensationAmountValue);
+        data.append('cost', costValue);
+        data.append('objectives', objectivesValue);
+        data.append('ideal_collaborators', idealCollaboratorsValue);
+        data.append('proposal', proposalValue);
+        data.append('responsibility', responsibilityValue);
+        data.append('planning', planningValue);
+        data.append('operations_and_sales', operationsAndSalesValue);
+        data.append('marketing', marketingValue);
+        data.append('economic_agreements', economicAgreementsValue);
+        data.append('terms_and_conditions', termsAndConditionsValue);
+        data.append('observations', observationsValue);
+        data.append('public_or_private', publicOrPrivate);
+        data.append('collab_limit', collabLimitChecked);
+        data.append('limit', limitValue);
+        data.append('ad_start_date', adStartDate);
+        data.append('ad_end_date', adEndDate);
+        data.append('send_notification', sendNotification);
 
+
+        data.append('image', imageValue);
+
+        createNewCollab(data).then((res) => {
+            console.log(res)
             
-        });
+            router.push("/admin");
+        })
+            .catch((error) => {
+                console.error('Login failed:', error);
+
+            })
     };
 
-  return (
-    <Container overflow="auto" className='pb-20 '>
-            <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
-            </Box>
+    return (
+        <Container overflow="auto" className='pb-20 '>
             <Typography variant="h2" align="center">Crear propuesta de Colaboración</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
-            <form
-                noValidate
-                autoComplete="off"
-                
-            >
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="brand"
-                    label="Nombre de la marca"
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                    required
-                    value={brandValue}
-                    onChange={handleBrandChange}
-                    
-                />
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="title"
-                    label="Título"
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                    required
-                    value={titleValue}
-                    onChange={handleTitleChange}
-                    
-                />
+                <form
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={handleSubmit}
+                >
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="brand"
+                        label="Nombre de la marca"
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        required
+                        value={brandValue}
+                        onChange={handleBrandChange}
 
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="description"
-                    label="Descripción"
-                    multiline
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                    required
-                    value={descriptionValue}
-                    onChange={handleDescriptionChange}
-                    
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="title"
+                        label="Título"
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        required
+                        value={titleValue}
+                        onChange={handleTitleChange}
 
-                />
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="image"
-                    label="sube tu imagen"
-                    type="file"
-                    fullWidth
-                    required
-                    variant="outlined"
-                    color="primary"
-                    InputLabelProps={{ shrink: true }}
-                    value={imageValue}
-                    onChange={handleImageChange}
-                    
-                />
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="collab_start_date"
-                    label="Fecha de inicio"
-                    type="date"
-                    fullWidth
-                    required
-                    variant="outlined"
-                    color="primary"
-                    InputLabelProps={{ shrink: true }}
-                    value={collabStartDate}
-                    onChange={handleCollabStartDateChange}
-                />
+                    />
 
-                <TextField
-                    sx={{
-                        margin: '1rem',
-                    }}
-                    id="collab_end_date"
-                    label="Fecha de finalización"
-                    type="date"
-                    fullWidth
-                    required
-                    variant="outlined"
-                    color="primary"
-                    InputLabelProps={{ shrink: true }}
-                    value={collabEndDate}
-                    onChange={handleCollabEndDateChange}
-                />
-                    
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="description"
+                        label="Descripción"
+                        multiline
+                        variant="outlined"
+                        color="primary"
+                        fullWidth
+                        required
+                        value={descriptionValue}
+                        onChange={handleDescriptionChange}
+
+
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="image"
+                        label="sube tu imagen"
+                        type="file"
+                        fullWidth
+
+                        variant="outlined"
+                        color="primary"
+                        InputLabelProps={{ shrink: true }}
+                        onChange={(e) => setImageValue(e.target.files[0])}
+
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="collab_start_date"
+                        label="Fecha de inicio"
+                        type="date"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        InputLabelProps={{ shrink: true }}
+                        value={collabStartDate}
+                        onChange={handleCollabStartDateChange}
+                    />
+
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="collab_end_date"
+                        label="Fecha de finalización"
+                        type="date"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        InputLabelProps={{ shrink: true }}
+                        value={collabEndDate}
+                        onChange={handleCollabEndDateChange}
+                    />
+
                     <BasicSelect
                         id="collab_type"
                         label="Tipo de colaboración"
                         value={collabType}
-                        onChange={handleCollabTypeChange}
+                        onChange={setCollabType}
                         options={[
                             { value: 'Co-Branding', label: 'Co-Branding' },
                             { value: 'Co-Licensing', label: 'Co-Licensing' },
@@ -300,7 +347,7 @@ export default function NewCollabForm (){
                         id="duration"
                         label="Duración"
                         value={duration}
-                        onChange={handleDurationChange}
+                        onChange={setDuration}
                         options={[
                             { value: 'puntual', label: 'puntual' },
                             { value: 'periódica', label: 'periódica' },
@@ -315,6 +362,34 @@ export default function NewCollabForm (){
                         sx={{
                             margin: '1rem',
                         }}
+                        id="compensation"
+                        label="Compensación"
+                        type="text"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        value={compensationValue}
+                        onChange={handleCompensationValueChange}
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="compensation_amount"
+                        label="Monto de compensación"
+                        type="number"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        value={compensationAmountValue}
+                        onChange={handleCompensationAmountValueChange}
+                    />
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
                         id="cost"
                         label="Costo"
                         type="text"
@@ -322,7 +397,8 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={costValue}
+                        onChange={handleCostChange}
                     />
 
                     <TextField
@@ -336,9 +412,10 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={objectivesValue}
+                        onChange={handleObjectivesChange}
                     />
-                    
+
                     <TextField
                         sx={{
                             margin: '1rem',
@@ -350,9 +427,11 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={idealCollaboratorsValue}
+                        onChange={handleIdealCollaboratorsChange}
+
                     />
-                        <TextField
+                    <TextField
                         sx={{
                             margin: '1rem',
                         }}
@@ -363,7 +442,8 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={proposalValue}
+                        onChange={handleProposalChange}
                     />
 
                     <TextField
@@ -377,7 +457,8 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={responsibilityValue}
+                        onChange={handleResponsibilityChange}
                     />
 
                     <TextField
@@ -391,8 +472,9 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
-                    />  
+                        value={planningValue}
+                        onChange={handlePlanningChange}
+                    />
 
                     <TextField
                         sx={{
@@ -405,8 +487,9 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
-                    />  
+                        value={operationsAndSalesValue}
+                        onChange={handleOperationsAndSalesChange}
+                    />
 
                     <TextField
                         sx={{
@@ -419,8 +502,9 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
-                    />   
+                        value={marketingValue}
+                        onChange={handleMarketingChange}
+                    />
 
                     <TextField
                         sx={{
@@ -433,8 +517,9 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
-                    /> 
+                        value={economicAgreementsValue}
+                        onChange={handleEconomicAgreementsChange}
+                    />
                     <TextField
                         sx={{
                             margin: '1rem',
@@ -446,7 +531,8 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={termsAndConditionsValue}
+                        onChange={handleTermsAndConditionsChange}
                     />
                     <TextField
                         sx={{
@@ -459,16 +545,17 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={observationsValue}
+                        onChange={handleObservationsChange}
                     />
                     <BasicSelect
                         id="public_or_private"
                         label="público o privado"
                         value={publicOrPrivate}
-                        onChange={handlePublicOrPrivateChange}
+                        onChange={setPublicOrPrivate}
                         options={[
-                            { value: 'public', label: 'Público' },
-                            { value: 'private', label: 'Privado' },
+                            { value: 'publico', label: 'publico' },
+                            { value: 'privado', label: 'privado' },
                         ]}
                         sx={{
                             '& .MuiInputLabel-root': { color: 'red' },
@@ -476,19 +563,54 @@ export default function NewCollabForm (){
                         }}
                     />
 
-                    <TextField
-                        sx={{
-                            margin: '1rem',
-                        }}
-                        id="collab_limit"
-                        label="Límite de colaboraciones"
-                        type="number"
-                        fullWidth
-                        required
-                        variant="outlined"
-                        color="primary"
-                        
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <FormGroup sx={{ marginLeft: 2, marginTop: 3 }}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={collabLimitChecked}
+                                            onChange={handleCollabLimitChange}
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Límitar colaboraciones"
+                                />
+                            </FormGroup>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                sx={{
+                                    marginLeft: '1rem',
+                                    marginTop: '1rem',
+                                    marginBottom: '1rem',
+                                    width: '100%',
+                                }}
+                                id="limit"
+                                label="Límite"
+                                type="number"
+                                required
+                                variant="outlined"
+                                color="primary"
+                                value={limitValue}
+                                onChange={handleLimitChange}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    {/* <Box className="w-full flex flex-row">
+                        <FormGroup sx={{ marginLeft: 2 }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={collabLimitChecked}
+                                    onChange={handleCollabLimitChange}
+                                    color="primary"
+                                />
+                            }
+                            label="Límitar colaboraciones"
+                        />
+                    </FormGroup>
 
                     <TextField
                         sx={{
@@ -501,8 +623,13 @@ export default function NewCollabForm (){
                         required
                         variant="outlined"
                         color="primary"
-                        
+                        value={limitValue}
+                        onChange={handleLimitChange}
+
                     />
+                    </Box> */}
+
+
                     <TextField
                         sx={{
                             margin: '1rem',
@@ -515,6 +642,8 @@ export default function NewCollabForm (){
                         variant="outlined"
                         color="primary"
                         InputLabelProps={{ shrink: true }}
+                        value={adStartDate}
+                        onChange={handleAdStartDateChange}
                     />
 
                     <TextField
@@ -529,47 +658,43 @@ export default function NewCollabForm (){
                         variant="outlined"
                         color="primary"
                         InputLabelProps={{ shrink: true }}
+                        value={adEndDate}
+                        onChange={handleAdEndDateChange}
                     />
 
-                    {/* <TextField
-                        sx={{
-                            margin: '1rem',
-                        }}
-                        id="send_notification"
-                        label="Fecha final del anuncio"
-                        type="date"
-                        fullWidth
-                        required
-                        variant="outlined"
-                        color="primary"
-                        
-                        
-                    /> */}
 
                     <FormGroup sx={{ marginLeft: 2 }}>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Enviar notificaciones" 
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={sendNotification}
+                                    onChange={handleSendNotificationChange}
+                                    color="primary"
+                                />
+                            }
+                            label="Enviar notificaciones"
                         />
                     </FormGroup>
 
 
-                
 
-                <Box>
-                    <Button
-                        
-                        type="submit"
-                        color="primary"
-                        variant="contained"
-                        endIcon={<KeyboardArrowRight />}
-                        fullWidth
-                        sx={{ m: 2, }}
-                    >
-                        Enviar
-                    </Button>
-                </Box>
-            </form>
+
+                    <Box>
+                        <Button
+
+                            type="submit"
+                            color="primary"
+                            variant="contained"
+                            endIcon={<KeyboardArrowRight />}
+                            fullWidth
+                            sx={{ m: 2, }}
+                        >
+                            Enviar
+                        </Button>
+                    </Box>
+                </form>
             </Box>
- 
+
         </Container>
-  )
+    )
 }

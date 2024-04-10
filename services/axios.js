@@ -158,6 +158,24 @@ export const getMyCollaborations = async () => {
     }
 };
 
+//Post new collab
+
+export const createNewCollab = async (proposalData) => {
+    try {
+        const token = Cookies.get('laravel_session');
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        }
+
+        const response = await axios.post(`api/collaboration-proposals`, proposalData, {headers});
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error.response;
+    }
+};
+
 export const getCollaborationById = async (collabId) => {
     try {
         const response = await axios.get(`api/collaboration-proposals/${collabId}`);
