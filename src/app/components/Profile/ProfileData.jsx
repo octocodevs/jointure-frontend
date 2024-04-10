@@ -37,7 +37,7 @@ export default function ProfileData() {
             {isLoading ? (
                 <Spinner />
             ) : profileData ? (
-                <Box className="flex h-auto flex-row items-start justify-around pt-8">
+                <Box className="flex h-auto flex-col lg:flex-row items-start justify-around pt-8">
                     <Box className="pt-5 p-8">
                         <Image
                             src={`http://localhost:8000/storage/${profileData.image}`}
@@ -48,27 +48,27 @@ export default function ProfileData() {
                         />
                     </Box>
 
-                    <Box>
+                    <Box className="pt-5 p-8">
                         <Typography variant="h3">Nombre de la empresa</Typography>
                         <Typography variant="caption">{profileData.user.business_name}</Typography>
-                        <Divider variant="inset" component=""/>
+                        <Divider variant="inset" component="" sx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }}/>
 
                         <Typography variant="h3">Ubicación</Typography>
                         <Typography variant="caption">{profileData.user.country}</Typography>
-                        <Divider variant="inset" component="" />
+                        <Divider variant="inset" component="" sx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }} />
 
                         <Typography variant="h3">Descripción</Typography>
                         <Typography variant="caption">{profileData.description}</Typography>
                     </Box>
 
-                    <Box>
+                    <Box className="pt-5 p-8">
                         <Typography variant="h3">Sector</Typography>
                         <Typography variant="caption">{profileData.sector}</Typography>
-                        <Divider variant="inset" component="" />
+                        <Divider variant="inset" component="" sx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }} />
 
                         <Typography variant="h3">Tipo de negocio</Typography>
                         <Typography variant="caption">{profileData.legal_structure}</Typography>
-                        <Divider variant="inset" component="" />
+                        <Divider variant="inset" component="" ssx={{ marginY: 1 , marginRight: 'auto', marginLeft: 0 }} />
 
                         <Typography variant="h3">Redes sociales</Typography>
                         <Typography variant="caption">

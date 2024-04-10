@@ -15,7 +15,6 @@ export default function ProfilePage() {
                 <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: 'divider' }}>
                     <ProfileData />
                 </Box>
-                <Divider variant="inset" component="li"/>
                 <Box sx={{ flexGrow: 1 }}>
                     <CenteredTabs />
                 </Box>
