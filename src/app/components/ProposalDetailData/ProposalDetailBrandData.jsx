@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { getProfileById } from '../../../../services/axios.js';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -46,6 +48,25 @@ const Demo = styled('div')(({ theme }) => ({
 }));
 
 export default function ProposalDetailData() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const pathname = window.location.pathname;
+      const userId = pathname.split("/").pop();
+
+      try {
+        const data = await getProfileById(userId);
+        setData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+ 
   const [dense] = React.useState(false);
 
   return (
@@ -63,31 +84,31 @@ export default function ProposalDetailData() {
                 <ListItem />,
                 <BusinessIcon />,
                 "Sector",
-                "Alimentación"
+                data && data.sector
               )}
               {generate(
                 <ListItem />,
                 <LocationOnIcon />,
                 "Ubicación",
-                "Barcelona"
+                data && data.user.country
               )}
               {generate(
                 <ListItem />,
                 <StorefrontIcon />,
                 "Canales de venta",
-                "Offline"
+                data && data.sales_channels
               )}
               {generate(
                 <ListItem />,
                 <FavoriteIcon />,
                 "Valores",
-                "vegano"
+                data && data.values
               )}
               {generate(
                 <ListItem />,
                 <DescriptionIcon />,
                 "Descripción",
-                "Lorem Ipsum"
+                data && data.description
               )}
             </List>
           </Demo>
