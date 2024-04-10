@@ -171,11 +171,9 @@ export default function NewCollabForm() {
         data.append('ad_end_date', adEndDate);
         data.append('send_notification', sendNotification);
 
-
         data.append('image', imageValue);
 
         createNewCollab(data).then((res) => {
-            console.log(res)
 
             router.push("/admin");
         })
