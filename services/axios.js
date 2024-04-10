@@ -130,3 +130,13 @@ export const createNewProfile = async (userData) => {
         throw error.response;
     }
 };
+
+export const getCollaborationById = async (collabId) => {
+    console.log(collabId);
+    try {
+      const response = await axios.get(`api/collaboration-proposals/${collabId}`);
+      return response.data.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  };
