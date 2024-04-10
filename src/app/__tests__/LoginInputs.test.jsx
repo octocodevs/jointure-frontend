@@ -1,131 +1,88 @@
 import "@testing-library/jest-dom";
-import React from "react";
-import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import { render, fireEvent, waitFor, } from "@testing-library/react";
 import LoginInputs from "../components/LoginInputs.jsx";
-import { useRouter } from "next/navigation";
 import 'jest-localstorage-mock';
+import { useRouter } from "next/navigation";
+import { useAuthContext } from '../../contexts/authContext';
 import axios from "axios";
 
-jest.mock("axios");
 
-jest.mock("next/navigation");
 
-describe("LoginInputs", () => {
-  beforeEach(() => {
-    jest.spyOn(console, "log").mockImplementation(() => {});
-  });
+jest.mock('axios', () => ({
+  defaults: {
+    baseURL: 'http://localhost:8000/',
+    withCredentials: true,
+  },
+  post: jest.fn(),
+}));
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
 
-  test("debe renderizar correctamente", () => {
-    render(<LoginInputs />);
-    expect(screen.getByLabelText("E-mail")).toBeInTheDocument();
-    expect(screen.getByLabelText("Contraseña")).toBeInTheDocument();
-    expect(
-      screen.getByLabelText("Acepto las condiciones y la privacidad")
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Enviar" })).toBeInTheDocument();
-  });
+const loginMock = jest.fn();
+jest.mock('../../contexts/authContext', () => ({
+  useAuthContext: () => ({
+    login: loginMock,
+  }),
+}));
 
-  test("debe mostrar mensaje de error si se envía el formulario con campos vacíos", async () => {
-    render(<LoginInputs />);
-    fireEvent.click(screen.getByText("Enviar"));
-    expect(
-      screen.getByText("El correo electrónico es obligatorio")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("La contraseña es obligatoria")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("Por favor, acepta los términos y condiciones")
-    ).toBeInTheDocument();
-  });
-
-  test("debe mostrar mensaje de error si la autenticación falla", async () => {
+describe('LoginInputs', () => {
+  it('renders correctly', () => {
+    const { getByLabelText, getByText } = render(<LoginInputs />);
     
-    axios.get.mockResolvedValueOnce();
-  
-    axios.post.mockRejectedValueOnce({
-      response: {
-        data: {
-          errors: {
-            general: "Email o contraseña incorrecto",
-          },
-        },
-      },
-    });
-  
-    render(<LoginInputs />);
-    fireEvent.change(screen.getByLabelText("E-mail"), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(screen.getByLabelText("Contraseña"), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(
-      screen.getByLabelText("Acepto las condiciones y la privacidad")
-    );
-    fireEvent.click(screen.getByText("Enviar"));
-  
-    // Esperar a que se complete la solicitud
-    await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith("api/login", {
-        email: "test@example.com",
-        password: "password123",
-        agree: true,
-      });
-    });
-  
-    // Verificar que se muestra el mensaje de error adecuado
-    expect(
-      screen.getByText("Email o contraseña incorrecto")
-    ).toBeInTheDocument();
+    expect(getByLabelText('E-mail')).toBeInTheDocument();
+    expect(getByLabelText('Contraseña')).toBeInTheDocument();
+    expect(getByLabelText('Acepto las condiciones y la privacidad')).toBeInTheDocument();
+    expect(getByText('Enviar')).toBeInTheDocument();
+    expect(getByText('¿No estás registrado?')).toBeInTheDocument();
   });
 
-  test("debe redireccionar al usuario a la página de admin si la autenticación es exitosa", async () => {
-    axios.get.mockResolvedValueOnce();
+  it('displays error messages when submitting empty form', async () => {
+    const { getByLabelText, getByText } = render(<LoginInputs />);
+    const submitButton = getByText('Enviar');
 
-    // Mockear respuesta de axios para la autenticación exitosa
-    axios.post.mockResolvedValueOnce();
-
-    const pushMock = jest.fn();
-    useRouter.mockReturnValue({
-      push: pushMock,
-      replace: jest.fn(),
-      prefetch: jest.fn(),
-      route: "/",
-    });
-
-    render(<LoginInputs />);
-    fireEvent.change(screen.getByLabelText("E-mail"), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(screen.getByLabelText("Contraseña"), {
-      target: { value: "password123" },
-    });
-    fireEvent.click(
-      screen.getByLabelText("Acepto las condiciones y la privacidad")
-    );
-    fireEvent.click(screen.getByText("Enviar"));
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith("api/login", {
-        email: "test@example.com",
-        password: "password123",
-        agree: true,
-      });
+      expect(getByText('El correo electrónico es obligatorio')).toBeInTheDocument();
+      expect(getByText('La contraseña es obligatoria')).toBeInTheDocument();
+      expect(getByText('Por favor, acepta los términos y condiciones')).toBeInTheDocument();
     });
   });
 
-  test("debe mostrar mensaje de registro si el usuario no está registrado", async () => {
-    render(<LoginInputs />);
-    expect(
-      screen.getByText("¿No estás registrado?")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("Regístrate aquí")
-    ).toBeInTheDocument();
+  it('displays general error message when login fails', async () => {
+    axios.post.mockRejectedValueOnce({ response: { data: { errors: { general: 'Email o contraseña incorrecto' } } } });
+    const { getByLabelText, getByText } = render(<LoginInputs />);
+    const submitButton = getByText('Enviar');
+
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' } });
+    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(getByText('Email o contraseña incorrecto')).toBeInTheDocument();
+    });
+  });
+
+  it('redirects to admin page when login succeeds', async () => {
+    const userId = 'user123';
+    axios.post.mockResolvedValueOnce({ data: { access_token: 'token123', user: { id: userId } } });
+    const { getByLabelText, getByText } = render(<LoginInputs />);
+    const submitButton = getByText('Enviar');
+
+    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' } });
+    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(localStorage.setItem).toHaveBeenCalledWith('user_id', userId);
+      expect(useAuthContext().login).toHaveBeenCalledWith('token123');
+      expect(useRouter().push).toHaveBeenCalledWith("/admin");
+    });
   });
 });

@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import LargeButton from "./Buttons/LargeButton";
-import axios from "axios";
 import { loginUser } from "../../../services/axios";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/authContext";
