@@ -17,8 +17,11 @@ Jointure is a platform that automates collaborations between brands from various
 - [Developers](#developers)
 
 ## Requirements
+
 - Visual Studio Code
-- Node.js and Composer installed on your device
+- Node.js 
+- Composer
+- Xampp or mamp
 
 ## Technologies:
 
@@ -98,7 +101,6 @@ To run tests, run the following command
 
 ![Login](./public/img/login.png)
 ![Marketplace view](./public/img/marketplace.png)
-![Marketplace view](./public/img/marketplace2.png)
 ![Profile](./public/img/profile.png)
 
 
