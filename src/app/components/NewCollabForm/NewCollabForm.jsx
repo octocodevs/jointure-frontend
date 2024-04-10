@@ -55,9 +55,9 @@ export default function NewCollabForm() {
         setDescriptionValue(event.target.value);
     };
 
-    const handleImageChange = (event) => {
-        setImageValue(event.target.value);
-    };
+    // const handleImageChange = (event) => {
+    //     setImageValue(event.target.files[0]);
+    // };
 
     const handleCollabStartDateChange = (event) => {
         setCollabStartDate(event.target.value);
@@ -124,7 +124,7 @@ export default function NewCollabForm() {
     // };
 
     const handleCollabLimitChange = (event) => {
-        event.target.checked?setCollabLimitChecked(1):setCollabLimitChecked(0)
+        event.target.checked ? setCollabLimitChecked(1) : setCollabLimitChecked(0)
     };
 
     const handleLimitChange = (event) => {
@@ -140,53 +140,87 @@ export default function NewCollabForm() {
     };
 
     const handleSendNotificationChange = (event) => {
-        event.target.checked?setSendNotification(1):setSendNotification(0)
+        event.target.checked ? setSendNotification(1) : setSendNotification(0)
 
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        const userData = {
-            brand: brandValue,
-            title: titleValue,
-            description: descriptionValue,
-            image: imageValue,
-            collab_start_date: collabStartDate,
-            collab_end_date: collabEndDate,
-            collab_type: collabType,
-            duration: duration,
-            compensation:compensationValue,
-            compensation_amount:compensationAmountValue,
-            cost: costValue,
-            objectives: objectivesValue,
-            ideal_collaborators: idealCollaboratorsValue,
-            proposal: proposalValue,
-            responsibility: responsibilityValue,
-            planning: planningValue,
-            operations_and_sales: operationsAndSalesValue,
-            marketing: marketingValue,
-            economic_agreements: economicAgreementsValue,
-            terms_and_conditions: termsAndConditionsValue,
-            observations: observationsValue,
-            public_or_private: publicOrPrivate,
-            collab_limit: collabLimitChecked,
-            limit: limitValue,
-            ad_start_date: adStartDate,
-            ad_end_date: adEndDate,
-            send_notification: sendNotification,
+        // const userData = {
+        //     brand: brandValue,
+        //     title: titleValue,
+        //     description: descriptionValue,
+        //     image: imageValue,
+        //     collab_start_date: collabStartDate,
+        //     collab_end_date: collabEndDate,
+        //     collab_type: collabType,
+        //     duration: duration,
+        //     compensation: compensationValue,
+        //     compensation_amount: compensationAmountValue,
+        //     cost: costValue,
+        //     objectives: objectivesValue,
+        //     ideal_collaborators: idealCollaboratorsValue,
+        //     proposal: proposalValue,
+        //     responsibility: responsibilityValue,
+        //     planning: planningValue,
+        //     operations_and_sales: operationsAndSalesValue,
+        //     marketing: marketingValue,
+        //     economic_agreements: economicAgreementsValue,
+        //     terms_and_conditions: termsAndConditionsValue,
+        //     observations: observationsValue,
+        //     public_or_private: publicOrPrivate,
+        //     collab_limit: collabLimitChecked,
+        //     limit: limitValue,
+        //     ad_start_date: adStartDate,
+        //     ad_end_date: adEndDate,
+        //     send_notification: sendNotification,
+
+        // };
+
+        const data = new FormData();
+
+        data.append('brand', brandValue);
+        data.append('title', titleValue);
+        data.append('description', descriptionValue);
+        
+        data.append('collab_start_date', collabStartDate);
+        data.append('collab_end_date', collabEndDate);
+        data.append('collab_type', collabType);
+        data.append('duration', duration);
+        data.append('compensation', compensationValue);
+        data.append('compensation_amount', compensationAmountValue);
+        data.append('cost', costValue);
+        data.append('objectives', objectivesValue);
+        data.append('ideal_collaborators', idealCollaboratorsValue);
+        data.append('proposal', proposalValue);
+        data.append('responsibility', responsibilityValue);
+        data.append('planning', planningValue);
+        data.append('operations_and_sales', operationsAndSalesValue);
+        data.append('marketing', marketingValue);
+        data.append('economic_agreements', economicAgreementsValue);
+        data.append('terms_and_conditions', termsAndConditionsValue);
+        data.append('observations', observationsValue);
+        data.append('public_or_private', publicOrPrivate);
+        data.append('collab_limit', collabLimitChecked);
+        data.append('limit', limitValue);
+        data.append('ad_start_date', adStartDate);
+        data.append('ad_end_date', adEndDate);
+        data.append('send_notification', sendNotification);
 
 
-        };
-        console.log(userData);
-        // createNewCollab(userData).then((res) => {
-        // console.log(res)
-        //     // login(res.access_token);
-        //     router.push("/admin");
-        // })
-        //     .catch((error) => {
-        //         console.error('Login failed:', error);
+        data.append('image', imageValue);
 
-        //     })
+        console.log(data);
+        createNewCollab(data).then((res) => {
+            console.log(res)
+            // login(res.access_token);
+            router.push("/admin");
+        })
+            .catch((error) => {
+                console.error('Login failed:', error);
+
+            })
     };
 
     return (
@@ -253,12 +287,12 @@ export default function NewCollabForm() {
                         label="sube tu imagen"
                         type="file"
                         fullWidth
-                        
+
                         variant="outlined"
                         color="primary"
                         InputLabelProps={{ shrink: true }}
-                        value={imageValue}
-                        onChange={handleImageChange}
+                        // value={imageValue}
+                        onChange={(e) => setImageValue(e.target.files[0])}
 
                     />
                     <TextField
@@ -328,7 +362,7 @@ export default function NewCollabForm() {
                             '& .MuiSelect-root': { backgroundColor: 'lightblue' },
                         }}
                     />
-                        <TextField
+                    <TextField
                         sx={{
                             margin: '1rem',
                         }}
@@ -524,8 +558,8 @@ export default function NewCollabForm() {
                         value={publicOrPrivate}
                         onChange={setPublicOrPrivate}
                         options={[
-                            { value: 'public', label: 'publico' },
-                            { value: 'private', label: 'privado' },
+                            { value: 'publico', label: 'publico' },
+                            { value: 'privado', label: 'privado' },
                         ]}
                         sx={{
                             '& .MuiInputLabel-root': { color: 'red' },
@@ -566,9 +600,9 @@ export default function NewCollabForm() {
                                 onChange={handleLimitChange}
                             />
                         </Grid>
-                        </Grid>
+                    </Grid>
 
-                        {/* <Box className="w-full flex flex-row">
+                    {/* <Box className="w-full flex flex-row">
                         <FormGroup sx={{ marginLeft: 2 }}>
                         <FormControlLabel
                             control={
@@ -600,68 +634,68 @@ export default function NewCollabForm() {
                     </Box> */}
 
 
-                        <TextField
-                            sx={{
-                                margin: '1rem',
-                            }}
-                            id="ad_start_date"
-                            label="Fecha de inicio del anuncio"
-                            type="date"
-                            fullWidth
-                            required
-                            variant="outlined"
-                            color="primary"
-                            InputLabelProps={{ shrink: true }}
-                            value={adStartDate}
-                            onChange={handleAdStartDateChange}
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="ad_start_date"
+                        label="Fecha de inicio del anuncio"
+                        type="date"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        InputLabelProps={{ shrink: true }}
+                        value={adStartDate}
+                        onChange={handleAdStartDateChange}
+                    />
+
+                    <TextField
+                        sx={{
+                            margin: '1rem',
+                        }}
+                        id="ad_end_date"
+                        label="Fecha final del anuncio"
+                        type="date"
+                        fullWidth
+                        required
+                        variant="outlined"
+                        color="primary"
+                        InputLabelProps={{ shrink: true }}
+                        value={adEndDate}
+                        onChange={handleAdEndDateChange}
+                    />
+
+
+                    <FormGroup sx={{ marginLeft: 2 }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={sendNotification}
+                                    onChange={handleSendNotificationChange}
+                                    color="primary"
+                                />
+                            }
+                            label="Enviar notificaciones"
                         />
+                    </FormGroup>
 
-                        <TextField
-                            sx={{
-                                margin: '1rem',
-                            }}
-                            id="ad_end_date"
-                            label="Fecha final del anuncio"
-                            type="date"
-                            fullWidth
-                            required
-                            variant="outlined"
+
+
+
+                    <Box>
+                        <Button
+
+                            type="submit"
                             color="primary"
-                            InputLabelProps={{ shrink: true }}
-                            value={adEndDate}
-                            onChange={handleAdEndDateChange}
-                        />
-
-
-                        <FormGroup sx={{ marginLeft: 2 }}>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={sendNotification}
-                                        onChange={handleSendNotificationChange}
-                                        color="primary"
-                                    />
-                                }
-                                label="Enviar notificaciones"
-                            />
-                        </FormGroup>
-
-
-
-
-                        <Box>
-                            <Button
-
-                                type="submit"
-                                color="primary"
-                                variant="contained"
-                                endIcon={<KeyboardArrowRight />}
-                                fullWidth
-                                sx={{ m: 2, }}
-                            >
-                                Enviar
-                            </Button>
-                        </Box>
+                            variant="contained"
+                            endIcon={<KeyboardArrowRight />}
+                            fullWidth
+                            sx={{ m: 2, }}
+                        >
+                            Enviar
+                        </Button>
+                    </Box>
                 </form>
             </Box>
 

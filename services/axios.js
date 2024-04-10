@@ -167,7 +167,10 @@ export const createNewCollab = async (proposalData) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         }
+
+        console.log('proposal data axios inicio');
         const response = await axios.post(`api/collaboration-proposals`, proposalData, {headers});
+        console.log('proposal data axios salida', response);
 
         return response.data;
     } catch (error) {
