@@ -8,11 +8,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 import XIcon from '@mui/icons-material/X';
 import { useState, useEffect } from 'react';
 import { getProfileById } from '../../../../services/axios';
-import { useAuthContext } from '../../../contexts/authContext';
 import Spinner from '../../components/Spinner';
 
 export default function ProfileData() {
-    // const { getAuthToken } = useAuthContext();
+   
     const [profileData, setProfileData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -20,7 +19,6 @@ export default function ProfileData() {
         const user_id = localStorage.getItem( "user_id" );
         if (user_id) {
             getProfileById(user_id).then((res) => {
-                console.log("Profile Data: ", res);
                 setProfileData(res);
                 setIsLoading(false);
             }).catch((err) => {
