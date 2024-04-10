@@ -10,12 +10,15 @@ import Typography from '@mui/material/Typography';
 import ProposalDetailData from '../ProposalDetailData/ProposalDetailData.jsx';
 import { Container } from '@mui/material';
 import ProposalDetailBrandData from '../ProposalDetailData/ProposalDetailBrandData.jsx';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const steps = ['Propuesta', 'Marca', 'Conecta'];
 
 export default function ProposalStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [termsAccepted, setTermsAccepted] = React.useState(false);
 
   const totalSteps = () => {
     return steps.length;
@@ -97,9 +100,23 @@ export default function ProposalStepper() {
           {activeStep === 1 && <div>
             <ProposalDetailBrandData />
           </div>}
-          {activeStep === 2 && <Typography sx={{ mt: 3, mb: 1, pl: 2, }}>¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado.
-          </Typography>}
-            
+          {activeStep === 2 && (
+  <div>
+    <Typography sx={{ mt: 3, mb: 1, pl: 2, }}>
+      ¡Recuerda! Aún no has sido elegido para participar en la colaboración. Recibirás un email confirmando si te han aceptado.
+    </Typography>
+    <FormControlLabel
+      sx={{ pl: 2, }}
+      control={
+        <Checkbox
+          checked={termsAccepted}
+          onChange={(event) => setTermsAccepted(event.target.checked)}
+        />
+      }
+      label="Acepto las condiciones de la colaboración"
+    />
+  </div>
+)}
           
 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -117,7 +134,13 @@ export default function ProposalStepper() {
                 Siguiente
               </Button>
               {activeStep === steps.length - 1 && (
-  <Button onClick={handleComplete}>Colaborar</Button>
+                <Button 
+                variant="contained" 
+                onClick={handleComplete} 
+                disabled={!termsAccepted}
+                >
+                Colaborar
+                </Button>
 )}
             </Box>
           </React.Fragment>
