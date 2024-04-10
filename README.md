@@ -2,7 +2,9 @@
 
 ![Jointure Logo](./public/img/jointure-logo.png)
 
-Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. Alongside [this back-end repository](https://github.com/octocodevs/jointure-backend/tree/main), this fullstack project involves the creation of a responsive website that allows users to explore, create, and manage collaborations. 
+Jointure is a platform that automates collaborations between brands from various sectors, facilitating seamless interactions and partnerships. Alongside [this backend repository](https://github.com/octocodevs/jointure-backend/tree/main), this fullstack project involves the creation of a responsive website that allows users to explore, create, and manage collaborations. 
+
+![Marketplace view](./public/img/marketplace2.png)
 
 ## Table of Contents
 
@@ -11,14 +13,13 @@ Jointure is a platform that automates collaborations between brands from various
 - [Frontend File Structure](#frontend-file-structure)
 - [Features](#features)
 - [Installation](#installation)
-- [Backend Repo](#backend-link)
 - [Running Tests](#running-tests)
 - [Demo](#demo)
 - [Developers](#developers)
 
 ## Requirements
 - Visual Studio Code
-- Node.js and Composer installed on your device
+- Node.js, Composer, and xampp or mamp installed on your device
 
 ## Technologies:
 
@@ -98,7 +99,6 @@ To run tests, run the following command
 
 ![Login](./public/img/login.png)
 ![Marketplace view](./public/img/marketplace.png)
-![Marketplace view](./public/img/marketplace2.png)
 ![Profile](./public/img/profile.png)
 
 
