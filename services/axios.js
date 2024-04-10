@@ -104,6 +104,23 @@ export const deleteCollaboration = async (collaborationId, authToken) => {
 
 
 
+export const createNewProfile = async (userData) => {
+    try {
+        const token = Cookies.get('laravel_session')
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        }
+
+        const response = await axios.post(`api/profile`, userData, { headers });
+
+        return response.data;
+    } catch (error) {
+        console.error('Error al crear el perfil', error);
+        throw error.response;
+    }
+};
+
 
 export const getProfiles = async () => {
     try {
@@ -114,19 +131,38 @@ export const getProfiles = async () => {
     }
 };
 
-export const createNewProfile = async (userData) => {
+
+export const getProfileById = async (userId) => {
     try {
-        const token = Cookies.get('laravel_session')
-        const headers = { 
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-        }
-        
-        const response = await axios.post(`api/profile`, userData, { headers }); 
+        const token = Cookies.get('laravel_session');
+        const headers = { Authorization: `Bearer ${token}` };
+
+        const response = await axios.get(`api/profile/${userId}`, { headers });
 
         return response.data;
     } catch (error) {
-        console.error('Error al crear el perfil', error);
-        throw error.response;
+        throw error.response.data;
+    }
+};
+
+
+export const getMyCollaborations = async () => {
+    try {
+        const token = Cookies.get('laravel_session');
+        const headers = { Authorization: `Bearer ${token}` };
+
+        const response = await axios.get(`api/my-collaboration-proposals`, { headers });
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+export const getCollaborationById = async (collabId) => {
+    try {
+        const response = await axios.get(`api/collaboration-proposals/${collabId}`);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data;
     }
 };

@@ -14,7 +14,6 @@ export default function CreatedProposals () {
     const fetchData = async() => {
       try{
         const response = await getMyCollaborations();
-        console.log(response);
         setCards(response);
       }catch(error){
         console.error('Error fetching data:', error);
