@@ -7,7 +7,6 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import ResponsiveDrawer from '../Navigation/ResponsiveDrawer.jsx';
 import ProposalDetailData from '../ProposalDetailData/ProposalDetailData.jsx';
 import { Container } from '@mui/material';
 import ProposalDetailBrandData from '../ProposalDetailData/ProposalDetailBrandData.jsx';
