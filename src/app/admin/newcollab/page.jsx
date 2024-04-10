@@ -1,6 +1,6 @@
 import ResponsiveDrawer from '@/app/components/Navigation/ResponsiveDrawer.jsx';
 import NewCollabForm from '@/app/components/NewCollabForm/NewCollabForm';
-import { Box, Container} from '@mui/material'
+import { Container} from '@mui/material'
 import React from 'react'
 
 export default function NewCollab(){

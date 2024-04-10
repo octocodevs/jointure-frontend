@@ -76,20 +76,20 @@ const LoginInputs = () => {
         handleLoginSuccess(res.user.id);
         route.push("/admin");
 
-      })
-      .catch((error) => {
-        console.log(error);
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          setErrorMessages(error.response.data.errors);
-        } else {
-          setErrorMessages({ general: "Email o contraseña incorrecto" });
-        }
-      });
-
+        })
+        .catch((error) => {
+          console.log(error);
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            setErrorMessages(error.response.data.errors);
+          } else {
+            setErrorMessages({ general: "Email o contraseña incorrecto" });
+          }
+        });
+    
   };
 
   return (
@@ -167,7 +167,7 @@ const LoginInputs = () => {
         <Typography variant="body1" color="textSecondary">
           ¿No estás registrado?{" "}
           <Link
-            href="/admin/register"
+            href="/register"
             color="secudary"
             className="text-[#46A9B6] font-bold"
 
