@@ -35,7 +35,7 @@ export default function AuthContextProvider({ children }) {
     }, []);
 
     const getAuthToken = useCallback(() => {
-        const authTokens = Cookies.get("XSRF-TOKEN");
+        const authTokens = Cookies.get("laravel_session");
         return authTokens ? authTokens : null;
     }, []);
 
