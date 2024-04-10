@@ -299,7 +299,7 @@ export default function Form() {
                     variant="body1">
                     ¿Ya tienes una cuenta?
                     <Link href="/">
-                        <span className="text-[#46A9B6] font-bold">
+                        <span className="text-[#46A9B6] font-bold ml-1">
                             Inicia sesión aquí
                         </span>
                     </Link>
