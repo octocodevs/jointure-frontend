@@ -3,18 +3,17 @@ import React from 'react'
 import { Box, Grid } from '@mui/material'
 import ProposalCard from '../../ProposalCards/ProposalCard';
 import { useState,useEffect } from 'react';
-import { getMyCollaborations } from '../../../../../services/axios';
+import { getCollaborations } from '../../../../../services/axios';
 
 
-export default function CreatedProposals () {
+export default function JoinedProposals () {
 
   const [cards, setCards] = useState([]);
   
   useEffect(() => {
     const fetchData = async() => {
       try{
-        const response = await getMyCollaborations();
-        console.log(response);
+        const response = await getCollaborations();
         setCards(response);
       }catch(error){
         console.error('Error fetching data:', error);
@@ -42,4 +41,3 @@ export default function CreatedProposals () {
         </Box>
   )
 }
-
