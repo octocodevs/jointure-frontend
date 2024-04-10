@@ -211,10 +211,9 @@ export default function NewCollabForm() {
 
         data.append('image', imageValue);
 
-        console.log(data);
         createNewCollab(data).then((res) => {
             console.log(res)
-            // login(res.access_token);
+            
             router.push("/admin");
         })
             .catch((error) => {
@@ -225,8 +224,6 @@ export default function NewCollabForm() {
 
     return (
         <Container overflow="auto" className='pb-20 '>
-            {/* <Box className="py-8 pb-4" display="flex" alignItems="center" justifyContent="center">
-            </Box> */}
             <Typography variant="h2" align="center">Crear propuesta de Colaboración</Typography>
             <Box className='px-16 pt-12' overflow="auto" >
                 <form
@@ -291,7 +288,6 @@ export default function NewCollabForm() {
                         variant="outlined"
                         color="primary"
                         InputLabelProps={{ shrink: true }}
-                        // value={imageValue}
                         onChange={(e) => setImageValue(e.target.files[0])}
 
                     />
