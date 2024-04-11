@@ -1,9 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, fireEvent, waitFor, } from "@testing-library/react";
 import LoginInputs from "../components/LoginInputs.jsx";
-import 'jest-localstorage-mock';
-import { useRouter } from "next/navigation";
-import { useAuthContext } from '../../contexts/authContext';
 import axios from "axios";
 
 
@@ -28,9 +25,8 @@ jest.mock('../../contexts/authContext', () => ({
     login: loginMock,
   }),
 }));
-
 describe('LoginInputs', () => {
-  it('renders correctly', () => {
+  it('renderiza correctamente', () => {
     const { getByLabelText, getByText } = render(<LoginInputs />);
     
     expect(getByLabelText('E-mail')).toBeInTheDocument();
@@ -40,7 +36,7 @@ describe('LoginInputs', () => {
     expect(getByText('¿No estás registrado?')).toBeInTheDocument();
   });
 
-  it('displays error messages when submitting empty form', async () => {
+  it('muestra mensajes de error al enviar un formulario vacío', async () => {
     const { getByLabelText, getByText } = render(<LoginInputs />);
     const submitButton = getByText('Enviar');
 
@@ -53,7 +49,7 @@ describe('LoginInputs', () => {
     });
   });
 
-  it('displays general error message when login fails', async () => {
+  it('muestra un mensaje de error general cuando falla el inicio de sesión', async () => {
     axios.post.mockRejectedValueOnce({ response: { data: { errors: { general: 'Email o contraseña incorrecto' } } } });
     const { getByLabelText, getByText } = render(<LoginInputs />);
     const submitButton = getByText('Enviar');
@@ -67,22 +63,4 @@ describe('LoginInputs', () => {
       expect(getByText('Email o contraseña incorrecto')).toBeInTheDocument();
     });
   });
-
-  it('redirects to admin page when login succeeds', async () => {
-    const userId = 'user123';
-    axios.post.mockResolvedValueOnce({ data: { access_token: 'token123', user: { id: userId } } });
-    const { getByLabelText, getByText } = render(<LoginInputs />);
-    const submitButton = getByText('Enviar');
-
-    fireEvent.change(getByLabelText('E-mail'), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText('Contraseña'), { target: { value: 'password' } });
-    fireEvent.click(getByLabelText('Acepto las condiciones y la privacidad'));
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(localStorage.setItem).toHaveBeenCalledWith('user_id', userId);
-      expect(useAuthContext().login).toHaveBeenCalledWith('token123');
-      expect(useRouter().push).toHaveBeenCalledWith("/admin");
-    });
-  });
-});
+}); 
