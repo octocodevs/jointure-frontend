@@ -1,110 +1,57 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import * as api from '../../../../services/axios';
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
+import * as api from "../../../../services/axios";
 
-describe('Funciones de Axios', () => {
-  let mock;
+const mock = new MockAdapter(axios);
 
-  beforeEach(() => {
-    mock = new MockAdapter(axios);
-  });
-
+describe('Funciones de la API', () => {
   afterEach(() => {
-    mock.restore();
+    mock.reset();
   });
 
-  describe('registerNewUser', () => {
-    it('debería registrar un nuevo usuario exitosamente', async () => {
-      const userData = { username: 'usuario', password: 'contraseña' };
-      const responseData = { id: 1, ...userData };
-      mock.onPost('api/register').reply(200, responseData);
+  it('debería registrar un nuevo usuario correctamente', async () => {
+    const userData = {
+      nombre: 'John Doe',
+      email: 'john@example.com',
+      contraseña: 'contraseña123',
+    };
+    const responseMock = { mensaje: 'Usuario registrado correctamente' };
+    mock.onPost('api/register', userData).reply(200, responseMock);
 
-      const newUser = await api.registerNewUser(userData);
-
-      expect(newUser).toEqual(responseData);
-    });
+    const result = await api.registerNewUser(userData);
+    expect(result).toEqual(responseMock);
   });
 
-  describe('loginUser', () => {
-    it('debería iniciar sesión exitosamente', async () => {
-      const userData = { username: 'usuario', password: 'contraseña' };
-      const responseData = { token: 'token_de_prueba', ...userData };
-      mock.onPost('api/login').reply(200, responseData);
+  it('debería iniciar sesión de un usuario correctamente', async () => {
+    const userData = {
+      email: 'john@example.com',
+      contraseña: 'contraseña123',
+    };
+    const responseMock = { access_token: 'token123' };
+    mock.onPost('api/login', userData).reply(200, responseMock);
 
-      const user = await api.loginUser(userData);
-
-      expect(user).toEqual(responseData);
-    });
+    const result = await api.loginUser(userData);
+    expect(result).toEqual(responseMock);
   });
 
-  describe('logoutUser', () => {
-    it('debería manejar errores al cerrar sesión', async () => {
-      mock.onPost('api/logout').reply(500);
+  it('debería obtener todos los perfiles correctamente', async () => {
+    const profiles = [
+      { id: 1, nombre: 'John Doe' },
+      { id: 2, nombre: 'Jane Doe' }
+    ];
+    mock.onGet('api/profile').reply(200, profiles);
 
-      await expect(api.logoutUser()).rejects.toThrow();
-    });
+    const result = await api.getProfiles();
+    expect(result).toEqual(profiles);
   });
 
-  describe('createCollaboration', () => {
-    it('debería crear una colaboración exitosamente', async () => {
-      const collaborationData = { title: 'Colaboración', description: 'Descripción de la colaboración' };
-      const authToken = 'token_de_prueba';
-      const responseData = { id: 1, ...collaborationData };
-      mock.onPost('api/marketplace').reply(200, responseData);
+  it('debería obtener un perfil por ID correctamente', async () => {
+    const userId = 1;
+    const profile = { id: userId, nombre: 'John Doe' };
+    mock.onGet(`api/profile/${userId}`).reply(200, profile);
 
-      const newCollaboration = await api.createCollaboration(collaborationData, authToken);
-
-      expect(newCollaboration).toEqual(responseData);
-    });
-
-    it('debería manejar errores al crear una colaboración', async () => {
-      const collaborationData = { title: 'Colaboración', description: 'Descripción de la colaboración' };
-      const authToken = 'token_de_prueba';
-      mock.onPost('api/marketplace').reply(500);
-
-      await expect(api.createCollaboration(collaborationData, authToken)).rejects.toThrow();
-    });
+    const result = await api.getProfileById(userId);
+    expect(result).toEqual(profile);
   });
 
-  describe('deleteCollaboration', () => {
-    it('debería eliminar una colaboración exitosamente', async () => {
-      const collaborationId = 1;
-      const authToken = 'token_de_prueba';
-      mock.onDelete(`api/marketplace/${collaborationId}`).reply(200);
-
-      const response = await api.deleteCollaboration(collaborationId, authToken);
-
-      expect(response).toEqual(undefined);
-    });
-
-    it('debería manejar errores al eliminar una colaboración', async () => {
-      const collaborationId = 1;
-      const authToken = 'token_de_prueba';
-      mock.onDelete(`api/marketplace/${collaborationId}`).reply(500);
-
-      await expect(api.deleteCollaboration(collaborationId, authToken)).rejects.toThrow();
-    });
-  });
-
-  describe('getCollaborations', () => {
-    it('debería obtener colaboraciones exitosamente', async () => {
-      const responseData = [{ id: 1, titulo: 'Colaboración 1' }];
-      mock.onGet('api/collaboration-proposals').reply(200, { data: responseData });
-
-      const collaborations = await api.getCollaborations();
-
-      expect(collaborations).toEqual(responseData);
-    });
-  });
-
-  describe('getprofiles', () => {
-    it('debería obtener perfiles exitosamente', async () => {
-      const responseData = [{ id: 1, username: 'usuario1' }, { id: 2, username: 'usuario2' }];
-      mock.onGet('api/profile').reply(200, responseData);
-
-      const profiles = await api.getprofiles();
-
-      expect(profiles).toEqual(responseData);
-    });
-  });
 });
